@@ -1,0 +1,8 @@
+node_modules/
+.next/
+.swc/
+.*.env
+.idea
+.claude/
+*.env
+wdeny-report-tasks/

@@ -1,0 +1,139 @@
+.airplane-card {
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  .text-primary {
+    color: #0074C3;
+  }
+
+  .bg-primary {
+    background-color: #0074C3;
+  }
+
+  .text-secondary {
+    color: #0b649e;
+  }
+
+  .bg-secondary {
+    background-color: #0b649e;
+  }
+}
+
+.results-header {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  min-height: 50px;
+
+  .results-sort-button {
+    min-width: 142px;
+    height: 50px;
+    border: 1px solid #c4c4c4;
+    border-radius: 50px;
+    background: #F47522;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .results-sort-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .results-stats-bar {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-height: 50px;
+    height: 50px;
+    border: 0;
+    border-radius: 50px;
+    overflow: hidden;
+    background: #f5f5f7;
+  }
+
+  .results-stat-item {
+    border: 0;
+    outline: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #f5f5f7;
+    border-inline-start: 1px solid #d9d9d9;
+    color: #2e2e2e;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    height: 50px;
+    padding: 0 10px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:first-child {
+      border-inline-start: 0;
+    }
+
+    &.is-active {
+      background: #0074C3;
+      color: #fff;
+    }
+  }
+
+  .results-stat-label {
+    font-weight: 500;
+  }
+
+  @media (max-width: 1200px) {
+    .results-sort-button {
+      min-width: 124px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+
+    .results-sort-button {
+      width: 100%;
+      min-height: 50px;
+      border-radius: 14px;
+      font-size: 16px;
+    }
+
+    .results-stats-bar {
+      flex-direction: column;
+      gap: 10px;
+      min-height: auto;
+      height: auto;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .results-stat-item {
+      width: 100%;
+      font-size: 16px;
+      min-height: 50px;
+      border-radius: 14px;
+      border-inline-start: 0;
+      background: #f2f2f4;
+    }
+  }
+}

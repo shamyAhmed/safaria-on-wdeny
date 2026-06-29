@@ -1,0 +1,170 @@
+@use "_mixins.scss" as *;
+
+.faqs :global {
+  overflow: hidden;
+
+  .faqs-section {
+    padding: 80px 0 120px;
+    background-color: #fbfbfd;
+
+    .faqs-header {
+      text-align: center;
+      margin-bottom: 64px;
+
+      .section-title {
+        color: theme("colors.secondary");
+        font-size: 38px;
+        font-weight: 800;
+        margin-bottom: 16px;
+        line-height: 1.3;
+
+        @include small {
+          font-size: 26px;
+        }
+      }
+
+      .section-subtitle {
+        color: #6b7280;
+        font-size: 16px;
+        font-weight: 400;
+        max-width: 580px;
+        margin: 0 auto;
+        line-height: 1.7;
+      }
+    }
+
+    .faqs-categories {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 860px;
+      margin: 0 auto;
+
+      .faq-category {
+        .category-title {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 20px;
+          font-weight: 700;
+          color: theme("colors.secondary");
+          margin-bottom: 16px;
+
+          .category-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: theme("colors.primary");
+            flex-shrink: 0;
+          }
+        }
+
+        .faq-collapse {
+          background: transparent;
+          border: none;
+
+          .faq-panel {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px !important;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.25s ease;
+
+            &:hover {
+              box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+            }
+
+            .ant-collapse-header {
+              padding: 20px 24px !important;
+              font-size: 15px;
+              font-weight: 600;
+              color: theme("colors.titlesColor");
+              align-items: center !important;
+
+              .ant-collapse-header-text {
+                flex: 1;
+              }
+            }
+
+            &.ant-collapse-item-active {
+              border-color: theme("colors.primary");
+              box-shadow: 0 4px 20px rgba(0, 116, 195, 0.08);
+
+              .ant-collapse-header {
+                color: theme("colors.primary");
+              }
+            }
+
+            .ant-collapse-content {
+              border-top: 1px solid #f3f4f6;
+
+              .ant-collapse-content-box {
+                padding: 16px 24px 20px !important;
+
+                p {
+                  color: #4b5563;
+                  font-size: 14px;
+                  line-height: 1.8;
+                  font-weight: 400;
+                }
+              }
+            }
+
+            .expand-icon {
+              font-size: 18px;
+              color: #9ca3af;
+              transition: transform 0.3s ease, color 0.3s ease;
+
+              &.active {
+                transform: rotate(180deg);
+                color: theme("colors.primary");
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .faqs-cta {
+      margin-top: 72px;
+      background-color: theme("colors.secondary");
+      border-radius: 24px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 860px;
+      margin-inline: auto;
+
+      p {
+        color: #ffffff;
+        font-size: 17px;
+        font-weight: 500;
+        margin-bottom: 24px;
+        line-height: 1.6;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background-color: theme("colors.primary");
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 14px 36px;
+        border-radius: 50px;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+
+        &:hover {
+          opacity: 0.88;
+          transform: translateY(-2px);
+          color: #ffffff;
+        }
+      }
+
+      @include small {
+        padding: 36px 20px;
+        margin-top: 48px;
+      }
+    }
+  }
+}

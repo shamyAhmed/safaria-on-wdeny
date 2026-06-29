@@ -1,0 +1,50 @@
+"use client";
+import { Collapse } from "antd";
+import type { CollapseProps } from "antd";
+import { FaChevronDown } from "react-icons/fa6";
+
+const FilterPanelHeader = ({ title }: { title: string }) => (
+  <span className="font-medium text-base text-primary">{title}</span>
+);
+
+export const PrivateFiltersSection = () => {
+  const items: CollapseProps["items"] = [
+    {
+      key: "1",
+      label: <FilterPanelHeader title="نوع السيارة" />,
+      children: (
+        <div className="py-2 text-sm text-gray-400">قريباً...</div>
+      ),
+    },
+    {
+      key: "2",
+      label: <FilterPanelHeader title="نطاق السعر" />,
+      children: (
+        <div className="py-2 text-sm text-gray-400">قريباً...</div>
+      ),
+    },
+    {
+      key: "3",
+      label: <FilterPanelHeader title="عدد الركاب" />,
+      children: (
+        <div className="py-2 text-sm text-gray-400">قريباً...</div>
+      ),
+    },
+  ];
+
+  return (
+    <div className="airplane-filters">
+      <Collapse
+        defaultActiveKey={["1", "2", "3"]}
+        ghost
+        expandIconPosition="end"
+        expandIcon={({ isActive }) => (
+          <FaChevronDown
+            className={`!text-primary transition-transform ${isActive ? "!rotate-180" : "!rotate-0"}`}
+          />
+        )}
+        items={items}
+      />
+    </div>
+  );
+};

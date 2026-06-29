@@ -1,0 +1,5 @@
+{
+  "apiUrl": "https://portal.wdenytravel.com/api/v1",
+  "testaUrl": "https://wdenytravel.com/api/v1",
+  "UnAuthorizationRedirectUrl": "/"
+}

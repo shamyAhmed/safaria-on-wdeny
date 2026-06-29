@@ -1,0 +1,1376 @@
+{
+  "nav": {
+    "home": "Home",
+    "whatWeOffer": "What we offer",
+    "about": "About",
+    "insights": "Insights",
+    "partnerWithUs": "Partner with us",
+    "blogs": "Blog",
+    "contactUs": "Contact us"
+  },
+  "header": {
+    "logoAlt": "Wdiny logo",
+    "notifications": "Notifications",
+    "nav": {
+      "home": "Home",
+      "about": "About the platform",
+      "blogs": "Blog",
+      "contactUs": "Contact us"
+    },
+    "languages": {
+      "english": "English",
+      "arabic": "Arabic"
+    },
+    "mobileMenu": {
+      "open": "Open menu",
+      "close": "Close menu"
+    },
+    "marquee": "20% discount when booking SAPTCO trips for April",
+    "profileLinks": {
+      "personalInfo": "Personal Information",
+      "changePassword": "Change Password",
+      "myTrips": "My Trips",
+      "savedAddresses": "Saved Addresses",
+      "notifications": "Notifications",
+      "myWallet": "My Wallet",
+      "deleteAccount": "Delete Account"
+    }
+  },
+  "partnerWithUsModal": {
+    "buttonText": "Partner with us",
+    "partnerTitle": "Get in touch: Let’s",
+    "partnerSubtitle": "create impact together",
+    "partnerDescription1": "Sanad is a pioneering corporate venture studio for Al startups across MENA. If you are equally excited about corporate venture building, we'd love to hear from you.",
+    "privacy1": "For more information on how Sanad handles personal data,",
+    "privacy2": "please see our",
+    "privacyLink": "Privacy Policy",
+    "form": {
+      "fullName": "Full name",
+      "email": "Company email",
+      "organization": "Organization",
+      "phone": "Phone number",
+      "message": "Message",
+      "submit": "Submit",
+      "lookingTo": {
+        "label": "I'm looking to:",
+        "options": {
+          "invest": "Invest in Sanad or a Sanad startup",
+          "co_build": "Co-build startups with Sanad",
+          "work": "Work with Sanad or a Sanad startup",
+          "press": "Make a press inquiry",
+          "other": "Other"
+        },
+        "error": "Please select an option"
+      },
+      "errors": {
+        "fullName": "Please input your full name!",
+        "email": "Please input your company email!",
+        "organization": "Please input your organization!",
+        "phone": "Please input your phone number!"
+      },
+      "placeholders": {
+        "fullName": "Type your full name",
+        "email": "you@example.com",
+        "organization": "Type your organization name",
+        "phone": "Type your phone number",
+        "message": "Type your message"
+      }
+    }
+  },
+  "footer": {
+    "description": "Safaria is your smart platform for booking train, bus, and private car trips anytime and from anywhere. We provide an easy, comfortable, and secure travel experience so you can enjoy every moment on the road.",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "logoAlt": "Safaria logo",
+    "importantLinksTitle": "Important links",
+    "importantLinks": {
+      "about": "Get to know Safaria",
+      "explore": "Explore",
+      "contact": "Contact us"
+    },
+    "supportTitle": "Help and support",
+    "supportLinks": {
+      "terms": "Terms and conditions",
+      "privacy": "Privacy policy",
+      "faq": "Frequently asked questions"
+    },
+    "followUs": "Follow us on:"
+  },
+  "userAuthButton": {
+    "account": "Account",
+    "login": "Log in",
+    "menu": {
+      "profile": "Personal information",
+      "trips": "My trips",
+      "notifications": "Notifications",
+      "logout": "Log out"
+    }
+  },
+  "appHero": {
+    "imageAlt": "Wdiny app preview",
+    "titleHighlight": "Your next trip",
+    "titleRest": "starts here",
+    "description": "Book your train, bus, or private car ticket in minutes. Stay ready for every trip and travel comfortably every time.",
+    "googlePlay": "Google Play",
+    "appleStore": "Apple Store"
+  },
+  "allRights": {
+    "prefix": "All rights reserved for",
+    "brand": "Safaria platform",
+    "logoAlt": "Safaria logo"
+  },
+  "newsletter": {
+    "title": "Subscribe to our newsletter",
+    "description": "Get the latest offers, travel updates, and platform news directly to your inbox.",
+    "form": {
+      "emailPlaceholder": "Enter your email address",
+      "submit": "Subscribe",
+      "errors": {
+        "emailRequired": "Please enter your email address"
+      }
+    }
+  },
+  "aboutUs": {
+    "learnMoreAboutProcess": "Learn more about our process",
+    "bannerTitle": "Get to know Safaria",
+    "bannerCurrentPage": "About the platform",
+    "intro": {
+      "logoAlt": "Safaria logo",
+      "label": "About Safaria",
+      "description1": "Safaria is a platform and website that makes planning your trips simple and smooth. You can book your stay easily through our platform, compare transport options, prices, and dates, and complete your whole trip from the comfort of home.",
+      "description2": "A leading company in the transport sector in the Kingdom, making significant changes in the industry.",
+      "description3": "We simplify your travel experience — search for flights, buses, and private cars that you won't find anywhere else."
+    },
+    "vision": {
+      "title": "Vision",
+      "description": "To become the leading platform in the Kingdom for a smart and comfortable travel experience, bringing all transport options together in one app that makes it easy for everyone to travel with confidence and comfort."
+    },
+    "mission": {
+      "title": "Mission",
+      "description": "We work to simplify the travel experience within the Kingdom by providing instant and secure booking for all transport options, while ensuring the best prices and ease of use on every trip."
+    },
+    "features": {
+      "title": "Travel easily... everything in one app",
+      "description": "With the Safaria app, plan your trip, book it, and save your time and effort with ease.",
+      "instantBooking": {
+        "title": "Direct and easy booking",
+        "description": "Book the train, bus, or private car in seconds from wherever you are."
+      },
+      "securePayment": {
+        "title": "Secure and fast payment",
+        "description": "Pay easily with Mada, Tabby, or your bank card."
+      },
+      "comparePrices": {
+        "title": "Compare prices with ease",
+        "description": "See all available options and choose the best one for your budget."
+      },
+      "liveAlerts": {
+        "title": "Live alerts and updates",
+        "description": "Receive notifications about trips and new offers as they happen."
+      },
+      "tripTracking": {
+        "title": "Track your trips and schedules",
+        "description": "Follow trip timings accurately and make sure you are always on time."
+      }
+    },
+    "whyChooseUs": {
+      "title": "Why choose us?",
+      "description": "Lorem ipsum is simply dummy text meaning the purpose is form not content, used in the printing and publishing industries.",
+      "cards": {
+        "1": {
+          "title": "Guided Autonomy",
+          "description": "Lorem ipsum is simply dummy text meaning the purpose is form not content, used in the printing and publishing industries. Lorem ipsum has been the industry standard for dummy text since the 15th century when an unknown printer scrambled a galley of type to make a type specimen book."
+        },
+        "2": {
+          "title": "Robust Network",
+          "description": "Lorem ipsum is simply dummy text meaning the purpose is form not content, used in the printing and publishing industries. Lorem ipsum has been the industry standard for dummy text since the 15th century when an unknown printer scrambled a galley of type to make a type specimen book."
+        },
+        "3": {
+          "title": "In-house Expertise",
+          "description": "Lorem ipsum is simply dummy text meaning the purpose is form not content, used in the printing and publishing industries. Lorem ipsum has been the industry standard for dummy text since the 15th century when an unknown printer scrambled a galley of type to make a type specimen book."
+        }
+      }
+    }
+  },
+  "homePage": {
+    "learnMore": "Learn more",
+    "back": "Back",
+    "howWeWork": "HOW WE WORK",
+    "errorLoading": "An error occurred while loading the page",
+    "hero": {
+      "badge": "Welcome to Safaria! 👋",
+      "title": "Where would you like to go today?",
+      "description": "Travel to any destination in one tap with direct trips inside and outside the Kingdom",
+      "tabs": {
+        "bus": "Buses",
+        "privateTrip": "Private trips",
+        "airplan": "Flights"
+      }
+    },
+    "stats": {
+      "items": {
+        "bookedTrips": {
+          "value": "+200,000",
+          "label": "Trips booked"
+        },
+        "coveredCities": {
+          "value": "+120",
+          "label": "Cities covered by our services"
+        },
+        "satisfactionRate": {
+          "value": "96%",
+          "label": "Customer satisfaction rate"
+        },
+        "customers": {
+          "value": "+12,656",
+          "label": "Number of customers"
+        }
+      }
+    },
+    "about": {
+      "title": "About Safaria",
+      "description1": "Safaria is a platform and website that makes planning your trips simple and smooth. You can book your stay easily through our platform, compare transport options, prices, and dates, and complete your whole trip from the comfort of home.",
+      "description2": "Safaria stands out by offering accurate comparison, recommendations tailored to your needs, and an easy-to-use interface that gives you a booking experience without complexity.",
+      "contactButton": "Contact us",
+      "slides": {
+        "1": {
+          "alt": "Traveler using the Wdiny app"
+        },
+        "2": {
+          "alt": "Travel support and booking assistance"
+        },
+        "3": {
+          "alt": "Open road for a new journey"
+        }
+      }
+    },
+    "whyWodini": {
+      "title": "Why Safaria?",
+      "description": "Our goal is to make every trip easy and comfortable, from the first booking tap until you arrive safely. That is why we designed the platform with services that support you at every step, so you can enjoy travel without complexity.",
+      "slides": {
+        "1": {
+          "title": "All travel options in one place",
+          "description": "We bring all travel options together in one place to save you time and effort while choosing the trip that suits you. Whether you are heading to work, traveling abroad, or preparing for a long journey, Safaria helps you organize every step with comfort and confidence.",
+          "buttonText": "Reserve now"
+        },
+        "2": {
+          "title": "Outstanding customer service around the clock",
+          "description": "Our support team is available 24/7 to help with any question or issue you may face. We are here to make sure your travel experience stays smooth and enjoyable.",
+          "buttonText": "Contact us"
+        },
+        "3": {
+          "title": "Competitive prices and exclusive offers",
+          "description": "Get the best prices and exclusive offers across transport options. We provide choices that fit your budget while maintaining service quality.",
+          "buttonText": "View offers"
+        }
+      },
+      "navigation": {
+        "nextSlide": "Next slide",
+        "previousSlide": "Previous slide"
+      }
+    },
+    "paymentMethods": {
+      "title": "Secure and convenient payment methods",
+      "descriptionLine1": "Our goal is to make every trip a smooth, comfortable experience from the first booking tap until you arrive safely,",
+      "descriptionLine2": "with services that support you at every step so you can enjoy a trip without complication.",
+      "methods": {
+        "tabbyTamara": "Tabby | Tamara",
+        "visa": "Visa",
+        "applePay": "Apple Pay",
+        "mada": "Mada",
+        "stcPay": "STC Pay",
+        "moyasar": "Moyasar"
+      },
+      "navigation": {
+        "next": "Next",
+        "previous": "Previous"
+      }
+    },
+    "joinTravelWorld": {
+      "title": "Join us and start your journey in the world of travel and transport",
+      "description1": "Track your activity and boost your earnings through our partnership.",
+      "description2": "We provide a trusted platform that connects you with customers looking for travel and transport services, with easy steps and continuous support that helps you grow with confidence.",
+      "button1": "Join as a trip provider",
+      "button2": "Join as a bus provider"
+    },
+    "partnerCompanies": {
+      "title": "Our partners are our success on the road",
+      "description": "Leading transport companies in the Kingdom collaborate with us to deliver the best possible travel experience ✈️🚌",
+      "details": "More details",
+      "navigation": {
+        "next": "Next",
+        "previous": "Previous"
+      },
+      "companies": {
+        "1": "Nawras Bus",
+        "2": "Nawras Bus",
+        "3": "Nawras Bus",
+        "4": "Nawras Bus",
+        "5": "Nawras Bus"
+      }
+    },
+    "travelDestinations": {
+      "title": "Top transport routes between cities",
+      "description": "The most popular bus routes across Egyptian cities. Book your trip easily and start your journey in comfort.",
+      "bookNow": "Book now",
+      "navigation": {
+        "next": "Next",
+        "previous": "Previous"
+      },
+      "cards": {
+        "1": {
+          "title": "Cairo - Downtown"
+        },
+        "2": {
+          "title": "Alexandria - The Corniche"
+        },
+        "3": {
+          "title": "Giza - The Pyramids"
+        },
+        "4": {
+          "title": "Luxor - Karnak Temple"
+        },
+        "5": {
+          "title": "Aswan - Nile Corniche"
+        }
+      }
+    },
+    "blogsShowcase": {
+      "title": "Read... and discover more with Safaria",
+      "description": "Explore Safaria blog and discover travel tips, top destinations, and real traveler experiences to start every journey with useful insights.",
+      "cardButton": "More details",
+      "more": "More",
+      "cards": {
+        "1": {
+          "title": "How to choose the right travel method",
+          "description": "Bus, train, or private trip? Learn which option saves your time based on your budget and needs."
+        },
+        "2": {
+          "title": "Tips before your first train trip",
+          "description": "Traveling by train for the first time? This quick guide helps keep your trip comfortable and safe."
+        },
+        "3": {
+          "title": "Top travel destinations across Egypt",
+          "description": "Discover the most beautiful cities and attractions across Egypt from Cairo to Alexandria and Luxor."
+        }
+      }
+    },
+    "allInOneApp": {
+      "title": "Travel easily... everything in one app",
+      "description": "With the Safaria app, plan your trip, book it, and save time and effort with ease.",
+      "features": {
+        "instantBooking": {
+          "title": "Instant and easy booking",
+          "description": "Book the train, bus, or private car in seconds from wherever you are."
+        },
+        "securePayment": {
+          "title": "Secure and fast payment",
+          "description": "Pay easily with Mada, Tabby, or your bank card."
+        },
+        "comparePrices": {
+          "title": "Compare prices with ease",
+          "description": "See all available options and choose what fits your budget best."
+        },
+        "liveUpdates": {
+          "title": "Live alerts and updates",
+          "description": "Receive notifications about trips and new offers as they happen."
+        },
+        "tripTracking": {
+          "title": "Track your trips and schedules",
+          "description": "Follow trip timings accurately and make sure you are always on time."
+        }
+      }
+    },
+    "howToBook": {
+      "title": "Book your ticket in just 4 steps 🎟️",
+      "description": "Choose your travel method, set your destination and date, pay online, and your ticket is ready. All of this from your place with one tap in the Safaria app.",
+      "steps": {
+        "1": {
+          "title": "Open the app"
+        },
+        "2": {
+          "title": "Choose your destination and travel date"
+        },
+        "3": {
+          "title": "Pick the right seat"
+        },
+        "4": {
+          "title": "Pay with the method that suits you"
+        }
+      }
+    },
+    "airplaneForm": {
+      "fields": {
+        "from": {
+          "label": "From",
+          "placeholder": "Choose the airport or city"
+        },
+        "to": {
+          "label": "To",
+          "placeholder": "Choose the airport or city"
+        },
+        "departureDate": {
+          "label": "Departure date",
+          "placeholder": "Departure date"
+        },
+        "returnDate": {
+          "label": "Return date",
+          "placeholder": "Return date"
+        },
+        "passengers": {
+          "label": "Passengers",
+          "placeholder": "Adult, child",
+          "maxReached": "Maximum 9 passengers allowed"
+        },
+        "class": {
+          "label": "Class",
+          "placeholder": "Class"
+        }
+      },
+      "classOptions": {
+        "economy": "Economy",
+        "premiumEconomy": "Premium Economy",
+        "business": "Business",
+        "first": "First Class"
+      },
+      "tripTypes": {
+        "one": "One way",
+        "round": "Round trip",
+        "multi": "Multi-city"
+      },
+      "actions": {
+        "remove": "Remove",
+        "addCity": "Add another city",
+        "search": "Search",
+        "apply": "Apply"
+      },
+      "adt": "Adults",
+      "chd": "Children",
+      "inf": "Infants",
+      "passengersSubtitles": {
+        "adt": "Age 12 or above",
+        "chd": "Age 2–11",
+        "inf": "Under 2 years"
+      }
+    },
+    "busForm": {
+      "fields": {
+        "departure": {
+          "label": "Departure station",
+          "placeholder": "Departure location"
+        },
+        "arrival": {
+          "label": "Arrival station",
+          "placeholder": "Arrival location"
+        },
+        "departureDate": {
+          "label": "Departure date",
+          "placeholder": "25 November 2025"
+        },
+        "returnDate": {
+          "label": "Return date",
+          "placeholder": "Choose a return date"
+        },
+        "loading": "Loading...",
+        "noOptions": "No options"
+      },
+      "tripTypes": {
+        "one": "One way",
+        "round": "Round trip"
+      },
+      "actions": {
+        "search": "Search"
+      }
+    },
+    "privateTripsForm": {
+      "fields": {
+        "departure": {
+          "label": "Departure station",
+          "placeholder": "Departure location"
+        },
+        "arrival": {
+          "label": "Arrival station",
+          "placeholder": "Arrival location"
+        },
+        "departureDate": {
+          "label": "Departure date",
+          "placeholder": "25 November 2025"
+        },
+        "departureTime": {
+          "label": "Departure time",
+          "placeholder": "12:20"
+        },
+        "returnDate": {
+          "label": "Return date",
+          "placeholder": "Choose a return date"
+        },
+        "returnTime": {
+          "label": "Return time",
+          "placeholder": "12:20"
+        },
+        "loading": "Loading...",
+        "noOptions": "No options"
+      },
+      "tripTypes": {
+        "one": "One way",
+        "round": "Round trip"
+      },
+      "actions": {
+        "search": "Search"
+      }
+    },
+    "getApp": {
+      "subtitle": "Safaria App",
+      "title": "Get the Safaria app for free",
+      "googlePlay": "Google Play",
+      "appleStore": "Apple Store"
+    },
+    "successPartners": {
+      "title": "Success Partners",
+      "description": "Together we succeed — our trusted partners in achieving milestones"
+    }
+  },
+  "discoverPrivate": {
+    "card": {
+      "companyPrefix": "Company",
+      "tripPrice": "Trip price",
+      "roundTripPrice": "Round trip: {price} {currency}",
+      "bookNow": "Book now",
+      "details": "Details",
+      "share": "Share",
+      "available": "Available",
+      "features": {
+        "seats": "{count} seats",
+        "bigBags": "{count} large bags",
+        "smallBag": "{count} small bag"
+      }
+    }
+  },
+  "discoverBus": {
+    "pageTitle": "Book now",
+    "filters": {
+      "title": "Filters",
+      "reset": "Reset",
+      "resetFilters": "Reset filters"
+    },
+    "card": {
+      "fromLabel": "From: {city}",
+      "toLabel": "To: {city}",
+      "perSeat": "/ seat",
+      "selectSeat": "Select seat",
+      "duration": "{hours}h {minutes}m"
+    },
+    "booking": {
+      "title": "Choose your seat",
+      "legendYourSeat": "Your seat",
+      "legendAvailable": "Available",
+      "legendBooked": "Booked",
+      "departureStation": "Departure station",
+      "arrivalStation": "Arrival station",
+      "selectDepartureStation": "Select departure station",
+      "selectArrivalStation": "Select arrival station",
+      "loadingTrip": "Loading trip details...",
+      "loadingSeats": "Loading seats...",
+      "mapTitle": "Location on map",
+      "from": "From",
+      "to": "To",
+      "passengersCount": "Passengers",
+      "seatPrice": "Seat price",
+      "seatsCount": "Seats",
+      "total": "Total",
+      "agreeTo": "I agree to the",
+      "termsAndConditions": "Terms and conditions",
+      "confirmSeats": "Confirm {count} seat(s)",
+      "loginToContinue": "Log in to continue",
+      "bookingCreated": "Booking created successfully",
+      "routeError": "Couldn't load the trip route"
+    },
+    "loadMore": "Load more",
+    "emptyState": {
+      "title": "No trips found",
+      "description": "Try adjusting your search filters or choose a different date.",
+      "backToHome": "Back to home"
+    }
+  },
+  "discoverAirplan": {
+    "emptyState": {
+      "title": "No flights found",
+      "description": "We couldn't find any flights matching your search. Try adjusting your dates, route, or filters.",
+      "backToHome": "Back to Home"
+    },
+    "pageTitle": "Book Now",
+    "filters": {
+      "title": "Filters",
+      "reset": "Reset",
+      "filterButton": "Filters"
+    }
+  },
+  "discoverAirplaneFilters": {
+    "common": {
+      "searchPlaceholder": "Search"
+    },
+    "timeRanges": {
+      "option1": "00 - 18",
+      "option2": "18 - 12",
+      "option3": "12 - 06",
+      "option4": "06 - 00"
+    },
+    "panels": {
+      "bookingClass": {
+        "title": "Flight booking class",
+        "options": {
+          "economy": "Economy",
+          "premiumEconomy": "Premium Economy",
+          "business": "Business",
+          "first": "First Class"
+        }
+      },
+      "departureTime": {
+        "title": "Departure time",
+        "origins": {
+          "cairo": "From Cairo",
+          "hail": "From Hail"
+        }
+      },
+      "fareType": {
+        "title": "Fare type",
+        "options": {
+          "refundable": "Refundable",
+          "refundableWithPenalty": "Refundable with penalty",
+          "nonRefundable": "Non-refundable"
+        }
+      },
+      "priceRange": {
+        "title": "Price range",
+        "from": "From",
+        "to": "To"
+      },
+      "flightOptions": {
+        "title": "Flight options",
+        "directOnly": "Direct flights only",
+        "refundableOnly": "Refundable flights only"
+      },
+      "airlines": {
+        "title": "Airlines",
+        "options": {
+          "saudiArabianAirlines": "Saudi Arabian Airlines",
+          "flynas": "Flynas",
+          "jazeeraAirways": "Jazeera Airways"
+        }
+      },
+      "stopAirport": {
+        "title": "Stop airport",
+        "options": {
+          "cairoInternationalAirport": "Cairo International Airport",
+          "hailAirport": "Hail Airport",
+          "kingFahadAirport": "King Fahad Airport"
+        }
+      }
+    }
+  },
+  "insightsHero": {
+    "title": "Insights from the <br /> Frontlines of Innovation",
+    "description": "Stay ahead of the curve with expert perspectives, actionable advice, and the latest trends in entrepreneurship and venture building. At Sanad Studio we’re committed to sharing knowledge that inspires and empowers. Explore our curated content to gain valuable insights into the world of innovation.",
+    "button": "Read our latest article"
+  },
+  "browseMoreArticlesSection": {
+    "heading": "Browse more articles",
+    "description": "Discover expert insights, practical advice, and emerging trends in entrepreneurship and innovation to help you grow and lead with confidence."
+  },
+  "featuredArticlesSection": {
+    "title": "Featured Articles",
+    "description": "Dive into thought-provoking articles on entrepreneurship, emerging technologies, market trends, and startup strategies."
+  },
+  "privacyAndTerms": {
+    "privacyTitle": "Privacy Policy",
+    "TermsTitle": "Terms and Conditions",
+    "lastUpdate": "Last updated: "
+  },
+  "topBar": {
+    "nightMode": "Night Mode",
+    "followUs": "Follow Us",
+    "currencies": {
+      "sar": "SAR",
+      "usd": "USD",
+      "eur": "EUR",
+      "egp": "EGP"
+    }
+  },
+  "bookingPage": {
+    "passengerTypes": {
+      "adult": "Adult",
+      "child": "Child",
+      "infant": "Infant"
+    },
+    "steps": {
+      "selectFlight": "Select Flight",
+      "passengerDetails": "Passenger Details",
+      "payment": "Payment",
+      "ticket": "Ticket"
+    },
+    "pageTitle": "Book Now",
+    "reviewFlightTitle": "Review Flight",
+    "passengerDetailsTitle": "Passenger Details",
+    "passengerDetailsNote": "Enter details as they appear in your passport. Use English only.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Email",
+    "emailRequired": "Please enter your email",
+    "emailInvalid": "Invalid email",
+    "pendingPassengersWarning": "Please confirm all passenger details before proceeding to payment",
+    "termsText": "To complete this booking, I agree that I have read and agree to the rules and restrictions.",
+    "termsLink": "Terms of Use",
+    "privacyLink": "Privacy Policy",
+    "payNow": "Pay Now",
+    "back": "Back",
+    "departed": "Departed",
+    "passengerCount": "{count} passenger"
+  },
+  "auth": {
+    "imageAlts": {
+      "sideImage": "Auth",
+      "logo": "Safaria logo"
+    },
+    "login": {
+      "title": "Welcome Back",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create new account",
+      "inputs": {
+        "labels": {
+          "phone": "Phone number",
+          "password": "Password"
+        },
+        "validation": {
+          "phoneRequired": "Please enter your phone number",
+          "phoneInvalid": "Invalid phone number",
+          "passwordRequired": "Please enter your password!"
+        }
+      },
+      "form": {
+        "password": {
+          "label": "Password",
+          "placeholder": "Password",
+          "required": "Please enter your password!"
+        },
+        "forgotPassword": "Forgot your password?",
+        "submit": "Log In",
+        "or": "Or",
+        "googleLogin": "Log in with Google"
+      }
+    },
+    "register": {
+      "title": "Create New Account",
+      "hasAccount": "Already have an account?",
+      "login": "Log In",
+      "inputs": {
+        "labels": {
+          "fullName": "Full Name",
+          "phone": "Phone number",
+          "email": "Email",
+          "password": "Password",
+          "confirmPassword": "Confirm Password"
+        },
+        "validation": {
+          "fullNameRequired": "Please enter your full name!",
+          "phoneRequired": "Please enter your phone number",
+          "phoneInvalid": "Invalid phone number",
+          "emailRequired": "Please enter your email!",
+          "emailInvalid": "Please enter a valid email",
+          "passwordRequired": "Please enter your password!",
+          "passwordMinLength": "Password must be at least 8 characters",
+          "passwordUppercase": "Must contain at least one uppercase letter",
+          "passwordLowercase": "Must contain at least one lowercase letter",
+          "passwordNumber": "Must contain at least one number",
+          "passwordInvalid": "Invalid password",
+          "confirmPasswordRequired": "Please enter your password!",
+          "confirmPasswordMismatch": "Passwords do not match",
+          "acceptPolicyRequired": "You must agree to the privacy policy and terms"
+        }
+      },
+      "form": {
+        "fullName": {
+          "label": "Full Name",
+          "placeholder": "Full Name",
+          "required": "Please enter your full name!"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Email",
+          "required": "Please enter your email!",
+          "invalid": "Please enter a valid email"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Password",
+          "required": "Please enter your password!",
+          "minLength": "Password must be at least 8 characters",
+          "uppercase": "Must contain at least one uppercase letter",
+          "lowercase": "Must contain at least one lowercase letter",
+          "number": "Must contain at least one number",
+          "invalid": "Invalid password"
+        },
+        "confirmPassword": {
+          "label": "Confirm Password",
+          "placeholder": "Confirm Password",
+          "required": "Please enter your password!",
+          "mismatch": "Passwords do not match"
+        },
+        "acceptPolicy": {
+          "required": "You must agree to the privacy policy and terms",
+          "text": "I agree to",
+          "link": "Privacy Policy and Terms & Conditions"
+        },
+        "submit": "Create Account",
+        "or": "Or",
+        "googleLogin": "Log in with Google"
+      }
+    },
+    "verifyOtp": {
+      "title": "Verify Your Phone Number",
+      "description": "We sent a 4-digit code to your phone number",
+      "codeLabel": "Code",
+      "didNotReceive": "Didn't receive the code?",
+      "resend": "Resend",
+      "confirm": "Confirm",
+      "inputs": {
+        "labels": {
+          "code": "Code"
+        }
+      }
+    },
+    "forgotPassword": {
+      "title": "Forgot Your Password?",
+      "description": "Enter your phone number to recover your password",
+      "inputs": {
+        "labels": {
+          "phone": "Phone number"
+        },
+        "validation": {
+          "phoneRequired": "Please enter your phone number",
+          "phoneInvalid": "Invalid phone number"
+        }
+      },
+      "form": {
+        "submit": "Send Verification Code"
+      }
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Enter a new password to replace the old one",
+      "inputs": {
+        "labels": {
+          "newPassword": "New Password",
+          "confirmPassword": "Confirm Password"
+        },
+        "validation": {
+          "newPasswordRequired": "Please enter the new password",
+          "newPasswordMinLength": "Password must be at least 8 characters",
+          "confirmPasswordRequired": "Please confirm your password",
+          "confirmPasswordMismatch": "Passwords do not match"
+        }
+      },
+      "form": {
+        "newPassword": {
+          "label": "New Password",
+          "required": "Please enter the new password",
+          "minLength": "Password must be at least 8 characters"
+        },
+        "confirmPassword": {
+          "label": "Confirm Password",
+          "required": "Please confirm your password",
+          "mismatch": "Passwords do not match"
+        },
+        "submit": "Save Password"
+      }
+    },
+    "congratulations": {
+      "title": "Congratulations!",
+      "description": "Password changed successfully"
+    },
+    "registerCompany": {
+      "title": "Join Us as a Bus Company and Expand Your Service Range",
+      "description": "Offer your trips through our platform and reach thousands of travelers easily",
+      "tabs": {
+        "companyInfo": "Company Information",
+        "accountInfo": "Account Information"
+      },
+      "companyPlaceholder": "Company information form coming soon",
+      "inputs": {
+        "labels": {
+          "fullName": "Name",
+          "phone": "Phone Number",
+          "email": "Email",
+          "password": "Password",
+          "confirmPassword": "Confirm Password"
+        },
+        "validation": {
+          "fullNameRequired": "Please enter your name",
+          "phoneRequired": "Please enter your phone number",
+          "phoneInvalid": "Invalid phone number",
+          "emailRequired": "Please enter your email",
+          "emailInvalid": "Please enter a valid email",
+          "passwordRequired": "Please enter your password",
+          "passwordMinLength": "Password must be at least 8 characters",
+          "passwordUppercase": "Must contain at least one uppercase letter",
+          "passwordLowercase": "Must contain at least one lowercase letter",
+          "passwordNumber": "Must contain at least one number",
+          "passwordInvalid": "Invalid password",
+          "confirmPasswordRequired": "Please confirm your password",
+          "confirmPasswordMismatch": "Passwords do not match"
+        }
+      },
+      "form": {
+        "fullName": {
+          "placeholder": "Enter name"
+        },
+        "email": {
+          "placeholder": "Enter email"
+        },
+        "password": {
+          "placeholder": "Enter password"
+        },
+        "confirmPassword": {
+          "placeholder": "Enter password"
+        },
+        "submit": "Next"
+      },
+      "companyForm": {
+        "labels": {
+          "companyName": "Company Name",
+          "country": "Company Country",
+          "transportationType": "Transportation Type",
+          "phoneNumbers": "Phone Numbers"
+        },
+        "placeholders": {
+          "companyName": "Enter company name",
+          "country": "Select country",
+          "transportationType": "Select transportation type",
+          "phone": "5xxxxxxxx"
+        },
+        "transportationTypes": {
+          "privateCar": "Private Car",
+          "airplane": "Airplane",
+          "bus": "Bus"
+        },
+        "validation": {
+          "companyNameRequired": "Please enter the company name",
+          "countryRequired": "Please select the company country",
+          "transportationTypeRequired": "Please select the transportation type",
+          "phoneRequired": "Please enter the phone number",
+          "phoneInvalid": "Invalid phone number"
+        },
+        "addPhone": "Add phone number",
+        "removePhone": "Remove",
+        "submit": "Next"
+      }
+    }
+  },
+  "faqs": {
+    "banner": {
+      "title": "Frequently Asked Questions",
+      "breadcrumb": "FAQs"
+    },
+    "section": {
+      "title": "How can we help you?",
+      "subtitle": "Browse our most common questions. If you don't find what you're looking for, our support team is always ready to help."
+    },
+    "categories": {
+      "general": {
+        "title": "General",
+        "q1": "What is Wdiny?",
+        "a1": "Wdiny is a smart platform for booking train, bus, and private car trips inside and outside the Kingdom. We provide a seamless, comfortable, and secure travel experience so you can enjoy every moment on the road.",
+        "q2": "Do I need to create an account to book?",
+        "a2": "Yes, you need to create a free account to complete a booking. Registration takes less than a minute and gives you access to your booking history, loyalty points, and exclusive offers.",
+        "q3": "Is the platform available as a mobile app?",
+        "a3": "Yes! The Wdiny app is available on both Google Play and the Apple App Store. You can download it and manage all your trips directly from your phone."
+      },
+      "booking": {
+        "title": "Booking",
+        "q1": "How do I book a trip?",
+        "a1": "Simply choose your trip type (bus, train, or private car), enter your departure and destination cities along with your travel date, then select your preferred trip from the available options and complete payment.",
+        "q2": "Can I book for multiple passengers?",
+        "a2": "Yes, you can book multiple seats in a single reservation. Enter the number of passengers during the search step and select the appropriate seats for all travelers.",
+        "q3": "How far in advance can I book a trip?",
+        "a3": "You can book up to 30 days in advance for most routes. Availability varies by operator, so we recommend booking early for popular routes and peak travel periods.",
+        "q4": "Will I receive a confirmation after booking?",
+        "a4": "Yes, once your booking is confirmed you will receive a booking summary via email and SMS. You can also view all your bookings at any time from your account."
+      },
+      "payment": {
+        "title": "Payment",
+        "q1": "What payment methods are accepted?",
+        "a1": "We accept Mada, credit and debit cards (Visa & Mastercard), Tabby, and Apple Pay. All transactions are secured with the latest encryption standards.",
+        "q2": "Is my payment information safe?",
+        "a2": "Absolutely. Wdiny uses industry-standard SSL encryption and never stores your full card details. All payments are processed through certified and PCI-compliant payment gateways.",
+        "q3": "Will I be charged any additional fees?",
+        "a3": "The price shown at checkout is the final price you pay — no hidden fees. Some payment methods may apply a small processing fee which will be shown before you confirm."
+      },
+      "cancellation": {
+        "title": "Cancellation & Refunds",
+        "q1": "Can I cancel my booking?",
+        "a1": "Yes, bookings can be cancelled before departure. Cancellation policies vary by trip operator. You can view the specific policy for your trip on the booking details page.",
+        "q2": "How long does a refund take?",
+        "a2": "Refunds are typically processed within 3–7 business days depending on your bank or payment provider. You will receive a notification once the refund has been initiated.",
+        "q3": "Can I modify my booking instead of cancelling?",
+        "a3": "Trip modification (date or seat change) is supported for select operators. Go to My Trips in your account to check if modification is available for your booking."
+      },
+      "loyalty": {
+        "title": "Loyalty Program",
+        "q1": "How does the loyalty program work?",
+        "a1": "Every completed trip earns you loyalty points based on the trip value. Points accumulate in your account and can be redeemed for discounts on future bookings or exclusive rewards.",
+        "q2": "When do my points expire?",
+        "a2": "Points are valid for 12 months from the date they are earned. Any account activity (booking, redemption) resets the expiry period for your existing points balance.",
+        "q3": "How do I redeem my points?",
+        "a3": "During checkout, you will see an option to apply your available points as a discount. Simply toggle the option on and the eligible amount will be deducted from your total."
+      }
+    },
+    "cta": {
+      "text": "Didn't find the answer you were looking for? Our support team is available around the clock to help you.",
+      "button": "Contact Us"
+    }
+  },
+  "notificationsPage": {
+    "title": "Notifications",
+    "clearAll": "Clear all",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "empty": {
+      "title": "No notifications",
+      "description": "All notifications related to your bookings and account updates will appear here."
+    },
+    "item": {
+      "markAsRead": "Mark as read",
+      "alreadyRead": "Already read"
+    }
+  },
+  "contactUs": {
+    "bannerTitle": "Contact us",
+    "bannerCurrentPage": "Contact us",
+    "formTitle": "Get support immediately",
+    "submit": "Send",
+    "infoTitle": "We are here to help you",
+    "infoSubtitle": "Contact us through any of the following channels",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "addressLabel": "Address",
+    "addressValue": "Cairo, Egypt",
+    "inputs": {
+      "placeholders": {
+        "fullName": "Full name",
+        "email": "Email",
+        "message": "Write your message here"
+      },
+      "labels": {
+        "fullName": "Full name",
+        "email": "Email address",
+        "phone": "Phone number",
+        "message": "Question / Message"
+      },
+      "validation": {
+        "fullNameRequired": "Please enter your name",
+        "emailRequired": "Please enter a valid email",
+        "messageRequired": "Please enter your message",
+        "messageMinLength": "Message must be at least 25 characters",
+        "phoneRequired": "Please enter your phone number",
+        "phoneInvalid": "Invalid phone number"
+      }
+    }
+  },
+  "privateBooking": {
+    "proceedToPay": "Proceed to Pay"
+  },
+  "flightModal": {
+    "priceRules": {
+      "companyName": "Safaria",
+      "breakdown": "Price Breakdown",
+      "baseFare": "Base Fare",
+      "taxesAndFees": "Taxes & Fees",
+      "total": "Total",
+      "cancellationFees": "Cancellation Fees",
+      "refundabilityStatus": "Refundability Status",
+      "changeDateFees": "Date Change Fees",
+      "noInfoAvailable": "No information available",
+      "refundable": "Refundable",
+      "partiallyRefundable": "Partially Refundable",
+      "nonRefundable": "Non-refundable",
+      "disclaimer": "Airlines stop accepting cancellation or change requests 4-72 hours before flight departure depending on the airline. Airline fees are indicative based on automated interpretation of flight ticket price rules. {company} does not guarantee the accuracy of this information. Change or cancellation fees may also vary based on fluctuations in currency conversion rates. For exact cancellation or change fees, please contact us at our customer service number.",
+      "disclaimerNote": "Note: Non-refundable booking cancellation fees will be additional",
+      "detailsLink": "For more details, click here"
+    },
+    "tabs": {
+      "timeline": "Flight Details",
+      "summary": "Price Summary",
+      "rules": "Price Rules",
+      "baggage": "Baggage Details"
+    },
+    "timeline": {
+      "to": "to",
+      "totalDuration": "Total Duration",
+      "terminal": "Terminal",
+      "flightNumber": "Flight No.",
+      "aircraft": "Aircraft",
+      "transitTime": "Transit Time",
+      "durationFormat": "{h}h {m}m"
+    },
+    "priceSummary": {
+      "baseFare": "Base Fare",
+      "taxesAndFees": "Taxes & Fees",
+      "discount": "Discount",
+      "refundPrice": "Refund Price",
+      "unspecifiedYet": "Unspecified yet",
+      "total": "Total",
+      "disclaimer": "There may be a slight difference in the fare summary due to rounding to the next tier."
+    }
+  },
+  "profile": {
+    "myTrips": {
+      "title": "My Trips",
+      "resultsCount": "{count} results found",
+      "tabs": {
+        "all": "All",
+        "pending": "Pending",
+        "booked": "Booked"
+      },
+      "emptyState": {
+        "title": "No flight tickets",
+        "description": "You haven't booked any flights yet. Start exploring available flights and book your ticket."
+      },
+      "card": {
+        "orderStatus": {
+          "onHold": "On Hold",
+          "booked": "Booked",
+          "cancelled": "Cancelled"
+        },
+        "paymentStatus": {
+          "paid": "Paid",
+          "failed": "Payment Failed",
+          "pending": "Processing"
+        },
+        "passengers": {
+          "one": "passenger",
+          "many": "passengers"
+        },
+        "noTransactions": "No transactions",
+        "paymentLabel": "Payment:",
+        "actions": {
+          "pay": "Pay",
+          "invoice": "Download Invoice",
+          "orderInvoice": "Order Invoice",
+          "details": "Details"
+        },
+        "direct": "Direct",
+        "stop": "stop",
+        "stops": "stops",
+        "durationFormat": "{h}h {m}m"
+      },
+      "detail": {
+        "pageTitle": "Ticket Details",
+        "errorMessage": "Failed to load order details",
+        "orderStatus": {
+          "onHold": "On Hold",
+          "booked": "Booked",
+          "cancelled": "Cancelled"
+        },
+        "paymentStatus": {
+          "paid": "Paid",
+          "failed": "Payment Failed",
+          "pending": "Processing"
+        },
+        "journey": "Flight Route",
+        "journeyN": "Flight {n}",
+        "direct": "Direct",
+        "stop": "stop",
+        "stops": "stops",
+        "layoverAt": "Layover at {city}",
+        "passengers": "Passengers",
+        "passengerCount": "{count, plural, one {# passenger} other {# passengers}}",
+        "passengerTypes": {
+          "adult": "Adult",
+          "child": "Child",
+          "infant": "Infant"
+        },
+        "priceDetails": "Price Details",
+        "baseFare": "Base Fare",
+        "taxesAndFees": "Taxes & Fees",
+        "serviceCharge": "Service Charge",
+        "discount": "Discount",
+        "total": "Total",
+        "transactions": "Payment Transactions",
+        "invoice": "Invoice",
+        "durationFormat": "{h}h {m}m"
+      }
+    }
+  },
+  "airplaneCard": {
+    "departure": "Departure",
+    "return": "Return",
+    "on": "on",
+    "via": "via",
+    "totalTime": "Total time",
+    "refundable": "Refundable",
+    "nonRefundable": "Non-refundable",
+    "partiallyRefundable": "Partially Refundable",
+    "selectFlight": "Select Flight",
+    "flightDetails": "Flight Details",
+    "bookNow": "Book Now",
+    "classOptions": {
+      "economy": "Economy",
+      "premiumEconomy": "Premium Economy",
+      "business": "Business",
+      "first": "First Class"
+    }
+  },
+  "resultsHeader": {
+    "sort": "Sort",
+    "sortOptions": {
+      "cheapestFirst": "Cheapest First",
+      "mostExpensiveFirst": "Most Expensive",
+      "fastestFirst": "Fastest First",
+      "slowestFirst": "Slowest First",
+      "earliestDepartureFirst": "Earliest Departure First",
+      "latestDepartureFirst": "Latest Departure"
+    },
+    "stats": {
+      "cheapest": "Cheapest",
+      "mostExpensive": "Most Expensive",
+      "fastest": "Fastest",
+      "slowest": "Slowest",
+      "earliestDeparture": "Earliest Departure",
+      "latestDeparture": "Latest Departure"
+    }
+  },
+  "passengerForm": {
+    "title": {
+      "label": "Title",
+      "placeholder": "Title",
+      "required": "Required"
+    },
+    "firstName": {
+      "label": "First Name",
+      "placeholder": "First Name",
+      "required": "Please enter first name",
+      "englishOnly": "English letters only"
+    },
+    "middleName": {
+      "label": "Middle Name",
+      "placeholder": "Middle Name (optional)",
+      "englishOnly": "English only"
+    },
+    "lastName": {
+      "label": "Last Name",
+      "placeholder": "Last Name",
+      "required": "Please enter last name",
+      "englishOnly": "English letters only"
+    },
+    "gender": {
+      "label": "Gender",
+      "placeholder": "Gender",
+      "required": "Please select gender"
+    },
+    "dob": {
+      "label": "Date of Birth",
+      "placeholder": "Date of Birth",
+      "required": "Please select date of birth"
+    },
+    "nationality": {
+      "label": "Nationality",
+      "placeholder": "Nationality",
+      "required": "Please select nationality"
+    },
+    "residenceCountry": {
+      "label": "Country of Residence",
+      "placeholder": "Country of Residence",
+      "required": "Please select country of residence"
+    },
+    "passportNumber": {
+      "label": "Passport Number",
+      "placeholder": "Passport Number",
+      "required": "Please enter passport number"
+    },
+    "passportCountry": {
+      "label": "Passport Issuing Country",
+      "placeholder": "Country of Issue",
+      "required": "Please select issuing country"
+    },
+    "passportExpiry": {
+      "label": "Passport Expiry Date",
+      "placeholder": "Expiry Date",
+      "required": "Please select expiry date"
+    },
+    "addressCountry": {
+      "label": "Address Country",
+      "placeholder": "Country",
+      "required": "Required"
+    },
+    "addressCity": {
+      "label": "City",
+      "placeholder": "City",
+      "required": "Required",
+      "englishOnly": "English letters only"
+    },
+    "addressLine1": {
+      "label": "Address (Line 1)",
+      "placeholder": "Address - Line 1",
+      "required": "Required",
+      "englishOnly": "English letters and numbers only"
+    },
+    "addressLine2": {
+      "label": "Address (Line 2)",
+      "placeholder": "Address - Line 2 (optional)",
+      "englishOnly": "English letters and numbers only"
+    },
+    "titleOptions": {
+      "MR": "Mr",
+      "MRS": "Mrs",
+      "MS": "Ms"
+    },
+    "genderOptions": {
+      "M": "Male",
+      "F": "Female"
+    },
+    "passengerLabel": "Passenger {num}",
+    "noDataEntered": "No data entered yet",
+    "editData": "Edit Data",
+    "confirmPassenger": "Confirm Passenger Data"
+  },
+  "priceSummaryCard": {
+    "title": "Price Summary",
+    "baseFare": "Base Fare",
+    "taxesAndFees": "Taxes & Fees",
+    "serviceCharge": "Service Charge",
+    "bundlePrice": "Bundle Price ({name})",
+    "passengersExcludingInfants": "Passengers (excl. infants)",
+    "bundleTotal": "Bundle Total",
+    "total": "Total",
+    "grandTotal": "Total",
+    "passengerCountNoInfants": "Passengers (excl. infants)"
+  },
+  "invoicePage": {
+    "pageTitle": "Booking Ticket",
+    "bookNow": "Book Now",
+    "bookingTitle": "Flight Booking Ticket",
+    "paymentCode": "Payment Code",
+    "tripType": "Trip Type",
+    "oneWayTrip": "One-Way Trip",
+    "operationTime": "Operation Time",
+    "seatNumber": "Seat Number",
+    "outboundTrip": "Outbound Trip",
+    "from": "From",
+    "to": "To",
+    "am": "AM",
+    "paymentMethod": "Payment Method",
+    "outboundTicketPrice": "Outbound Ticket Price",
+    "discount": "Discount",
+    "total": "Total",
+    "passengerData": "Passenger Data",
+    "fullName": "Full Name",
+    "mobileNumber": "Mobile Number",
+    "email": "Email",
+    "serialNumber": "Serial Number",
+    "issueDate": "Issue Date",
+    "downloadTicket": "Download Ticket",
+    "tripInstructions": "Trip Instructions",
+    "complaintsAndInquiries": "Complaints & Inquiries"
+  },
+  "common": {
+    "home": "Home"
+  }
+}

@@ -1,0 +1,80 @@
+.loyalityProgram :global {
+  .loyality-program-banner {
+    background: url("/images/loyality-program-banner.png");
+    background-size: cover;
+    padding-top: 112px;
+    padding-bottom: 112px;
+  }
+  .loyality-program-how-works {
+    background: #f9fbfa;
+
+    .how-works-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow:
+        0 4px 6px -1px rgba(15, 36, 29, 0.08),
+        0 2px 4px -2px rgba(15, 36, 29, 0.06);
+      padding: 34px;
+      position: relative;
+
+      .icon {
+        border-radius: 20px;
+        background: #eaf6f2;
+        width: 64px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #3a5762;
+        font-size: 30px;
+      }
+    }
+  }
+  .loyality-program-features {
+    background: rgba(238, 241, 240, 0.5);
+
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow:
+        0 4px 6px -1px rgba(15, 36, 29, 0.08),
+        0 2px 4px -2px rgba(15, 36, 29, 0.06);
+      padding: 34px;
+      position: relative;
+
+      .icon {
+        border-radius: 20px;
+        background: theme("colors.secondary");
+        width: 64px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #f1f1f1;
+        font-size: 30px;
+      }
+    }
+  }
+
+  .loyality-program-not-member {
+    margin-top: 90px;
+    margin-bottom: 90px;
+    padding: 48px;
+    border-radius: 16px;
+    background: theme("colors.primary");
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+}

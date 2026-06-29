@@ -1,0 +1,215 @@
+@use "_mixins.scss" as *;
+
+.singleInsight :global {
+  margin-top: 86px;
+  overflow: hidden;
+  .single-insight-hero-section {
+    height: 100vh;
+
+    @include small {
+      height: auto;
+      margin-top: 100px;
+    }
+
+    .insight-content {
+      @include small {
+        padding: 32px;
+      }
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      color: theme("colors.secondary");
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    h1 {
+      color: theme("colors.secondary");
+      font-size: 35px;
+      font-weight: 700;
+      line-height: 66px;
+      margin-bottom: 24px;
+      margin-top: 33px;
+
+      @include small {
+        font-size: 40px;
+      }
+    }
+
+    p {
+      color: #121212;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 30px;
+    }
+
+    .insight-image {
+      height: 100vh;
+      position: relative;
+    }
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  ul {
+    list-style: auto;
+    margin-inline-start: 10px;
+    li {
+      margin-bottom: 10px;
+    }
+  }
+  // .what-is-section {
+  //   background: #f3f4f6;
+
+  //   .container {
+  //     padding-top: 120px;
+  //     padding-bottom: 120px;
+  //   }
+  //   h2 {
+  //     color: theme("colors.secondary");
+  //     font-size: 36px;
+  //     font-weight: 700;
+  //     line-height: 46px;
+  //     margin-bottom: 16px;
+  //   }
+  //   p {
+  //     color: #121212;
+  //     font-size: 18px;
+  //     font-weight: 400;
+  //     line-height: 30px;
+  //   }
+  // }
+
+  // .why-the-studio-section {
+  //   padding-top: 130px;
+  //   h3 {
+  //     color: theme("colors.secondary");
+  //     font-size: 36px;
+  //     font-weight: 700;
+  //     line-height: 46px;
+  //     margin-bottom: 24px;
+  //   }
+  //   .why-the-studio-item {
+  //     &:not(:last-child) {
+  //       margin-bottom: 24px;
+  //     }
+
+  //     h4 {
+  //       color: theme("colors.secondary");
+  //       font-size: 18px;
+  //       font-weight: 600;
+  //       line-height: 30px;
+  //       margin-bottom: 10px;
+  //     }
+
+  //     p {
+  //       color: #909090;
+  //       font-size: 18px;
+  //       font-weight: 400;
+  //       line-height: 30px;
+  //     }
+  //   }
+
+  //   img {
+  //     margin-top: 140px;
+  //   }
+  // }
+
+  // .perfect-fit-section {
+  //   padding: 120px 0;
+  //   background: #f3f4f6;
+
+  //   h3 {
+  //     color: theme("colors.secondary");
+  //     font-size: 36px;
+  //     font-weight: 700;
+  //     line-height: 46px;
+  //     margin-bottom: 16px;
+  //   }
+
+  //   p {
+  //     color: #121212;
+  //     font-size: 18px;
+  //     font-weight: 400;
+  //     line-height: 30px;
+  //   }
+  // }
+
+  // .what-the-future-section {
+  //   padding: 120px 0;
+
+  //   h3 {
+  //     color: theme("colors.secondary");
+  //     font-size: 36px;
+  //     font-weight: 700;
+  //     line-height: 46px;
+  //     margin-bottom: 24px;
+  //   }
+
+  //   p {
+  //     color: #121212;
+  //     font-size: 18px;
+  //     font-weight: 400;
+  //     line-height: 30px;
+  //     margin-bottom: 10px;
+  //   }
+
+  //   h6 {
+  //     color: #909090;
+  //     font-size: 18px;
+  //     font-weight: 400;
+  //     line-height: 30px;
+  //     margin-bottom: 10px;
+  //   }
+
+  //   ul {
+  //     list-style: none;
+  //     li {
+  //       color: #909090;
+  //       font-size: 18px;
+  //       font-weight: 400;
+  //       line-height: 30px;
+  //       padding-inline-start: 30px;
+  //       position: relative;
+  //       margin-bottom: 5px;
+
+  //       &::before {
+  //         content: "";
+  //         width: 5px;
+  //         height: 5px;
+  //         background: #909090;
+  //         position: absolute;
+  //         border-radius: 50%;
+  //         left: 10px;
+  //         top: 50%;
+  //         transform: translateY(-50%);
+  //       }
+  //     }
+  //   }
+  // }
+
+  // .conclusion-section {
+  //   padding: 120px 0;
+
+  //   h3 {
+  //     color: theme("colors.secondary");
+  //     font-size: 36px;
+  //     font-weight: 700;
+  //     line-height: 46px;
+  //     margin-bottom: 24px;
+  //   }
+
+  //   p {
+  //     color: #121212;
+  //     font-size: 18px;
+  //     font-weight: 400;
+  //     line-height: 30px;
+  //   }
+  // }
+}

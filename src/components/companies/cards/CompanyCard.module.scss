@@ -1,0 +1,29 @@
+.cardRoot {
+  container-type: inline-size;
+  container-name: company-card;
+}
+
+@container company-card (max-width: 330px) {
+  .metaRow {
+    margin-top: 0.875rem;
+  }
+
+  .logoWrap {
+    width: 40px;
+    height: 40px;
+  }
+
+  .title {
+    font-size: 0.9375rem;
+    line-height: 1.25rem;
+  }
+
+  .details {
+    font-size: 0.75rem;
+    gap: 0.25rem;
+  }
+
+  .detailsIcon {
+    font-size: 0.75rem;
+  }
+}

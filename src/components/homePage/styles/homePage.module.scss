@@ -1,0 +1,96 @@
+@use "_mixins.scss" as *;
+
+.homePage :global {
+  .hero-section {
+    --hero-media-height: 560px;
+    --hero-gradient-overlap: 170px;
+    --hero-gradient-extension: 36px;
+
+    position: relative;
+    padding-top: 45px;
+    padding-bottom: 90px;
+    background-color: theme("colors.primary");
+
+    .hero-media {
+      position: absolute;
+      inset-inline: 0;
+      top: 0;
+      height: var(--hero-media-height);
+      overflow: hidden;
+    }
+
+    .hero-media-shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(17, 17, 19, 0.38) 0%,
+        rgba(17, 17, 19, 0.2) 45%,
+        rgba(17, 17, 19, 0.08) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-gradient {
+      position: absolute;
+      inset-inline: 0;
+      top: calc(var(--hero-media-height) - var(--hero-gradient-overlap));
+      height: calc(var(--hero-gradient-overlap) + var(--hero-gradient-extension));
+      background: linear-gradient(180deg, rgba(0, 116, 195, 0), rgb(0 116 195 / 38%) 80%, #0074C3 100%); 
+      pointer-events: none;
+      top: 0;
+      height: 560px;
+      z-index: 1;
+
+      @media screen and (max-width: 1024px) {
+        height: 500px; // Screen-specific style for .element
+      }
+
+      @media screen and (max-width: 768px) {
+        height: 420px; // Screen-specific style for .element
+      }
+    }
+
+    @media (max-width: 1024px) {
+      --hero-media-height: 500px;
+      --hero-gradient-overlap: 150px;
+      --hero-gradient-extension: 32px;
+    }
+
+    @media (max-width: 768px) {
+      --hero-media-height: 420px;
+      --hero-gradient-overlap: 120px;
+      --hero-gradient-extension: 28px;
+    }
+
+    .hero-bullet {
+      width: 10px;
+      height: 10px;
+      background-color: #d1d5db;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .hero-bullet-active {
+      width: 32px;
+      height: 10px;
+      background-color: #3d5a5a;
+      border-radius: 9999px;
+    }
+  }
+
+  .features-section {
+    padding: 80px 0;
+    background-color: #fbfbfd;
+
+    .all-features {
+      position: relative;
+      border-radius: 40px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  }
+}

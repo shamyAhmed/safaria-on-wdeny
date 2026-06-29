@@ -1,0 +1,180 @@
+@import "antd/dist/reset.css"; // Ensure Ant Design resets are applied
+
+// Inputs
+.ant-input-number {
+  width: 100% !important;
+}
+
+// Buttons
+
+.ant-btn {
+  border-radius: 16px !important;
+  padding: 10px 20px !important;
+  height: auto !important;
+  min-width: 100px;
+  font-weight: 500 !important;
+}
+
+.ant-btn-primary {
+  background-color: theme("colors.primary") !important;
+  border-color: theme("colors.primary") !important;
+  color: #fff !important;
+
+  &:hover {
+    background-color: #fff !important;
+    border-color: theme("colors.primary") !important;
+    color: theme("colors.primary") !important;
+  }
+
+  &:disabled,
+  &.ant-btn-disabled {
+    background-color: #e0e0e0 !important;
+    border-color: #e0e0e0 !important;
+    color: #a3a3a3 !important;
+    cursor: not-allowed !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+
+    * {
+      color: #a3a3a3 !important;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: #e0e0e0 !important;
+      border-color: #e0e0e0 !important;
+      color: #a3a3a3 !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+.ant-btn-default {
+  color: theme("colors.secondary") !important; // Change primary color
+  border-color: #949499 !important;
+}
+
+.ant-btn-text {
+  color: #fff !important; // Change primary color
+  border-color: transparent !important;
+  border: 1px solid #fff !important;
+}
+
+// Dragers
+.ant-upload-wrapper {
+  .ant-upload-drag {
+    background: #fff !important;
+    border: 1px solid #e5e7eb !important;
+  }
+}
+
+.ant-switch {
+  height: 35px !important;
+  min-width: 80px !important; // optional: adjust for content
+
+  .ant-switch-handle {
+    top: 50% !important;
+    transform: translateY(-50%);
+  }
+
+  .ant-switch-inner {
+    height: fit-content !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  &.ant-switch-checked {
+    background-color: #013a34 !important;
+    border-color: #013a34 !important;
+
+    .ant-switch-inner span {
+      color: #fff !important;
+    }
+
+    .ant-switch-handle::before {
+      background-color: #fff !important;
+    }
+  }
+}
+
+// add-credit modal
+.add-credit-modal {
+  .ant-modal-content {
+    border-radius: 20px !important;
+    padding: 28px !important;
+  }
+
+  .ant-modal-header {
+    margin-bottom: 20px !important;
+  }
+
+  .ant-modal-title {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    text-align: end;
+  }
+
+  .ant-input-affix-wrapper {
+    border: 1px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+
+    &:focus-within {
+      border-color: theme("colors.primary") !important;
+    }
+
+    input {
+      // text-align: end !important;
+      background: transparent !important;
+    }
+  }
+}
+
+// add-address modal
+.add-address-modal {
+  .ant-modal-content {
+    border-radius: 20px !important;
+    padding: 28px !important;
+  }
+
+  .ant-modal-header {
+    margin-bottom: 16px !important;
+  }
+
+  .ant-modal-title {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+  }
+}
+
+/* Checked radio */
+.ant-radio-checked .ant-radio-inner {
+  border-color: #0074C3 !important;
+  background-color: #0074C3 !important;
+}
+
+/* Hover */
+.ant-radio-wrapper:hover .ant-radio-inner {
+  border-color: #0074C3 !important;
+}
+
+/* Inner dot */
+.ant-radio-inner::after {
+  background-color: #fff !important;
+}
+
+/* checkbox background */
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: theme("colors.primary") !important; /* your color */
+  border-color: theme("colors.primary") !important;
+}
+
+/* check icon color */
+.ant-checkbox-checked .ant-checkbox-inner::after {
+  border-color: #fff;
+}

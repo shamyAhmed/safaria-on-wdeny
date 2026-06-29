@@ -1,0 +1,231 @@
+@use "_mixins.scss" as *;
+
+.insights :global {
+  .insights-hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    .content {
+      h1 {
+        color: theme("colors.secondary");
+        font-size: 50px;
+        font-weight: 700;
+        line-height: 66px;
+        margin-bottom: 24px;
+      }
+
+      p {
+        color: #121212;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 30px;
+        margin-bottom: 40px;
+      }
+
+      .leatst-article-button {
+        border-color: theme("colors.secondary") !important;
+        color: theme("colors.secondary") !important;
+      }
+    }
+
+    .images-cards {
+      overflow: hidden;
+      gap: 25px;
+      width: 115%;
+
+      @include medium {
+        display: none;
+      }
+
+      .card {
+        position: relative;
+        height: 510px;
+        width: 360px;
+        border-radius: 30px;
+        overflow: hidden;
+
+        .article-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: -1;
+        }
+      }
+    }
+  }
+
+  .featured-articles-section {
+    background: #f3f4f6;
+    padding: 120px 0;
+
+    position: relative;
+
+    .swiper-navigation {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      pointer-events: none;
+
+      button {
+        width: 50px;
+        height: 50px;
+        pointer-events: all;
+        background: white;
+        color: #013a34;
+        border: none;
+        font-size: 2rem;
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: #013a34;
+          color: white;
+        }
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    .content {
+      h2 {
+        color: theme("colors.secondary");
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 46px;
+        margin-bottom: 16px;
+      }
+
+      p {
+        color: #121212;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 30px;
+        margin-bottom: 70px;
+      }
+    }
+
+    .article-card {
+      position: relative;
+      border-radius: 25px;
+      overflow: hidden;
+      background: linear-gradient(
+        0deg,
+        rgba(1, 58, 52, 0.6) 0%,
+        rgba(1, 58, 52, 0.6) 100%
+      );
+      height: 569px;
+      display: flex;
+      align-items: flex-end;
+
+      .article-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+      .article-content {
+        padding: 32px 42px;
+
+        h3 {
+          color: #fff;
+          font-size: 24px;
+          font-weight: 700;
+          line-height: 28px;
+          letter-spacing: -0.36px;
+          margin-bottom: 16px;
+        }
+
+        span {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .browse-more-articles-section {
+    padding: 130px 0;
+
+    .content {
+      h3 {
+        color: theme("colors.secondary");
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 46px;
+        margin-bottom: 16px;
+      }
+
+      p {
+        color: #909090;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 30px;
+        margin-bottom: 55px;
+      }
+    }
+
+    .articals {
+      .article-card {
+        border-radius: 20px;
+        background-color: #fef9ef;
+        padding: 40px;
+
+        h4 {
+          color: theme("colors.secondary");
+          font-size: 22px;
+          font-weight: 700;
+          line-height: 28px;
+          margin-bottom: 14px;
+        }
+
+        p {
+          color: #909090;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 20px;
+          margin-bottom: 24px;
+        }
+
+        a {
+          color: theme("colors.secondary");
+          font-size: 16px;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        &.main-card {
+          background-color: theme("colors.secondary");
+
+          h4,
+          p,
+          a {
+            color: #fff;
+          }
+
+          a {
+            margin-bottom: 24px;
+          }
+        }
+      }
+    }
+  }
+}
