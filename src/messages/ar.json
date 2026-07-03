@@ -84,7 +84,7 @@
     "logoAlt": "شعار سفرية",
     "importantLinksTitle": "روابط هامة",
     "importantLinks": {
-      "about": "تعرّف على سفرية",
+      "about": "عن المنصة",
       "explore": "استكشف",
       "contact": "اتصل بنا"
     },
@@ -459,6 +459,12 @@
           "label": "محطة التحرك",
           "placeholder": "مكان التحرك"
         },
+        "from": {
+          "label": "السفر من"
+        },
+        "to": {
+          "label": "الذهاب إلى"
+        },
         "arrival": {
           "label": "محطة الوصول",
           "placeholder": "مكان الوصول"
@@ -484,6 +490,12 @@
     },
     "privateTripsForm": {
       "fields": {
+        "from": {
+          "label": "السفر من"
+        },
+        "to": {
+          "label": "الذهاب إلى"
+        },
         "departure": {
           "label": "محطة التحرك",
           "placeholder": "مكان التحرك"

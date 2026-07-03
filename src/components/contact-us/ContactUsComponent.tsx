@@ -18,9 +18,6 @@ export async function ContactUsComponent() {
       <section className="container py-[160px]">
         <ContactFormLoader />
       </section>
-
-      {/* Contact Info Section */}
-      <ContactInfoSection />
     </div>
   );
 }

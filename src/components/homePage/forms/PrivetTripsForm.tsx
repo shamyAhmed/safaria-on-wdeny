@@ -69,7 +69,7 @@ export const PrivetTripsForm = ({ readonly = false }: { readonly?: boolean }) =>
           {/* محطة التحرك */}
           <Col xs={24} md={12} lg={10}>
             <PrivatePlacesInput
-              label={t("fields.departure.label")}
+              label={t("fields.from.label")}
               placeholder={t("fields.departure.placeholder")}
               value={pickupLocation}
               onSelect={(loc) => dispatch(setPickupLocation(loc))}
@@ -80,7 +80,7 @@ export const PrivetTripsForm = ({ readonly = false }: { readonly?: boolean }) =>
           {/* محطة الوصول */}
           <Col xs={24} md={12} lg={10}>
             <PrivatePlacesInput
-              label={t("fields.arrival.label")}
+              label={t("fields.to.label")}
               placeholder={t("fields.arrival.placeholder")}
               value={destinationLocation}
               onSelect={(loc) => dispatch(setDestinationLocation(loc))}

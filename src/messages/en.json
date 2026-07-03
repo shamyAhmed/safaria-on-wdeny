@@ -84,7 +84,7 @@
     "logoAlt": "Safaria logo",
     "importantLinksTitle": "Important links",
     "importantLinks": {
-      "about": "Get to know Safaria",
+      "about": "About Us",
       "explore": "Explore",
       "contact": "Contact us"
     },
@@ -455,6 +455,12 @@
     },
     "busForm": {
       "fields": {
+        "from": {
+          "label": "From"
+        },
+        "to": {
+          "label": "To"
+        },
         "departure": {
           "label": "Departure station",
           "placeholder": "Departure location"
@@ -484,6 +490,12 @@
     },
     "privateTripsForm": {
       "fields": {
+        "from": {
+          "label": "From"
+        },
+        "to": {
+          "label": "To"
+        },
         "departure": {
           "label": "Departure station",
           "placeholder": "Departure location"
