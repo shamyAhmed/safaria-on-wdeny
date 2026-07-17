@@ -9,7 +9,7 @@ import { useRouter } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/appStore";
-import { setBusCities } from "@/store/slices/bus/busSlice";
+import { setBusCities, setBusReturnDate } from "@/store/slices/bus/busSlice";
 import dayjs from "dayjs";
 import { useEffect } from "react";
 
@@ -105,17 +105,21 @@ export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
       );
     }
 
+    // The bus API has no round-trip search, so each leg is searched one-way.
+    // A return date turns the booking into a two-step cycle instead: the
+    // outbound order becomes the `parent_order_id` of the return one.
+    const returnDate =
+      isRoundTrip && values.returnDate
+        ? dayjs(values.returnDate).format("YYYY-MM-DD")
+        : null;
+    dispatch(setBusReturnDate(returnDate));
+
     const query = new URLSearchParams();
     query.set("city_from", String(values.departure));
     query.set("city_to", String(values.arrival));
     query.set("date", dayjs(values.departureDate).format("YYYY-MM-DD"));
-    // WARNING: Round-trip is unsupported by the bus API — trip_type is forced to
-    // "one" and the return_date is never sent. Restore the block below once the
-    // backend supports round trips (see the disabled round-trip radio).
-    query.set("trip_type", "one");
-    // if (isRoundTrip && values.returnDate) {
-    //   query.set("return_date", dayjs(values.returnDate).format("YYYY-MM-DD"));
-    // }
+    query.set("trip_type", isRoundTrip ? "round-trip" : "one");
+    if (returnDate) query.set("return_date", returnDate);
     router.push(`/discover-bus?${query.toString()}`);
   };
 
@@ -246,9 +250,8 @@ export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
           <div
             className={`inputS1 ${tripType === "one" ? "disabled" : ""}`}
             onClick={() => {
-              // WARNING: Round-trip disabled (no bus-API support). Clicking the
-              // return-date box no longer switches the form to a round trip.
-              // if (!readonly && tripType === "one") form.setFieldValue("tripType", "round-trip");
+              if (!readonly && tripType === "one")
+                form.setFieldValue("tripType", "round-trip");
             }}>
             <Form.Item
               label={t("fields.returnDate.label")}
@@ -280,17 +283,14 @@ export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
             className="!mb-0">
             <Radio.Group
               disabled={readonly}
+              onChange={(e) => {
+                if (e.target.value === "one") {
+                  form.setFieldValue("returnDate", undefined);
+                }
+              }}
               className="airplane-radio-group !flex flex-col items-start gap-2 sm:flex-row">
               <Radio value="one">{t("tripTypes.one")}</Radio>
-              {/* WARNING: Round-trip is disabled for buses. The Wdeny bus API has no
-                round-trip / return-ticket support (no `round` flag, no return_date,
-                no linked-order / combined-payment endpoint), so only one-way trips
-                are bookable. Re-enable once the backend exposes a round-trip flow. */}
-              <Radio
-                value="round-trip"
-                disabled>
-                {t("tripTypes.round")}
-              </Radio>
+              <Radio value="round-trip">{t("tripTypes.round")}</Radio>
             </Radio.Group>
           </Form.Item>
         </div>

@@ -12,6 +12,9 @@ export type PrivateTripsFilters = {
   to_lat?: string | number;
   to_lng?: string | number;
   rounded?: boolean;
+  /** Combined "YYYY-MM-DD HH:mm" timestamps — see `combineDateTime`. */
+  date?: string;
+  return_date?: string;
 };
 
 const useGetPrivateTrips = (filters: PrivateTripsFilters) => {
@@ -21,7 +24,9 @@ const useGetPrivateTrips = (filters: PrivateTripsFilters) => {
     filters.from_lat != null &&
     filters.from_lng != null &&
     filters.to_lat != null &&
-    filters.to_lng != null;
+    filters.to_lng != null &&
+    filters.date != null &&
+    (!filters.rounded || filters.return_date != null);
 
   return useQuery({
     queryKey: [apiRoutes.privateSearch, filters, currency],
@@ -32,6 +37,10 @@ const useGetPrivateTrips = (filters: PrivateTripsFilters) => {
       params.set("to_latitude", String(filters.to_lat));
       params.set("to_longitude", String(filters.to_lng));
       params.set("rounded", filters.rounded ? "true" : "false");
+      params.set("date", String(filters.date));
+      if (filters.rounded && filters.return_date) {
+        params.set("return_date", filters.return_date);
+      }
       params.set("currency", currency);
 
       const response = await axiosInstance.get<ApiResponse<PrivateTrip[]>>(

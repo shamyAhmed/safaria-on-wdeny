@@ -14,6 +14,7 @@ import style from "../discover/styles/discover.module.scss";
 import { useRouter } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import useGetPrivateTrips from "@/app/[locale]/_hooks/useGetPrivateTrips";
+import { combineDateTime } from "@/utils/privateTripDateTime";
 import { clearLocations } from "@/store/slices/private/privateTripSlice";
 import { AppDispatch } from "@/store/appStore";
 import "../discoverAirplan/styles/airplane-discover.scss";
@@ -35,16 +36,27 @@ export const DiscoverPrivateComponent = () => {
   const toLng = searchParams.get("to_lng") ?? undefined;
   const rounded = searchParams.get("rounded") === "true";
 
+  const date = combineDateTime(
+    searchParams.get("date"),
+    searchParams.get("time"),
+  );
+  const returnDate = combineDateTime(
+    searchParams.get("return_date"),
+    searchParams.get("return_time"),
+  );
+
   const { data, isLoading } = useGetPrivateTrips({
     from_lat: fromLat,
     from_lng: fromLng,
     to_lat: toLat,
     to_lng: toLng,
     rounded,
+    date,
+    return_date: returnDate,
   });
 
   const trips = data ?? [];
-  const hasSearch = !!(fromLat && fromLng && toLat && toLng);
+  const hasSearch = !!(fromLat && fromLng && toLat && toLng && date);
 
   const filterSidebar = <PrivateFiltersSection />;
 

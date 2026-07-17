@@ -595,6 +595,7 @@
       "confirmSeats": "تأكيد {count} مقعد",
       "loginToContinue": "سجّل دخولك للمتابعة",
       "bookingCreated": "تم إنشاء الحجز بنجاح",
+      "outboundBooked": "تم حجز رحلة الذهاب، اختر الآن رحلة العودة",
       "routeError": "تعذّر تحميل مسار الرحلة"
     },
     "loadMore": "تحميل المزيد",

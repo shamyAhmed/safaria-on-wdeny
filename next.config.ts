@@ -33,6 +33,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "demo.safaria.travel",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "portal.wdenytravel.com",
         pathname: "/**",
       },

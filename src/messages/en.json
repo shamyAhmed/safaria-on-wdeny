@@ -595,6 +595,7 @@
       "confirmSeats": "Confirm {count} seat(s)",
       "loginToContinue": "Log in to continue",
       "bookingCreated": "Booking created successfully",
+      "outboundBooked": "Outbound trip booked — now choose your return trip",
       "routeError": "Couldn't load the trip route"
     },
     "loadMore": "Load more",

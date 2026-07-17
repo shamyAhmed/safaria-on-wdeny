@@ -44,8 +44,16 @@ const DiscoverPrivatePage = ({ params }: { params: Promise<{ id: string }> }) =>
   const isRound = searchParams.get("rounded") === "true";
 
   const [agreed, setAgreed] = useState(false);
-  const [departureDate, setDepartureDate] = useState<Dayjs | null>(null);
-  const [returnDate, setReturnDate] = useState<Dayjs | null>(null);
+  // Both legs were already picked on the search form and travel in the URL, so
+  // the pickers open on them instead of making the user choose twice.
+  const [departureDate, setDepartureDate] = useState<Dayjs | null>(() => {
+    const date = searchParams.get("date");
+    return date ? dayjs(date) : null;
+  });
+  const [returnDate, setReturnDate] = useState<Dayjs | null>(() => {
+    const date = searchParams.get("return_date");
+    return date ? dayjs(date) : null;
+  });
 
   const { mutate: createOrder, isPending: creatingOrder } =
     useCreatePrivateTicket();

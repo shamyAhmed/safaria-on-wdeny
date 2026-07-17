@@ -35,7 +35,17 @@ export const PrivateCard = ({ trip }: { trip: PrivateTrip }) => {
 
   const handleBook = () => {
     const query = new URLSearchParams();
-    const forward = ["from_lat", "from_lng", "to_lat", "to_lng", "rounded"];
+    const forward = [
+      "from_lat",
+      "from_lng",
+      "to_lat",
+      "to_lng",
+      "rounded",
+      "date",
+      "time",
+      "return_date",
+      "return_time",
+    ];
     forward.forEach((key) => {
       const val = searchParams.get(key);
       if (val) query.set(key, val);
