@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Row, Col } from "antd";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import style from "@/components/user/login/styles/login.module.scss";
+
+// Belt-and-braces alongside the per-page noindex: nothing under /auth belongs
+// in the index, including any screen added later without its own metadata.
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export default async function AuthLayout({
   children,
@@ -22,7 +29,7 @@ export default async function AuthLayout({
           <Col xs={24} md={12}>
             <div className="text-[#111113] min-h-[600px] relative !rounded-[40px] h-full w-full overflow-hidden">
               <Image
-                src="/images/login.png"
+                src="/images/login.webp"
                 objectFit="cover"
                 fill
                 alt={tAuth("sideImage")}

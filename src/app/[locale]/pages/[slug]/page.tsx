@@ -3,9 +3,11 @@ import { PageContent } from "@/app/[locale]/_types/Page";
 import { ApiResponse } from "@/app/[locale]/_types/Api";
 import { PageBannerSection } from "@/components/tools/sections/PageBannerSection";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+import { pageMetadata, toMetaDescription } from "@/lib/seo";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 const fetchPageContent = async (slug: string): Promise<PageContent | null> => {
@@ -16,6 +18,20 @@ const fetchPageContent = async (slug: string): Promise<PageContent | null> => {
     return null;
   }
 };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug, locale } = await params;
+  const page = await fetchPageContent(slug);
+
+  if (!page) return { robots: { index: false, follow: false } };
+
+  return pageMetadata({
+    locale,
+    path: `/pages/${page.slug}`,
+    title: page.title,
+    description: toMetaDescription(page.content),
+  });
+}
 
 const DynamicPage = async ({ params }: PageProps) => {
   const slug = (await params).slug

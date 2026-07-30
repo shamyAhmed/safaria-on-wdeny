@@ -26,7 +26,7 @@ const testimonials: Testimonial[] = [
     text: "Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget",
     name: "Robert Fox",
     role: "Customer",
-    avatar: "/images/domy-artical.png",
+    avatar: "/images/domy-artical.webp",
     rating: 5,
   },
   {
@@ -34,7 +34,7 @@ const testimonials: Testimonial[] = [
     text: "Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget",
     name: "Dianne Russell",
     role: "Customer",
-    avatar: "/images/domy-artical.png",
+    avatar: "/images/domy-artical.webp",
     rating: 5,
   },
   {
@@ -42,7 +42,7 @@ const testimonials: Testimonial[] = [
     text: "Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget",
     name: "Eleanor Pena",
     role: "Customer",
-    avatar: "/images/domy-artical.png",
+    avatar: "/images/domy-artical.webp",
     rating: 5,
   },
   {
@@ -50,7 +50,7 @@ const testimonials: Testimonial[] = [
     text: "Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget",
     name: "Wade Warren",
     role: "Customer",
-    avatar: "/images/domy-artical.png",
+    avatar: "/images/domy-artical.webp",
     rating: 5,
   },
   {
@@ -58,7 +58,7 @@ const testimonials: Testimonial[] = [
     text: "Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget",
     name: "Jenny Wilson",
     role: "Customer",
-    avatar: "/images/domy-artical.png",
+    avatar: "/images/domy-artical.webp",
     rating: 5,
   },
 ];

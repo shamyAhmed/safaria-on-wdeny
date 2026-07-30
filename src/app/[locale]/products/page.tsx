@@ -5,11 +5,16 @@ import { AllProductsComponent } from "@/components/products/AllProductsComponent
 import { LoaderS1 } from "@/components/tools/loaders/LoaderS1";
 import { Metadata } from "next";
 import { Suspense } from "react";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "All Products - نادي الطائي",
-  description: "اكتشف مجموعتنا الكاملة من منتجات نادي الطائي",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return pageMetadata({ locale, path: "/products", page: "products" });
+}
 
 interface ProductsPageProps {
   searchParams: Promise<{

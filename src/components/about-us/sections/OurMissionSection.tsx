@@ -25,10 +25,10 @@ export const OurVisionSection = () => {
         <Col span={24} lg={10}>
           <div className="content our-mission-content flex min-h-full relative rounded-[30px] overflow-hidden">
             <Image
-              src={"/photos/our-vision-1.png"}
+              src={"/photos/our-vision-1.webp"}
               fill
               objectFit="cover"
-              alt=""
+              alt={t("visionImageAlt")}
             />
           </div>
         </Col>
@@ -36,10 +36,10 @@ export const OurVisionSection = () => {
         <Col span={24} lg={10}>
           <div className="content our-mission-content flex min-h-full relative rounded-[30px] overflow-hidden">
             <Image
-              src={"/photos/our-vision-2.png"}
+              src={"/photos/our-vision-2.webp"}
               fill
               objectFit="cover"
-              alt=""
+              alt={t("missionImageAlt")}
             />
           </div>
         </Col>

@@ -34,6 +34,9 @@ export const CompaniesComponent = () => {
         </div>
 
         <div className="bg-white rounded-[40px] p-8">
+          <h1 className="mb-6 text-2xl md:text-3xl font-bold text-primary">
+            شركات النقل والسفر
+          </h1>
           <Row gutter={[24, 24]}>
             {companies?.map((company) => (
               <Col xs={24} md={8}>

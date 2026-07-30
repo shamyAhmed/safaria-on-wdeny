@@ -6,6 +6,7 @@ import { getMessages } from "next-intl/server";
 import MainLayout from "@/components/layout/MainLayout";
 import { Providers } from "@/providers/providers";
 import { routing } from "@/i18n/routing";
+import { SEO_COPY, SITE_NAME, SITE_URL, normalizeLocale } from "@/lib/seo";
 
 import "@/styles/globals.scss";
 import "@/styles/sections.scss";
@@ -34,52 +35,24 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  const isArabic = locale === "ar";
+  const isArabic = normalizeLocale(locale) === "ar";
 
-  const canonicalUrl = `https://safaria.travel/${locale}`;
-
+  // Fallback only. Every indexable page sets its own title, description,
+  // canonical and hreflang cluster through `pageMetadata()` in src/lib/seo.ts,
+  // so nothing inherits this description and ends up duplicated.
   const description = isArabic
-    ? "سفرية هي منصة متكاملة لحجز رحلات الطيران، وشركات النقل الخاصة، وحافلات النقل العام بسهولة وأمان، مع تجربة استخدام سلسة لجميع المستخدمين."
-    : "Safaria is a comprehensive platform for booking flights, private transportation companies, and public buses, offering a seamless and secure travel experience.";
+    ? SEO_COPY.home.ar.description
+    : SEO_COPY.home.en.description;
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: {
-      default: "Safaria",
-      template: "%s | Safaria",
+      default: SEO_COPY.home[isArabic ? "ar" : "en"].title,
+      template: `%s | ${SITE_NAME}`,
     },
     description,
     icons: {
       icon: "/favicon.svg",
-    },
-    alternates: {
-      canonical: canonicalUrl,
-      languages: {
-        en: "https://safaria.travel/en",
-        ar: "https://safaria.travel/ar",
-      },
-    },
-    openGraph: {
-      title: "Safaria",
-      description,
-      url: canonicalUrl,
-      siteName: "Safaria",
-      locale: isArabic ? "ar_SA" : "en_US",
-      alternateLocale: isArabic ? "en_US" : "ar_SA",
-      type: "website",
-      images: [
-        {
-          url: "/images/home-hero.webp",
-          width: 1200,
-          height: 630,
-          alt: "Safaria",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "Safaria",
-      description,
-      images: ["/images/home-hero.webp"],
     },
   };
 }

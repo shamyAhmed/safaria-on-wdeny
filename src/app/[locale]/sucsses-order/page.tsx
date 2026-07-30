@@ -2,10 +2,9 @@ import { SucssesfulOrderComponent } from "@/components/sucssesful-order/Sucssesf
 import { LoaderS1 } from "@/components/tools/loaders/LoaderS1";
 import { Metadata } from "next";
 import { Suspense } from "react";
+import { privatePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "SucssesOrder",
-};
+export const metadata: Metadata = privatePageMetadata("SucssesOrder");
 
 const SucssesOrderPage: React.FC = (): JSX.Element => {
   return (

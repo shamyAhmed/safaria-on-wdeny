@@ -150,7 +150,7 @@ export const InvoiceComponent = () => {
                 </span>
                 <div className="flex items-center gap-2">
                   <Image
-                    src="/images/payments/payment-4.png"
+                    src="/images/payments/payment-4.webp"
                     alt="payment card"
                     width={32}
                     height={26}

@@ -57,7 +57,7 @@ const GetAppSection = () => {
                     <div className="absolute left-1/2 top-24 h-[240px] w-[240px] -translate-x-1/2 rounded-full bg-white/10 sm:h-[330px] sm:w-[330px] md:h-[400px] md:w-[400px] lg:top-20 lg:h-[470px] lg:w-[470px]" />
 
                     <Image
-                        src="/images/home-app/phone-pics.png"
+                        src="/images/home-app/phone-pics.webp"
                         alt="phone-pics"
                         height={850}
                         width={800}

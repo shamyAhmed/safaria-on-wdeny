@@ -2,10 +2,9 @@ import { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { FiHome, FiRefreshCw } from "react-icons/fi";
 import { TbPointFilled } from "react-icons/tb";
+import { privatePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "فشل الدفع",
-};
+export const metadata: Metadata = privatePageMetadata("فشل الدفع");
 
 const FailedPaymentPage = () => {
   return (

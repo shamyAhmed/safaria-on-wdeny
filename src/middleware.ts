@@ -3,7 +3,13 @@ import { NextRequest, NextResponse } from "next/server";
 import createIntlMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
-const intlMiddleware = createIntlMiddleware(routing);
+// alternateLinks off: next-intl would emit hreflang in a Link header whose
+// x-default points at the un-prefixed root, contradicting the in-page hreflang
+// cluster from src/lib/seo.ts. The HTML tags are now the single source of truth.
+const intlMiddleware = createIntlMiddleware({
+  ...routing,
+  alternateLinks: false,
+});
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

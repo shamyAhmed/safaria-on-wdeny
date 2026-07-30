@@ -27,7 +27,7 @@ export function ContactInfoSection() {
         <div
           className="py-20 px-8 rounded-[40px] overflow-hidden"
           style={{
-            backgroundImage: "url('/photos/features.png')",
+            backgroundImage: "url('/photos/features.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

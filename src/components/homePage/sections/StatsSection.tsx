@@ -34,7 +34,12 @@ export default async function StatsSection() {
               <div className="relative shrink-0 h-[80px] w-[80px]">
                 <div className="absolute inset-0 rounded-full bg-primary/10" />
                 <div className="absolute h-[56px] w-[56px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary flex items-center justify-center">
-                  <Image src={icon} alt="" width={28} height={28} />
+                  <Image
+                    src={icon}
+                    alt={t("iconAlt", { label })}
+                    width={28}
+                    height={28}
+                  />
                 </div>
               </div>
               <div className="py-[8.5px]">

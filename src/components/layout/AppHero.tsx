@@ -14,8 +14,9 @@ const AppHero = () => {
       <div className="px-4">
         <div className="container rounded-[50px]">
           <Image
-            src="/images/footer-bg.png"
-            alt="footer-bg"
+            src="/images/footer-bg.webp"
+            alt=""
+            aria-hidden="true"
             fill
             className="object-cover rounded-[50px]"
           />
@@ -23,7 +24,7 @@ const AppHero = () => {
             {/* Phone */}
             <div className="app-hero__phone hidden lg:flex absolute left-6 bottom-0">
               <Image
-                src="/images/footer-app.png" // صورة الموبايل
+                src="/images/footer-app.webp" // صورة الموبايل
                 alt={t("imageAlt")}
                 width={440}
                 height={670}
@@ -33,11 +34,14 @@ const AppHero = () => {
 
             {/* Content */}
             <div className="app-hero__content mx-auto lg:mx-0 ltr:lg:ms-auto">
-              <h2 className="text-white text-2xl font-semibold md:text-4xl md:font-bold">
+              {/* Not a heading: this app-download banner sits in the site
+                  chrome on every page, so as an <h2> it made the same subheading
+                  duplicate across the whole site. Styling is unchanged. */}
+              <div className="text-white text-2xl font-semibold md:text-4xl md:font-bold">
                 <span className="text-primary"> {t("titleHighlight")} </span>
                 <br className="sm:hidden" />
                 {t("titleRest")}
-              </h2>
+              </div>
 
               <p className="md:text-lg">{t("description")}</p>
 

@@ -26,10 +26,10 @@ export const IndexComponent: React.FC = async () => {
         <div className="container">
             <div className="flex items-center justify-center relative h-[560px] rounded-2xl overflow-hidden">
               <Image
-                src="/images/home-banner.png"
+                src="/images/home-banner.webp"
                 fill
                 objectFit="cover"
-                alt=""
+                alt={t("bannerImageAlt")}
               />
           </div>
         </div>

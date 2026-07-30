@@ -100,9 +100,19 @@ export function ContactFormSection() {
           className="relative rounded-[30px] overflow-hidden"
           style={{ minHeight: "450px", height: "100%" }}
         >
-          <Image src="/images/contact-us.png" fill objectFit="cover" alt="" />
+          <Image
+            src="/images/contact-us.webp"
+            fill
+            objectFit="cover"
+            alt={t("imageAlt")}
+          />
           <div className="absolute inset-0 bg-black/20 flex items-center justify-center z-10">
-            <Image src="/images/logo-white.png" width={180} height={90} alt="" />
+            <Image
+              src="/images/logo-white.png"
+              width={180}
+              height={90}
+              alt={t("logoAlt")}
+            />
           </div>
         </div>
       </div>

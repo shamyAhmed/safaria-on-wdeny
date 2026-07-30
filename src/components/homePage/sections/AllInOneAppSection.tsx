@@ -16,7 +16,7 @@ export const AllInOneAppSection = () => {
         <div className="all-features py-20 px-8">
           <Image
             src="/images/home-features.webp"
-            alt=""
+            alt={t("imageAlt")}
             fill
             loading="lazy"
             className="object-cover -z-10"

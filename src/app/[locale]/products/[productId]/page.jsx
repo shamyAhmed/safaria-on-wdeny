@@ -8,18 +8,26 @@ import { SingleProductComponent } from "@/components/products/singleProduct/Sing
 import { LoaderS1 } from "@/components/tools/loaders/LoaderS1";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { SEO_COPY, normalizeLocale, pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }) {
+  const { locale, productId } = await params;
+  const fallback = SEO_COPY.products[normalizeLocale(locale)];
+  const path = `/products/${productId}`;
+
   try {
-    const res = await getSingleProductData(params.productId);
+    const res = await getSingleProductData(productId);
     const product = res?.data;
 
-    return {
-      title: product?.name || "منتج",
-      description: product?.description || "",
-    };
+    return pageMetadata({
+      locale,
+      path,
+      title: product?.name || fallback.title,
+      description: product?.description || fallback.description,
+      images: product?.image ? [product.image] : undefined,
+    });
   } catch {
-    return { title: "منتج" };
+    return pageMetadata({ locale, path, page: "products" });
   }
 }
 

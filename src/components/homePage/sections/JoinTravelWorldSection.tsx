@@ -11,75 +11,75 @@ interface GalleryItem {
 }
 
 const topGallery: GalleryItem[] = [
-  { id: 1, src: "/images/about/about-banner.png", alt: "Top gallery image 1" },
-  { id: 2, src: "/images/home-banner.png", alt: "Top gallery image 2" },
+  { id: 1, src: "/images/about/about-banner.webp", alt: "Top gallery image 1" },
+  { id: 2, src: "/images/home-banner.webp", alt: "Top gallery image 2" },
   {
     id: 3,
-    src: "/images/what-we-offer/banner.png",
+    src: "/images/what-we-offer/banner.webp",
     alt: "Top gallery image 3",
   },
   {
     id: 4,
-    src: "/images/why-the-studio-image.png",
+    src: "/images/why-the-studio-image.webp",
     alt: "Top gallery image 4",
   },
   {
     id: 5,
-    src: "/images/about/about-restless.png",
+    src: "/images/about/about-restless.webp",
     alt: "Top gallery image 5",
   },
   {
     id: 6,
-    src: "/images/what-we-offer/banner.png",
+    src: "/images/what-we-offer/banner.webp",
     alt: "Top gallery image 6",
   },
   {
     id: 7,
-    src: "/images/home-banner.png",
+    src: "/images/home-banner.webp",
     alt: "Top gallery image 7",
   },
   {
     id: 8,
-    src: "/images/about/about-banner.png",
+    src: "/images/about/about-banner.webp",
     alt: "Top gallery image 8",
   },
 ];
 
 const bottomGallery: GalleryItem[] = [
-  { id: 1, src: "/images/home-banner.png", alt: "Bottom gallery image 1" },
+  { id: 1, src: "/images/home-banner.webp", alt: "Bottom gallery image 1" },
   {
     id: 2,
-    src: "/images/what-we-offer/banner.png",
+    src: "/images/what-we-offer/banner.webp",
     alt: "Bottom gallery image 2",
   },
   {
     id: 3,
-    src: "/images/why-the-studio-image.png",
+    src: "/images/why-the-studio-image.webp",
     alt: "Bottom gallery image 3",
   },
   {
     id: 4,
-    src: "/images/about/about-restless.png",
+    src: "/images/about/about-restless.webp",
     alt: "Bottom gallery image 4",
   },
   {
     id: 5,
-    src: "/images/about/about-banner.png",
+    src: "/images/about/about-banner.webp",
     alt: "Bottom gallery image 5",
   },
   {
     id: 6,
-    src: "/images/why-the-studio-image.png",
+    src: "/images/why-the-studio-image.webp",
     alt: "Bottom gallery image 6",
   },
   {
     id: 7,
-    src: "/images/what-we-offer/banner.png",
+    src: "/images/what-we-offer/banner.webp",
     alt: "Bottom gallery image 7",
   },
   {
     id: 8,
-    src: "/images/home-banner.png",
+    src: "/images/home-banner.webp",
     alt: "Bottom gallery image 8",
   },
 ];

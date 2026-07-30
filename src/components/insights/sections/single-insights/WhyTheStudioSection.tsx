@@ -35,7 +35,7 @@ export const WhyTheStudioSection = () => {
         ))}
       </div>
       <Image
-        src="/images/why-the-studio-image.png"
+        src="/images/why-the-studio-image.webp"
         width={1512}
         height={400}
         alt="Why the Studio Model Works"

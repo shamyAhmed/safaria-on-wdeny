@@ -20,7 +20,7 @@ const offers: OfferCardProps[] = [
     title: "تخفيضات الشهر",
     subtitle: "افضل العروض",
     endDate: getEndDate(0),
-    image: "/products/offer1.png",
+    image: "/products/offer1.webp",
     bgColor: "blue",
     buttonVariant: "white",
   },

@@ -21,7 +21,7 @@ export function HeroSection() {
         aria-hidden="true">
         <Image
           src="/images/home-hero.webp"
-          alt=""
+          alt={t("imageAlt")}
           fill
           priority
           fetchPriority="high"

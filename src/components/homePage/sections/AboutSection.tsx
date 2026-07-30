@@ -14,12 +14,12 @@ export default function AboutSection() {
   const slides = [
     {
       id: 1,
-      src: "/images/login.png",
+      src: "/images/login.webp",
       alt: t("slides.1.alt"),
     },
     {
       id: 2,
-      src: "/images/contact-us.png",
+      src: "/images/contact-us.webp",
       alt: t("slides.2.alt"),
     },
     {

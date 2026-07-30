@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 
 import { routing } from "@/i18n/routing";
+import { DEFAULT_LOCALE, SITE_URL } from "@/lib/seo";
 
-const baseUrl = "https://safaria.travel";
+const baseUrl = SITE_URL;
 
 // Static, template-level public routes. Dynamic per-item pages (blog posts,
 // products, companies) are intentionally excluded — listing those requires
@@ -31,6 +32,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     staticPaths.map((path) => ({
       url: `${baseUrl}/${locale}${path}`,
       lastModified,
+      // Mirrors the on-page hreflang cluster so the sitemap and the HTML agree.
+      alternates: {
+        languages: {
+          ar: `${baseUrl}/ar${path}`,
+          en: `${baseUrl}/en${path}`,
+          "x-default": `${baseUrl}/${DEFAULT_LOCALE}${path}`,
+        },
+      },
     }))
   );
 }

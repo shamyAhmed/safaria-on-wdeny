@@ -21,20 +21,20 @@ export const PaymentMethodsSection = () => {
   const isRtl = locale === "ar";
 
   const paymentMethods: PaymentMethod[] = [
-    { id: 1,  name: t("methods.tabbyTamara"), logo: "/images/payments/payment-2.png" },
+    { id: 1,  name: t("methods.tabbyTamara"), logo: "/images/payments/payment-2.webp" },
     { id: 2,  name: t("methods.visa"),         logo: "/images/payments/payment-3.png" },
-    { id: 3,  name: t("methods.applePay"),     logo: "/images/payments/payment-4.png" },
-    { id: 4,  name: t("methods.mada"),         logo: "/images/payments/payment-5.png" },
-    { id: 5,  name: t("methods.stcPay"),       logo: "/images/payments/payment-6.png" },
-    { id: 6,  name: t("methods.moyasar"),      logo: "/images/payments/payment-2.png" },
+    { id: 3,  name: t("methods.applePay"),     logo: "/images/payments/payment-4.webp" },
+    { id: 4,  name: t("methods.mada"),         logo: "/images/payments/payment-5.webp" },
+    { id: 5,  name: t("methods.stcPay"),       logo: "/images/payments/payment-6.webp" },
+    { id: 6,  name: t("methods.moyasar"),      logo: "/images/payments/payment-2.webp" },
     { id: 7,  name: "Mastercard",              logo: "/images/payments/payment-3.png" },
-    { id: 8,  name: "Google Pay",              logo: "/images/payments/payment-4.png" },
-    { id: 9,  name: "PayPal",                  logo: "/images/payments/payment-5.png" },
-    { id: 10, name: "Tabby",                   logo: "/images/payments/payment-6.png" },
-    { id: 11, name: "Tamara",                  logo: "/images/payments/payment-2.png" },
+    { id: 8,  name: "Google Pay",              logo: "/images/payments/payment-4.webp" },
+    { id: 9,  name: "PayPal",                  logo: "/images/payments/payment-5.webp" },
+    { id: 10, name: "Tabby",                   logo: "/images/payments/payment-6.webp" },
+    { id: 11, name: "Tamara",                  logo: "/images/payments/payment-2.webp" },
     { id: 12, name: "Urpay",                   logo: "/images/payments/payment-3.png" },
-    { id: 13, name: "Benefit Pay",             logo: "/images/payments/payment-4.png" },
-    { id: 14, name: "Bank Transfer",           logo: "/images/payments/payment-5.png" },
+    { id: 13, name: "Benefit Pay",             logo: "/images/payments/payment-4.webp" },
+    { id: 14, name: "Bank Transfer",           logo: "/images/payments/payment-5.webp" },
   ];
 
   return (

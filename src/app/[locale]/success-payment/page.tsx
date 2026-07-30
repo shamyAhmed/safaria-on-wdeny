@@ -3,10 +3,9 @@ import { Link } from "@/i18n/navigation";
 import { FiHome } from "react-icons/fi";
 import { BsTicketPerforated } from "react-icons/bs";
 import { TbPointFilled } from "react-icons/tb";
+import { privatePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "تم الدفع بنجاح",
-};
+export const metadata: Metadata = privatePageMetadata("تم الدفع بنجاح");
 
 const SuccessPaymentPage = () => {
   return (

@@ -22,11 +22,11 @@ export const TravelDestinationsSection = () => {
   const t = useTranslations("homePage.travelDestinations");
 
   const destinations: DestinationCard[] = [
-    { id: 1, title: t("cards.1.title"), image: "/images/about/about-banner.png" },
-    { id: 2, title: t("cards.2.title"), image: "/images/why-the-studio-image.png" },
-    { id: 3, title: t("cards.3.title"), image: "/images/home-banner.png" },
-    { id: 4, title: t("cards.4.title"), image: "/images/about/about-restless.png" },
-    { id: 5, title: t("cards.5.title"), image: "/images/what-we-offer/banner.png" },
+    { id: 1, title: t("cards.1.title"), image: "/images/about/about-banner.webp" },
+    { id: 2, title: t("cards.2.title"), image: "/images/why-the-studio-image.webp" },
+    { id: 3, title: t("cards.3.title"), image: "/images/home-banner.webp" },
+    { id: 4, title: t("cards.4.title"), image: "/images/about/about-restless.webp" },
+    { id: 5, title: t("cards.5.title"), image: "/images/what-we-offer/banner.webp" },
   ];
 
   return (

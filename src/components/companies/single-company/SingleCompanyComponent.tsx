@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 export const SingleCompanyComponent = () => {
   const images = [
     "/photos/blue-bus.png",
-    "/images/contact-us.png",
+    "/images/contact-us.webp",
     "/photos/blue-bus.png",
   ];
 
@@ -50,7 +50,7 @@ export const SingleCompanyComponent = () => {
               />
             </div>
             <div className="flex items-center gap-2">
-              <h3 className="text-2xl font-bold text-[#4C4C4C]">نورس باص</h3>
+              <h1 className="text-2xl font-bold text-[#4C4C4C]">نورس باص</h1>
             </div>
           </div>
           <p className="my-6 text-[#666]">
@@ -65,7 +65,7 @@ export const SingleCompanyComponent = () => {
           <div className="relative w-full h-[420px] rounded-2xl overflow-hidden mb-4">
             <Image
               src={activeImage}
-              alt="main image"
+              alt="حافلات ومرافق شركة نورس باص"
               fill
               className="object-cover"
               priority
@@ -98,7 +98,7 @@ export const SingleCompanyComponent = () => {
                 >
                   <Image
                     src={img}
-                    alt={`thumb-${index}`}
+                    alt={`صورة ${index + 1} من صور شركة نورس باص`}
                     fill
                     className="object-cover"
                   />

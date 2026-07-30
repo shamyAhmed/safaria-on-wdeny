@@ -2,10 +2,16 @@ import { LoyalityProgramComponent } from "@/components/loyality/LoyalityProgramC
 import { LoaderS1 } from "@/components/tools/loaders/LoaderS1";
 import { Metadata } from "next";
 import { Suspense } from "react";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "برنامج ولاء الطائي",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return pageMetadata({ locale, path: "/loyality-program", page: "loyaltyProgram" });
+}
 
 const LoyalityProgramPage: React.FC = (): JSX.Element => {
   return (

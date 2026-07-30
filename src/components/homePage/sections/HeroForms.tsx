@@ -12,9 +12,9 @@ export function HeroForms() {
   const [currentTab, setCurrentTab] = useState("airplan");
 
   const tabs = [
-    { key: "airplan", label: t("tabs.airplan"), icon: <Image src="/images/icons/plane.webp" alt="" width={22} height={22} /> },
-    { key: "bus", label: t("tabs.bus"), icon: <Image src="/images/icons/bus.webp" alt="bus" width={22} height={22} /> },
-    { key: "privatTrip", label: t("tabs.privateTrip"), icon: <Image src="/images/icons/car.webp" alt="" width={22} height={22} /> },
+    { key: "airplan", label: t("tabs.airplan"), icon: <Image src="/images/icons/plane.webp" alt={t("tabs.airplan")} width={22} height={22} /> },
+    { key: "bus", label: t("tabs.bus"), icon: <Image src="/images/icons/bus.webp" alt={t("tabs.bus")} width={22} height={22} /> },
+    { key: "privatTrip", label: t("tabs.privateTrip"), icon: <Image src="/images/icons/car.webp" alt={t("tabs.privateTrip")} width={22} height={22} /> },
   ];
 
   return (

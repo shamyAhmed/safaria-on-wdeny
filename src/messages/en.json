@@ -190,7 +190,9 @@
           "description": "Lorem ipsum is simply dummy text meaning the purpose is form not content, used in the printing and publishing industries. Lorem ipsum has been the industry standard for dummy text since the 15th century when an unknown printer scrambled a galley of type to make a type specimen book."
         }
       }
-    }
+    },
+    "visionImageAlt": "The Safaria team planning an easier travel experience",
+    "missionImageAlt": "Travellers using Safaria to book their trips"
   },
   "homePage": {
     "learnMore": "Learn more",
@@ -205,7 +207,8 @@
         "bus": "Buses",
         "privateTrip": "Private trips",
         "airplan": "Flights"
-      }
+      },
+      "imageAlt": "Travellers at an airport preparing for their Safaria trip"
     },
     "stats": {
       "items": {
@@ -225,7 +228,8 @@
           "value": "+12,656",
           "label": "Number of customers"
         }
-      }
+      },
+      "iconAlt": "{label} icon"
     },
     "about": {
       "title": "About Safaria",
@@ -379,7 +383,8 @@
           "title": "Track your trips and schedules",
           "description": "Follow trip timings accurately and make sure you are always on time."
         }
-      }
+      },
+      "imageAlt": "Safaria app features for booking every trip in one place"
     },
     "howToBook": {
       "title": "Book your ticket in just 4 steps 🎟️",
@@ -540,7 +545,8 @@
     "successPartners": {
       "title": "Success Partners",
       "description": "Together we succeed — our trusted partners in achieving milestones"
-    }
+    },
+    "bannerImageAlt": "A Safaria bus on an intercity route in Saudi Arabia"
   },
   "discoverPrivate": {
     "card": {
@@ -1085,7 +1091,9 @@
         "phoneRequired": "Please enter your phone number",
         "phoneInvalid": "Invalid phone number"
       }
-    }
+    },
+    "imageAlt": "The Safaria support team ready to answer your questions",
+    "logoAlt": "Safaria logo"
   },
   "privateBooking": {
     "proceedToPay": "Proceed to Pay"

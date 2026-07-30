@@ -4,6 +4,7 @@ import { SingleBlogComponent } from "@/components/blogs/single-blog/SingleBlogCo
 import { BlogPostDetail } from "@/app/[locale]/_hooks/useGetBlogs";
 import { ApiResponse } from "@/app/[locale]/_types/Api";
 import apiRoutes from "@/lib/apiRoutes";
+import { SEO_COPY, normalizeLocale, pageMetadata, toMetaDescription } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string; locale: string }>;
@@ -29,10 +30,18 @@ async function getBlogBySlug(slug: string, locale: string): Promise<BlogPostDeta
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug, locale } = await params;
   const blog = await getBlogBySlug(slug, locale);
-  return {
-    title: blog?.seo_title ?? blog?.title ?? "المدونة",
-    description: blog?.seo_description ?? undefined,
-  };
+  const fallback = SEO_COPY.blogs[normalizeLocale(locale)];
+
+  return pageMetadata({
+    locale,
+    path: `/blogs/${slug}`,
+    title: blog?.seo_title ?? blog?.title ?? fallback.title,
+    description:
+      toMetaDescription(blog?.seo_description) ??
+      toMetaDescription(blog?.description) ??
+      fallback.description,
+    images: blog?.image?.url ? [blog.image.url] : undefined,
+  });
 }
 
 const SingleBlogPage = async ({ params }: PageProps) => {

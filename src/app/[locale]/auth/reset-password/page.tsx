@@ -2,10 +2,9 @@ import { Metadata } from "next";
 import { FaLock } from "react-icons/fa6";
 import { getTranslations } from "next-intl/server";
 import { ResetPasswordFormDynamic } from "@/components/user/AuthDynamicComponents";
+import { privatePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "إعادة تعيين كلمة المرور",
-};
+export const metadata: Metadata = privatePageMetadata("إعادة تعيين كلمة المرور");
 
 const ResetPasswordPage: React.FC = async (): Promise<JSX.Element> => {
   const t = await getTranslations("auth.resetPassword");

@@ -20,7 +20,7 @@ export const WhatIsSection = () => {
         </p>
       </div>
       <Image
-        src="/images/what-is-single-insight.png"
+        src="/images/what-is-single-insight.webp"
         width={1512}
         height={400}
         alt="What Is a Venture Studio?"
