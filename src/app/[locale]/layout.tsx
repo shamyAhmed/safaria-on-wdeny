@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { getMessages } from "next-intl/server";
 
 import MainLayout from "@/components/layout/MainLayout";
+import { ChatWidget } from "@/components/layout/ChatWidget";
 import { Providers } from "@/providers/providers";
 import { routing } from "@/i18n/routing";
 import { SEO_COPY, SITE_NAME, SITE_URL, normalizeLocale } from "@/lib/seo";
@@ -107,6 +108,7 @@ export default async function LocaleLayout({
             <MainLayout>{children}</MainLayout>
           </Providers>
         </NextIntlClientProvider>
+        <ChatWidget />
       </body>
     </html>
   );
