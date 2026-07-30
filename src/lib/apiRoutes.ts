@@ -12,8 +12,8 @@ const apiRoutes = {
   contact: "/contact",
   notifications: "/profile/notifications",
   wallet: "/profile/wallet",
-  flightOrders: "/profile/orders/flights",
-  flightOrderById: (id: number | string) => `/profile/orders/flights/${id}`,
+  flightOrders: "/profile/flights/orders",
+  flightOrderById: (id: number | string) => `/profile/flights/orders/${id}`,
   // ── Private trips (Wdeny API) ───────────────────────────────────────────────
   privateSearch: "/private/search",
   privateTripById: (id: string | number) => `/private/trips/${id}`,
