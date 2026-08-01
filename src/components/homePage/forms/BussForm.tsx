@@ -129,6 +129,7 @@ export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
       layout="vertical"
       onFinish={handleSearch}
       autoComplete="off"
+      requiredMark={false}
       name="addEditCategoryForm">
       <Row
         gutter={[16, 16]}

@@ -119,6 +119,15 @@ export const PrivetTripsForm = ({ readonly = false }: { readonly?: boolean }) =>
     }
   };
 
+  // Every field shares one row, so the spans tighten once the return leg adds
+  // two more columns; below xl they wrap to two per line, and to one on phones.
+  const locationCol = isRound
+    ? { xs: 24, sm: 12, xl: 6 }
+    : { xs: 24, sm: 12, lg: 7 };
+  const dateTimeCol = isRound
+    ? { xs: 24, sm: 12, xl: 3 }
+    : { xs: 24, sm: 12, lg: 5 };
+
   const handleSearch = () => {
     if (!isFormValid || !pickupLocation || !destinationLocation) return;
     if (!departureAt || (isRound && !returnAt)) return;
@@ -150,7 +159,7 @@ export const PrivetTripsForm = ({ readonly = false }: { readonly?: boolean }) =>
       >
         <Row gutter={[16, 16]} align="stretch">
           {/* محطة التحرك */}
-          <Col xs={24} md={12} lg={10}>
+          <Col {...locationCol}>
             <PrivatePlacesInput
               label={t("fields.from.label")}
               placeholder={t("fields.departure.placeholder")}
@@ -161,7 +170,7 @@ export const PrivetTripsForm = ({ readonly = false }: { readonly?: boolean }) =>
           </Col>
 
           {/* محطة الوصول */}
-          <Col xs={24} md={12} lg={10}>
+          <Col {...locationCol}>
             <PrivatePlacesInput
               label={t("fields.to.label")}
               placeholder={t("fields.arrival.placeholder")}
@@ -170,11 +179,9 @@ export const PrivetTripsForm = ({ readonly = false }: { readonly?: boolean }) =>
               readonly={readonly}
             />
           </Col>
-        </Row>
 
-        <Row gutter={[16, 16]} align="stretch" className="mt-4">
           {/* تاريخ التحرك */}
-          <Col xs={24} md={12} lg={6}>
+          <Col {...dateTimeCol}>
             <div className="inputS1">
               <Form.Item label={t("fields.departureDate.label")} name="date">
                 <DatePicker
@@ -203,7 +210,7 @@ export const PrivetTripsForm = ({ readonly = false }: { readonly?: boolean }) =>
           </Col>
 
           {/* وقت التحرك */}
-          <Col xs={24} md={12} lg={6}>
+          <Col {...dateTimeCol}>
             <div className="inputS1">
               <Form.Item label={t("fields.departureTime.label")} name="time">
                 <TimePicker
@@ -224,7 +231,7 @@ export const PrivetTripsForm = ({ readonly = false }: { readonly?: boolean }) =>
           {/* تاريخ ووقت العودة — ذهاب وعودة فقط */}
           {isRound && (
             <>
-              <Col xs={24} md={12} lg={6}>
+              <Col {...dateTimeCol}>
                 <div className="inputS1">
                   <Form.Item
                     label={t("fields.returnDate.label")}
@@ -247,7 +254,7 @@ export const PrivetTripsForm = ({ readonly = false }: { readonly?: boolean }) =>
                 </div>
               </Col>
 
-              <Col xs={24} md={12} lg={6}>
+              <Col {...dateTimeCol}>
                 <div className="inputS1">
                   <Form.Item
                     label={t("fields.returnTime.label")}

@@ -10,16 +10,13 @@ export const AboutUsSection = () => {
         <Row gutter={[50, 50]}>
           <Col span={24} lg={7}>
             <div dir="ltr" className="bg-white rounded-3xl min-w-fit h-full flex items-center justify-center py-6">
-              <div className="flex items-center gap-3">
-                <Image
-                  src={"/images/logo-small.png"}
-                  alt={t("logoAlt")}
-                  width={58}
-                  height={58}
-                  className="size-[58]"
-                />
-                <h3 className="text-primary text-2xl text-nowrap font-bold">Safaria</h3>
-              </div>
+              <Image
+                src={"/images/logo-blue.png"}
+                alt={t("logoAlt")}
+                width={200}
+                height={60}
+                className="h-auto w-[200px]"
+              />
             </div>
           </Col>
           <Col span={24} lg={17}>
