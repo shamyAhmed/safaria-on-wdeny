@@ -51,6 +51,29 @@ export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
     });
   }, [locations]);
 
+  // Cities carry both an English and an Arabic name, and either should match
+  // what the user types. Arabic input varies in hamza, ya and ta-marbuta
+  // spelling, so both sides are normalised before comparing.
+  const normalize = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/[أإآ]/g, "ا")
+      .replace(/ة/g, "ه")
+      .replace(/ى/g, "ي")
+      .replace(/[ً-ْـ]/g, "")
+      .trim();
+
+  const filterLocation = (
+    input: string,
+    option?: (typeof locationOptions)[number],
+  ) => {
+    const needle = normalize(input);
+    return (
+      normalize(String(option?.label ?? "")).includes(needle) ||
+      normalize(String(option?.name_ar ?? "")).includes(needle)
+    );
+  };
+
   const renderLocationOption = (option: {
     data: { label: string; name_ar: string };
   }) => (
@@ -153,14 +176,10 @@ export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
                   locationsLoading ? t("fields.loading") : t("fields.noOptions")
                 }
                 placeholder={t("fields.departure.placeholder")}
-                filterOption={(input, option) =>
-                  String(option?.label ?? "")
-                    .toLowerCase()
-                    .includes(input.toLowerCase())
-                }
+                filterOption={filterLocation}
                 optionRender={renderLocationOption}
                 dropdownAlign={{ points: ["tc", "bc"], offset: [0, 4] }}
-                listHeight={128}
+                listHeight={224}
                 suffixIcon={
                   <MdOutlineLocationOn className="text-2xl text-[#819DAF]" />
                 }
@@ -192,14 +211,10 @@ export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
                   locationsLoading ? t("fields.loading") : t("fields.noOptions")
                 }
                 placeholder={t("fields.arrival.placeholder")}
-                filterOption={(input, option) =>
-                  String(option?.label ?? "")
-                    .toLowerCase()
-                    .includes(input.toLowerCase())
-                }
+                filterOption={filterLocation}
                 optionRender={renderLocationOption}
                 placement="bottomLeft"
-                listHeight={128}
+                listHeight={224}
                 suffixIcon={
                   <MdOutlineLocationOn className="text-2xl text-[#819DAF]" />
                 }

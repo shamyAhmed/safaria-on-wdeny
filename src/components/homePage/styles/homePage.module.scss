@@ -2,20 +2,18 @@
 
 .homePage :global {
   .hero-section {
-    --hero-media-height: 560px;
-    --hero-gradient-overlap: 170px;
-    --hero-gradient-extension: 36px;
-
     position: relative;
     padding-top: 45px;
     padding-bottom: 90px;
     background-color: theme("colors.primary");
 
+    // The photo and its fade both span the full section rather than a fixed
+    // height, so the form stays on the image however tall the content stack
+    // grows. The old 560px cutoff landed just above the form on short
+    // viewports, leaving it stranded on the flat blue below.
     .hero-media {
       position: absolute;
-      inset-inline: 0;
-      top: 0;
-      height: var(--hero-media-height);
+      inset: 0;
       overflow: hidden;
     }
 
@@ -31,36 +29,37 @@
       z-index: 1;
     }
 
+    // Percentage stops, so the fade into the solid brand blue lands on the
+    // section's bottom edge at any height — no per-breakpoint heights needed.
     .hero-gradient {
       position: absolute;
-      inset-inline: 0;
-      top: calc(var(--hero-media-height) - var(--hero-gradient-overlap));
-      height: calc(var(--hero-gradient-overlap) + var(--hero-gradient-extension));
-      background: linear-gradient(180deg, rgba(0, 116, 195, 0), rgb(0 116 195 / 38%) 80%, #0074C3 100%); 
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 116, 195, 0), rgb(0 116 195 / 38%) 80%, #0074C3 100%);
       pointer-events: none;
-      top: 0;
-      height: 560px;
       z-index: 1;
-
-      @media screen and (max-width: 1024px) {
-        height: 500px; // Screen-specific style for .element
-      }
-
-      @media screen and (max-width: 768px) {
-        height: 420px; // Screen-specific style for .element
-      }
     }
 
-    @media (max-width: 1024px) {
-      --hero-media-height: 500px;
-      --hero-gradient-overlap: 150px;
-      --hero-gradient-extension: 32px;
-    }
+    // A 1600x900 panel at 117dpi reports roughly 1311x738 CSS pixels, and the
+    // stock rhythm below (45 + 90 padding, 48px heading, 64px description gap)
+    // pushed the booking form onto the very bottom of that fold. Tighten the
+    // spacing on short viewports; width-based breakpoints can't see this.
+    @media (max-height: 800px) {
+      padding-top: 24px;
+      padding-bottom: 48px;
 
-    @media (max-width: 768px) {
-      --hero-media-height: 420px;
-      --hero-gradient-overlap: 120px;
-      --hero-gradient-extension: 28px;
+      .container > span {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .container > h1 {
+        font-size: 2.25rem;
+        line-height: 1.15;
+      }
+
+      .container > p {
+        margin-bottom: 1.5rem;
+      }
     }
 
     .hero-bullet {

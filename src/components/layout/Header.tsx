@@ -135,20 +135,6 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-full overflow-hidden text-nowrap bg-brown py-[18px] text-[14px]">
-        <div className="header-animate flex gap-5 text-white">
-          {Array(8)
-            .fill(1)
-            .map((_, i) => {
-              return (
-                <React.Fragment key={i}>
-                  <p>{t("header.marquee")}</p>
-                  <p>&#x2022;</p>
-                </React.Fragment>
-              );
-            })}
-        </div>
-      </div>
 
       {/* Mobile Nav */}
       <AnimatePresence>
@@ -183,7 +169,7 @@ export const Header = () => {
                     <Link
                       href={path}
                       onClick={toggleMenu}
-                      className={`text-xl block text-center py-2 rounded-xl font-light w-full hover:text-gray-400 ${
+                      className={`text-base block text-center py-2 rounded-xl font-light w-full hover:text-gray-400 ${
                         pathname === path
                           ? "font-semibold bg-primary/10 text-primary"
                           : "text-primary"
@@ -207,7 +193,7 @@ export const Header = () => {
                       <Link
                         href={profileLink.path}
                         onClick={toggleMenu}
-                        className={`text-xl block text-center py-2 rounded-xl font-light w-full hover:text-gray-400 ${
+                        className={`text-base block text-center py-2 rounded-xl font-light w-full hover:text-gray-400 ${
                           pathname === profileLink.path
                             ? "font-semibold bg-primary/10 text-primary"
                             : "text-primary"

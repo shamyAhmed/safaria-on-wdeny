@@ -67,25 +67,6 @@ label {
   @apply mx-auto max-w-[90%] px-0 md:w-full md:max-w-7xl md:px-6 lg:px-4 2xl:px-10 2xl:max-w-[90%];
 }
 
-@keyframes slideInfinite {
-  from {
-    transform: translate3d(0px, 0px, 0px);
-  }
-}
-
-.header-animate {
-  animation: slideInfinite 3s infinite both linear;
-  transform: translate3d(350px, 0px, 0px);
-
-  [dir="ltr"] & {
-    transform: translate3d(-371px, 0px, 0px);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-}
-
 .hidden {
   display: none;
 }
@@ -171,6 +152,12 @@ iframe {
       color: #9b9b9b;
       font-size: 16px;
       position: relative;
+
+      // The desktop nav only appears from lg up, where 16px reads oversized
+      // against the rest of the bar.
+      @media (min-width: 1024px) {
+        font-size: 14px;
+      }
 
       &.active {
         &::after {

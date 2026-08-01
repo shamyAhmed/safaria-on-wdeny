@@ -6,10 +6,10 @@ export const BusTripsEmptyState = () => (
       <MdDirectionsBus className="text-4xl text-gray-300" />
     </div>
     <h3 className="text-lg font-semibold text-gray-600 mb-2">
-      لا توجد رحلات باصات
+      لا توجد رحلات اتوبيسات
     </h3>
     <p className="text-sm text-gray-400 max-w-xs">
-      لم تقم بحجز أي رحلة باص حتى الآن. ابدأ باستكشاف الرحلات المتاحة واحجز تذكرتك.
+      لم تقم بحجز أي رحلة اتوبيس حتى الآن. ابدأ باستكشاف الرحلات المتاحة واحجز تذكرتك.
     </p>
   </div>
 );

@@ -11,7 +11,7 @@ type TripTab = "flights" | "buses" | "private";
 
 const TABS: { key: TripTab; labelAr: string; icon: React.ReactNode; disabled?: boolean }[] = [
   { key: "flights", labelAr: "الطيران",   icon: <MdFlight size={18} /> },
-  { key: "buses",   labelAr: "الباصات",   icon: <MdDirectionsBus size={18} />, disabled: true },
+  { key: "buses",   labelAr: "الاتوبيسات",   icon: <MdDirectionsBus size={18} />, disabled: true },
   { key: "private", labelAr: "الرحلات الخاصة", icon: <FaCar size={16} />, disabled: true },
 ];
 
