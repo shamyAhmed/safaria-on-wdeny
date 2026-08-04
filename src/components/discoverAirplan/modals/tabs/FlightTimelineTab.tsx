@@ -8,6 +8,7 @@ import {
 } from "@/app/[locale]/_types/FlightOffer";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
+import useFormatDate from "@/hooks/useFormatDate";
 
 const getLayoverMinutes = (seg: FlightSegment, nextSeg: FlightSegment) =>
   dayjs(nextSeg.departureDateTime).diff(dayjs(seg.arrivalDateTime), "minute");
@@ -33,15 +34,14 @@ const formatDuration = (totalMinutes: number) => {
 export const FlightTimelineTab = ({ flight }: { flight: any }) => {
   const journeys: FlightJourney[] = flight?.journeys ?? [];
   const t = useTranslations("flightModal.timeline");
+  const date = useFormatDate();
 
   return (
     <div className="flight-timeline">
       {journeys.map((journey, journeyIdx) => {
         const firstSeg = journey.segment[0];
         const routeTitle = `${journey.origin} ${t("to")} ${journey.destination}`;
-        const dateLabel = dayjs(firstSeg.departureDateTime).format(
-          "DD MMMM YYYY",
-        );
+        const dateLabel = date.long(firstSeg.departureDateTime);
         const totalDuration = useMemo(() => {
           return t(
             "durationFormat",
@@ -74,12 +74,10 @@ export const FlightTimelineTab = ({ flight }: { flight: any }) => {
             {/* Segments */}
             <div className="space-y-7 pb-7">
               {journey.segment.map((seg, idx) => {
-                const departTime = dayjs(seg.departureDateTime).format("HH:mm");
-                const arriveTime = dayjs(seg.arrivalDateTime).format("HH:mm");
-                const departDate = dayjs(seg.departureDateTime).format(
-                  "DD MMM",
-                );
-                const arriveDate = dayjs(seg.arrivalDateTime).format("DD MMM");
+                const departTime = date.time(seg.departureDateTime);
+                const arriveTime = date.time(seg.arrivalDateTime);
+                const departDate = date.medium(seg.departureDateTime, { withYear: false });
+                const arriveDate = date.medium(seg.arrivalDateTime, { withYear: false });
                 const flightDuration = t("durationFormat", formatDuration(seg.flightTimeInMinutes))
                 const fromTerminal = seg.departureTerminal
                   ? `${t("terminal")} ${seg.departureTerminal}`

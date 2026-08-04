@@ -2,11 +2,12 @@
 
 import { RiBellLine, RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import dayjs from "dayjs";
 import { useGetNotifications } from "@/hooks/useGetNotifications";
 import { useDeleteNotifications } from "@/hooks/useDeleteNotifications";
 import { Notification } from "@/types/types";
+import { formatDateLong } from "@/utils/formatDate";
 import NotificationItem from "./NotificationItem";
 
 const NotificationSkeleton = () => (
@@ -33,7 +34,12 @@ const NotificationSkeleton = () => (
   </div>
 );
 
-function groupByDate(notifications: Notification[], todayLabel: string, yesterdayLabel: string) {
+function groupByDate(
+  notifications: Notification[],
+  todayLabel: string,
+  yesterdayLabel: string,
+  locale: string,
+) {
   const today = dayjs().startOf("day");
   const yesterday = dayjs().subtract(1, "day").startOf("day");
 
@@ -45,7 +51,7 @@ function groupByDate(notifications: Notification[], todayLabel: string, yesterda
       ? todayLabel
       : d.isSame(yesterday, "day")
         ? yesterdayLabel
-        : d.toDate().toLocaleDateString("ar-SA", { year: "numeric", month: "long", day: "numeric" });
+        : formatDateLong(n.created_date, locale);
 
     if (!map.has(key)) map.set(key, []);
     map.get(key)!.push(n);
@@ -58,10 +64,11 @@ function groupByDate(notifications: Notification[], todayLabel: string, yesterda
 
 export const NotificationsContent = () => {
   const t = useTranslations("notificationsPage");
+  const locale = useLocale();
   const { notifications, isLoading } = useGetNotifications();
   const { deleteNotifications, isDeleting } = useDeleteNotifications();
 
-  const groups = groupByDate(notifications, t("today"), t("yesterday"));
+  const groups = groupByDate(notifications, t("today"), t("yesterday"), locale);
   const hasNotifications = notifications.length > 0;
 
   return (

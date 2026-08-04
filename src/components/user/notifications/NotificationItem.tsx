@@ -4,19 +4,11 @@ import { IoCheckmark } from "react-icons/io5";
 import { LuClock3 } from "react-icons/lu";
 import { useTranslations } from "next-intl";
 import { Notification } from "@/types/types";
-
-const formatDate = (dateStr: string) => {
-  const d = new Date(dateStr);
-  const day = d.getDate();
-  const month = d.getMonth() + 1;
-  const hours = String(d.getHours()).padStart(2, "0");
-  const minutes = String(d.getMinutes()).padStart(2, "0");
-  const year = String(d.getFullYear());
-  return { time: `${hours}:${minutes}`, date: `${day}/${month}/${year}` };
-};
+import useFormatDate from "@/hooks/useFormatDate";
 
 const NotificationItem = ({ item }: { item: Notification }) => {
   const t = useTranslations("notificationsPage.item");
+  const date = useFormatDate();
   const isRead = item.read_at !== null;
   return (
     <div
@@ -50,8 +42,8 @@ const NotificationItem = ({ item }: { item: Notification }) => {
 
       {/* End: clock + timestamp */}
       <div className="flex-shrink-0 flex items-start gap-2 text-gray-400">
-        <span className="text-xs whitespace-nowrap">{formatDate(item.created_date).time}</span>
-        <span className="text-xs whitespace-nowrap">{formatDate(item.created_date).date}</span>
+        <span className="text-xs whitespace-nowrap">{date.time(item.created_date)}</span>
+        <span className="text-xs whitespace-nowrap">{date.numeric(item.created_date)}</span>
         <LuClock3 className="text-base" />
       </div>
     </div>

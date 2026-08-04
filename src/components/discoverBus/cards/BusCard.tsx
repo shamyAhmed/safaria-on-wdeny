@@ -19,6 +19,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/appStore";
 import { CurrencyLabel } from "@/components/discoverAirplan/CurrencyLabel";
+import useFormatDate from "@/hooks/useFormatDate";
 
 // ─── Station Picker ───────────────────────────────────────────────────────────
 
@@ -104,6 +105,7 @@ const BusCardComponent = ({ trip }: { trip: BusTrip }) => {
   const searchParams = useSearchParams();
   const t = useTranslations("discoverBus.card");
   const currency = useSelector((state: RootState) => state.currency.selected?.code ?? "");
+  const date = useFormatDate();
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
@@ -139,8 +141,8 @@ const BusCardComponent = ({ trip }: { trip: BusTrip }) => {
 
   const formatDate = (datetime: string | undefined) => {
     if (!datetime) return "—";
-    const d = new Date(datetime);
-    return d.toLocaleDateString("ar-EG", { day: "numeric", month: "long" });
+    // "2026-08-20 05:45 am" — only the date half parses reliably.
+    return date.medium(datetime.split(" ")[0], { withYear: false });
   };
 
   const departureTime = formatTime(selectedFromStation?.arrival_at);

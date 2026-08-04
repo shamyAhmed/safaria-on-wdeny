@@ -25,7 +25,8 @@ import {
   FlightOffer,
 } from "@/app/[locale]/_types/FlightOffer";
 import dayjs from "dayjs";
-import { useTranslations } from "next-intl";
+import { formatDateLong } from "@/utils/formatDate";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { MdOutlineAirplanemodeInactive } from "react-icons/md";
 
@@ -48,6 +49,7 @@ const mapJourneyToLeg = (
   journey: FlightJourney,
   isReturn: boolean,
   cabinClass: CabinClass,
+  locale: string,
 ): FlightJourneyLeg => {
   const first = journey.segment[0];
   const last = journey.segment[journey.segment.length - 1];
@@ -61,7 +63,7 @@ const mapJourneyToLeg = (
     arrivalTime: dayjs(last.arrivalDateTime).format("HH:mm"),
     arrivalCity: journey.destination,
     durationMinutes: totalMinutes,
-    date: dayjs(first.departureDateTime).format("DD MMMM YYYY"),
+    date: formatDateLong(first.departureDateTime, locale),
     flightNumber: `${first.marketingCarrierCode}${first.marketingFlightNumber}`,
     class: cabinClass,
     stops: getJourneyStops(journey),
@@ -69,10 +71,20 @@ const mapJourneyToLeg = (
   };
 };
 
-const mapOfferToFlight = (offer: FlightOffer, tripType: TripType, cabinClass: CabinClass) => {
+const mapOfferToFlight = (
+  offer: FlightOffer,
+  tripType: TripType,
+  cabinClass: CabinClass,
+  locale: string,
+) => {
   const outbound = offer.journeys[0];
   const legs = offer.journeys.map((journey, idx) =>
-    mapJourneyToLeg(journey, tripType === "round_trip" && idx === 1, cabinClass),
+    mapJourneyToLeg(
+      journey,
+      tripType === "round_trip" && idx === 1,
+      cabinClass,
+      locale,
+    ),
   );
   const totalDurationMinutes = offer.journeys.reduce(
     (total, journey) =>
@@ -133,6 +145,7 @@ const INITIAL_EXTREMES: FlightExtremes = {
 export const DiscoverAirplanComponent = () => {
   const [isFiltersDrawerOpen, setIsFiltersDrawerOpen] = useState(false);
   const t = useTranslations("discoverAirplan");
+  const locale = useLocale();
   const searchParams = useSearchParams();
   const {
     filters,
@@ -205,7 +218,7 @@ export const DiscoverAirplanComponent = () => {
   const { data, isLoading } = useSearchFlights(payload);
 
   const flights = (data ?? [])
-    .map((offer) => mapOfferToFlight(offer, tripType, cabinClass))
+    .map((offer) => mapOfferToFlight(offer, tripType, cabinClass, locale))
     .filter((flight) => flight.haveBundles === false);
 
   const visibleFlights = useMemo(() => {

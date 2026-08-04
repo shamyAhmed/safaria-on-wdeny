@@ -7,6 +7,7 @@ import { BsCalendar2Date } from "react-icons/bs";
 import { Col, Row } from "antd";
 import { BlogCard } from "../cards/BlogCard";
 import useGetBlogs, { BlogPostDetail } from "@/app/[locale]/_hooks/useGetBlogs";
+import useFormatDate from "@/hooks/useFormatDate";
 
 interface SingleBlogComponentProps {
   blog: BlogPostDetail;
@@ -14,6 +15,7 @@ interface SingleBlogComponentProps {
 
 export function SingleBlogComponent({ blog }: SingleBlogComponentProps) {
   const { data: relatedBlogs = [] } = useGetBlogs(blog.category?.id);
+  const date = useFormatDate();
   const filtered = relatedBlogs.filter((b) => b.id !== blog.id);
 
   return (
@@ -61,7 +63,7 @@ export function SingleBlogComponent({ blog }: SingleBlogComponentProps) {
               {blog.created_at && (
                 <div className="flex items-center gap-2 text-sm text-gray-500">
                   <BsCalendar2Date className="text-lg" />
-                  {new Date(blog.created_at).toLocaleDateString("en-GB")}
+                  {date.numeric(blog.created_at)}
                 </div>
               )}
             </div>

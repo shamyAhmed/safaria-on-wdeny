@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useLocalizedLink } from "@/hooks/useLocalizedLink";
 import {
@@ -21,40 +22,41 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 export const ProfileSidebar = () => {
   const pathname = usePathname();
   const getLink = useLocalizedLink();
+  const t = useTranslations("profile.nav");
 
   const menuItems = [
     {
-      name: "المعلومات الشخصية",
+      name: t("personalInfo"),
       path: "/user/profile",
       icon: <FiUser />,
     },
     {
-      name: "تغيير كلمة المرور",
+      name: t("changePassword"),
       path: "/user/change-password",
       icon: <RiLockPasswordFill />,
     },
     {
-      name: "رحلاتي",
+      name: t("myTrips"),
       path: "/user/my-trips",
       icon: <FaPlane />,
     },
     {
-      name: "العناوين المحفوظة",
+      name: t("savedAddresses"),
       path: "/user/saved-addresses",
       icon: <FaMapMarkerAlt />,
     },
     {
-      name: "الإشعارات",
+      name: t("notifications"),
       path: "/user/notifications",
       icon: <FiBell />,
     },
     {
-      name: "محفظتي",
+      name: t("wallet"),
       path: "/user/my-wallet",
       icon: <RiWalletLine />,
     },
     {
-      name: "حذف الحساب",
+      name: t("deleteAccount"),
       path: "/user/delete-account",
       icon: <FiTrash2 />,
       danger: true,
@@ -95,7 +97,7 @@ export const ProfileSidebar = () => {
               <span className="text-xl text-gray-600">
                 <FiLogOut />
               </span>
-              <span className="">تسجيل الخروج</span>
+              <span className="">{t("logout")}</span>
             </div>
           </Link>
         </li>

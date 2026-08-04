@@ -1147,7 +1147,9 @@
       "tabs": {
         "all": "الكل",
         "pending": "قيد الانتظار",
-        "booked": "تم الحجز"
+        "booked": "تم الحجز",
+        "confirmed": "مؤكدة",
+        "cancelled": "ملغية"
       },
       "emptyState": {
         "title": "لا توجد تذاكر طيران",
@@ -1179,7 +1181,8 @@
         "direct": "مباشر",
         "stop": "توقف",
         "stops": "توقفات",
-        "durationFormat": "{h}س {m}د"
+        "durationFormat": "{h}س {m}د",
+        "seats": "المقاعد:"
       },
       "detail": {
         "pageTitle": "تفاصيل التذكرة",
@@ -1216,7 +1219,85 @@
         "transactions": "المعاملات المالية",
         "invoice": "الفاتورة",
         "durationFormat": "{h}س {m}د"
+      },
+      "tripTypes": {
+        "flights": "الطيران",
+        "buses": "الأتوبيسات",
+        "private": "الرحلات الخاصة"
+      },
+      "busTitle": "تذاكر الأتوبيس",
+      "privateTitle": "الرحلات الخاصة",
+      "status": {
+        "pending": "قيد الانتظار",
+        "onHold": "محجوزة مؤقتاً",
+        "confirmed": "مؤكدة",
+        "paid": "مدفوعة",
+        "completed": "مكتملة",
+        "cancelled": "ملغية",
+        "expired": "منتهية",
+        "failed": "فشلت"
+      },
+      "busEmptyState": {
+        "title": "لا توجد تذاكر أتوبيس",
+        "description": "لم تقم بحجز أي رحلة أتوبيس حتى الآن. ابدأ باستكشاف الخطوط المتاحة واحجز مقعدك."
+      },
+      "privateEmptyState": {
+        "title": "لا توجد رحلات خاصة",
+        "description": "لم تقم بحجز أي رحلة خاصة حتى الآن. اختر نقطة الانطلاق والوجهة لتبدأ."
+      },
+      "busDetail": {
+        "pageTitle": "تفاصيل تذكرة الأتوبيس",
+        "errorMessage": "تعذّر تحميل تفاصيل الطلب",
+        "route": "المسار",
+        "departure": "المغادرة",
+        "arrival": "الوصول",
+        "seats": "المقاعد",
+        "seatNumber": "مقعد {number}",
+        "seatCount": "{count} مقعد",
+        "priceDetails": "تفاصيل السعر",
+        "ticketsTotal": "إجمالي التذاكر",
+        "discount": "الخصم",
+        "walletDiscount": "خصم المحفظة",
+        "paymentFees": "رسوم الدفع",
+        "total": "الإجمالي",
+        "payment": "الدفع",
+        "noGateway": "لا توجد بوابة دفع",
+        "gatewayInvoice": "صفحة الدفع"
+      },
+      "privateDetail": {
+        "pageTitle": "تفاصيل الرحلة الخاصة",
+        "errorMessage": "تعذّر تحميل تفاصيل الطلب",
+        "roundTrip": "ذهاب وعودة",
+        "oneWay": "ذهاب فقط",
+        "bookedOn": "تم الحجز في {date}",
+        "refundable": "قابلة للاسترداد",
+        "route": "المسار",
+        "departure": "نقطة الانطلاق",
+        "arrival": "الوجهة",
+        "returningOn": "العودة في {date}",
+        "vehicle": "المركبة",
+        "model": "الموديل",
+        "seats": "السعة",
+        "seatsCount": "{count} مقعد",
+        "gearType": "ناقل الحركة",
+        "luggage": "الأمتعة",
+        "bagsSummary": "{big} كبيرة · {small} صغيرة",
+        "category": "الفئة",
+        "priceDetails": "تفاصيل السعر",
+        "total": "الإجمالي",
+        "payment": "الدفع",
+        "gatewayInvoice": "صفحة الدفع"
       }
+    },
+    "nav": {
+      "personalInfo": "المعلومات الشخصية",
+      "changePassword": "تغيير كلمة المرور",
+      "myTrips": "رحلاتي",
+      "savedAddresses": "العناوين المحفوظة",
+      "notifications": "الإشعارات",
+      "wallet": "محفظتي",
+      "deleteAccount": "حذف الحساب",
+      "logout": "تسجيل الخروج"
     }
   },
   "airplaneCard": {

@@ -9,11 +9,13 @@ import dayjs from "dayjs";
 import { useLocale, useTranslations } from "next-intl";
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 import { useLocalizedLink } from "@/hooks/useLocalizedLink";
+import useFormatDate from "@/hooks/useFormatDate";
 
 export const FeaturedArticlesSection = ({ articles }) => {
   const locale = useLocale();
   const isEnglish = locale === "en";
   const t = useTranslations("featuredArticlesSection");
+  const date = useFormatDate();
   const getLink = useLocalizedLink();
 
   return (
@@ -71,7 +73,7 @@ export const FeaturedArticlesSection = ({ articles }) => {
                     <div className="flex items-center gap-6">
                       <span>{article?.author}</span>
                       <span>
-                        {dayjs(article?.published_at).format("YYYY-MM-DD")}
+                        {date.numeric(article?.published_at)}
                       </span>
                     </div>
                   </div>

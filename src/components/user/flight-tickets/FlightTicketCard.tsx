@@ -1,12 +1,12 @@
 "use client";
 
-import dayjs from "dayjs";
 import { Button } from "antd";
 import { MdFlight, MdFlightLand, MdFlightTakeoff } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
 import { BsCreditCard2Front } from "react-icons/bs";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
+import useFormatDate from "@/hooks/useFormatDate";
 import type { FlightOrder, FlightPaymentTransaction } from "@/app/[locale]/_types/FlightOrder";
 
 const StatusBadge = ({ label, color }: { label: string; color: string }) => {
@@ -35,6 +35,7 @@ export const FlightTicketCard = ({ order }: FlightTicketCardProps) => {
   const router = useRouter();
   const t = useTranslations("profile.myTrips.card");
   const tTimeline = useTranslations("flightModal.timeline");
+  const date = useFormatDate();
 
   const resolvePaymentStatus = (
     transactions: FlightPaymentTransaction[],
@@ -111,10 +112,10 @@ export const FlightTicketCard = ({ order }: FlightTicketCardProps) => {
             <MdFlightTakeoff size={16} className="text-primary mb-0.5 rtl:-scale-x-100 rtl:origin-center" />
             <p className="text-lg sm:text-xl font-black text-gray-900 leading-tight">{firstSeg?.origin ?? firstJourney?.origin ?? "—"}</p>
             <p className="text-xs text-gray-500 font-medium">
-              {firstSeg ? dayjs(firstSeg.departure_datetime).format("HH:mm") : "—"}
+              {firstSeg ? date.time(firstSeg.departure_datetime) : "—"}
             </p>
             <p className="text-[10px] text-gray-400 text-center">
-              {firstSeg ? dayjs(firstSeg.departure_datetime).format("D MMM") : ""}
+              {firstSeg ? date.medium(firstSeg.departure_datetime, { withYear: false }) : ""}
             </p>
           </div>
 
@@ -148,10 +149,10 @@ export const FlightTicketCard = ({ order }: FlightTicketCardProps) => {
             <MdFlightLand size={16} className="text-primary mb-0.5 rtl:-scale-x-100 rtl:origin-center" />
             <p className="text-lg sm:text-xl font-black text-gray-900 leading-tight">{lastSeg?.destination ?? firstJourney?.destination ?? "—"}</p>
             <p className="text-xs text-gray-500 font-medium">
-              {lastSeg ? dayjs(lastSeg.arrival_datetime).format("HH:mm") : "—"}
+              {lastSeg ? date.time(lastSeg.arrival_datetime) : "—"}
             </p>
             <p className="text-[10px] text-gray-400 text-center">
-              {lastSeg ? dayjs(lastSeg.arrival_datetime).format("D MMM") : ""}
+              {lastSeg ? date.medium(lastSeg.arrival_datetime, { withYear: false }) : ""}
             </p>
           </div>
 

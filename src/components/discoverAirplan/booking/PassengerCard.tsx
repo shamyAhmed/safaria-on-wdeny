@@ -3,7 +3,7 @@ import { Ref } from "react";
 import { Button, Col, DatePicker, Form, Input, Row, Select } from "antd";
 import { FaChevronDown, FaMinus, FaUserCheck } from "react-icons/fa6";
 import { FiPlus } from "react-icons/fi";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { PassengerState, PassengerType } from "./types";
 import { GENDER_OPTIONS, TITLE_OPTIONS, TITLE_TO_GENDER } from "./options";
 import { CountrySelectInput } from "@/components/common/CountrySelectInput";
@@ -43,6 +43,9 @@ const PassengerFields = ({
     const form = Form.useFormInstance();
     const gender: string | undefined = Form.useWatch(`${prefix}_gender`, form);
     const t = useTranslations("passengerForm");
+    // Digits render as one left-to-right run, so Arabic needs the year written
+    // first for it to end up on the left of the field.
+    const dateFormat = useLocale().startsWith("ar") ? "YYYY/MM/DD" : "DD/MM/YYYY";
 
     const allTitles = TITLE_OPTIONS.map((o) => ({
         ...o,
@@ -152,7 +155,7 @@ const PassengerFields = ({
                             <DatePicker
                                 className="w-full"
                                 placeholder={t("dob.placeholder")}
-                                format="DD/MM/YYYY"
+                                format={dateFormat}
                                 disabled={disabled}
                                 disabledDate={getDobDisabledDate(type)}
                                 defaultPickerValue={getDobDefaultPickerValue(type)}
@@ -225,7 +228,7 @@ const PassengerFields = ({
                             <DatePicker
                                 className="w-full"
                                 placeholder={t("passportExpiry.placeholder")}
-                                format="DD/MM/YYYY"
+                                format={dateFormat}
                                 disabled={disabled}
                                 disabledDate={(d) => d && d.isBefore(new Date())}
                             />

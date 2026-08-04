@@ -1147,7 +1147,9 @@
       "tabs": {
         "all": "All",
         "pending": "Pending",
-        "booked": "Booked"
+        "booked": "Booked",
+        "confirmed": "Confirmed",
+        "cancelled": "Cancelled"
       },
       "emptyState": {
         "title": "No flight tickets",
@@ -1179,7 +1181,8 @@
         "direct": "Direct",
         "stop": "stop",
         "stops": "stops",
-        "durationFormat": "{h}h {m}m"
+        "durationFormat": "{h}h {m}m",
+        "seats": "Seats:"
       },
       "detail": {
         "pageTitle": "Ticket Details",
@@ -1216,7 +1219,85 @@
         "transactions": "Payment Transactions",
         "invoice": "Invoice",
         "durationFormat": "{h}h {m}m"
+      },
+      "tripTypes": {
+        "flights": "Flights",
+        "buses": "Buses",
+        "private": "Private trips"
+      },
+      "busTitle": "Bus Tickets",
+      "privateTitle": "Private Trips",
+      "status": {
+        "pending": "Pending",
+        "onHold": "On Hold",
+        "confirmed": "Confirmed",
+        "paid": "Paid",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "expired": "Expired",
+        "failed": "Failed"
+      },
+      "busEmptyState": {
+        "title": "No bus tickets",
+        "description": "You haven't booked any bus trips yet. Start exploring routes and book your seat."
+      },
+      "privateEmptyState": {
+        "title": "No private trips",
+        "description": "You haven't booked any private trips yet. Pick a pickup point and a destination to get started."
+      },
+      "busDetail": {
+        "pageTitle": "Bus Ticket Details",
+        "errorMessage": "Failed to load order details",
+        "route": "Route",
+        "departure": "Departure",
+        "arrival": "Arrival",
+        "seats": "Seats",
+        "seatNumber": "Seat {number}",
+        "seatCount": "{count, plural, one {# seat} other {# seats}}",
+        "priceDetails": "Price Details",
+        "ticketsTotal": "Tickets Total",
+        "discount": "Discount",
+        "walletDiscount": "Wallet Discount",
+        "paymentFees": "Payment Fees",
+        "total": "Total",
+        "payment": "Payment",
+        "noGateway": "No payment gateway",
+        "gatewayInvoice": "Payment Page"
+      },
+      "privateDetail": {
+        "pageTitle": "Private Trip Details",
+        "errorMessage": "Failed to load order details",
+        "roundTrip": "Round trip",
+        "oneWay": "One way",
+        "bookedOn": "Booked on {date}",
+        "refundable": "Refundable",
+        "route": "Route",
+        "departure": "Pickup",
+        "arrival": "Destination",
+        "returningOn": "Returning on {date}",
+        "vehicle": "Vehicle",
+        "model": "Model",
+        "seats": "Capacity",
+        "seatsCount": "{count, plural, one {# seat} other {# seats}}",
+        "gearType": "Transmission",
+        "luggage": "Luggage",
+        "bagsSummary": "{big} large · {small} small",
+        "category": "Category",
+        "priceDetails": "Price Details",
+        "total": "Total",
+        "payment": "Payment",
+        "gatewayInvoice": "Payment Page"
       }
+    },
+    "nav": {
+      "personalInfo": "Personal Information",
+      "changePassword": "Change Password",
+      "myTrips": "My Trips",
+      "savedAddresses": "Saved Addresses",
+      "notifications": "Notifications",
+      "wallet": "My Wallet",
+      "deleteAccount": "Delete Account",
+      "logout": "Log Out"
     }
   },
   "airplaneCard": {

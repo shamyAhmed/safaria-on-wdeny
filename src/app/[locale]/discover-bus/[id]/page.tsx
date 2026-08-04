@@ -19,6 +19,7 @@ import { Link } from "@/i18n/navigation";
 import { PiBusBold } from "react-icons/pi";
 import { IoCalendarOutline } from "react-icons/io5";
 import { CurrencyLabel } from "@/components/discoverAirplan/CurrencyLabel";
+import useFormatDate from "@/hooks/useFormatDate";
 import type { BusTrip, BusTripStation } from "@/app/[locale]/_types/BusTrip";
 
 const formatTime = (datetime: string | undefined) => {
@@ -52,6 +53,7 @@ const BookingSummaryPanel = ({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const t = useTranslations("discoverBus.booking");
+  const formatDate = useFormatDate();
 
   const [agreed, setAgreed] = useState(false);
 
@@ -148,7 +150,7 @@ const BookingSummaryPanel = ({
             <div className="flex items-center gap-1 text-[10px] text-gray-400">
               <IoCalendarOutline size={11} />
               <span>
-                {date} — {formatTime(fromStation?.arrival_at)}
+                {formatDate.medium(date)} — {formatTime(fromStation?.arrival_at)}
               </span>
             </div>
           </div>
@@ -183,7 +185,7 @@ const BookingSummaryPanel = ({
             )}
             <div className="flex items-center gap-1 text-[10px] text-gray-400">
               <span>
-                {formatTime(toStation?.arrival_at)} — {date}
+                {formatTime(toStation?.arrival_at)} — {formatDate.medium(date)}
               </span>
               <IoCalendarOutline size={11} />
             </div>

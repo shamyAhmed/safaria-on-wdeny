@@ -3,20 +3,22 @@
 import { useState } from "react";
 import { MdFlight, MdDirectionsBus } from "react-icons/md";
 import { FaCar } from "react-icons/fa6";
+import { useTranslations } from "next-intl";
 import { FlightTicketsContent } from "@/components/user/flight-tickets/FlightTicketsContent";
-import { BusTripsEmptyState } from "./BusTripsEmptyState";
-import { PrivateTripsEmptyState } from "./PrivateTripsEmptyState";
+import { BusTicketsContent } from "@/components/user/bus-tickets/BusTicketsContent";
+import { PrivateTicketsContent } from "@/components/user/private-tickets/PrivateTicketsContent";
 
 type TripTab = "flights" | "buses" | "private";
 
-const TABS: { key: TripTab; labelAr: string; icon: React.ReactNode; disabled?: boolean }[] = [
-  { key: "flights", labelAr: "الطيران",   icon: <MdFlight size={18} /> },
-  { key: "buses",   labelAr: "الاتوبيسات",   icon: <MdDirectionsBus size={18} />, disabled: true },
-  { key: "private", labelAr: "الرحلات الخاصة", icon: <FaCar size={16} />, disabled: true },
-];
-
 export const MyTripsTabs = () => {
   const [activeTab, setActiveTab] = useState<TripTab>("flights");
+  const t = useTranslations("profile.myTrips.tripTypes");
+
+  const TABS: { key: TripTab; label: string; icon: React.ReactNode }[] = [
+    { key: "flights", label: t("flights"), icon: <MdFlight size={18} /> },
+    { key: "buses", label: t("buses"), icon: <MdDirectionsBus size={18} /> },
+    { key: "private", label: t("private"), icon: <FaCar size={16} /> },
+  ];
 
   return (
     <div>
@@ -26,26 +28,22 @@ export const MyTripsTabs = () => {
           <button
             key={tab.key}
             type="button"
-            disabled={tab.disabled}
-            onClick={() => !tab.disabled && setActiveTab(tab.key)}
+            onClick={() => setActiveTab(tab.key)}
             className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors relative shrink-0 ${
-              tab.disabled
-                ? "text-gray-300 cursor-not-allowed"
-                : activeTab === tab.key
-                  ? "text-primary after:absolute after:bottom-0 after:inset-x-0 after:h-[2px] after:bg-primary"
-                  : "text-gray-400 hover:text-gray-600"
-            }`}
-          >
+              activeTab === tab.key
+                ? "text-primary after:absolute after:bottom-0 after:inset-x-0 after:h-[2px] after:bg-primary"
+                : "text-gray-400 hover:text-gray-600"
+            }`}>
             {tab.icon}
-            {tab.labelAr}
+            {tab.label}
           </button>
         ))}
       </div>
 
       {/* ── Tab content ── */}
       {activeTab === "flights" && <FlightTicketsContent />}
-      {activeTab === "buses"   && <BusTripsEmptyState />}
-      {activeTab === "private" && <PrivateTripsEmptyState />}
+      {activeTab === "buses" && <BusTicketsContent />}
+      {activeTab === "private" && <PrivateTicketsContent />}
     </div>
   );
 };

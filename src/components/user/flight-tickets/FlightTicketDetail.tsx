@@ -1,6 +1,5 @@
 "use client";
 
-import dayjs from "dayjs";
 import { Skeleton } from "antd";
 import {
   MdFlight,
@@ -16,6 +15,7 @@ import {
 } from "react-icons/fi";
 import { BsCreditCard2Front, BsTagFill } from "react-icons/bs";
 import { useRouter } from "@/i18n/navigation";
+import useFormatDate from "@/hooks/useFormatDate";
 import { useTranslations } from "next-intl";
 import useGetFlightOrder from "@/app/[locale]/_hooks/useGetFlightOrder";
 import type {
@@ -96,6 +96,7 @@ export const FlightTicketDetail = ({ orderId }: FlightTicketDetailProps) => {
   const router = useRouter();
   const t = useTranslations("profile.myTrips.detail");
   const tTimeline = useTranslations("flightModal.timeline");
+  const date = useFormatDate();
   const formatDuration = (mins: number) => tTimeline("durationFormat", { h: Math.floor(mins / 60), m: mins % 60 });
   const { data: order, isLoading, isError } = useGetFlightOrder(orderId);
 
@@ -187,7 +188,7 @@ export const FlightTicketDetail = ({ orderId }: FlightTicketDetailProps) => {
         <div className="px-5 pb-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-500">
           <span className="flex items-center gap-1.5">
             <FiCalendar size={12} className="text-gray-400" />
-            {dayjs(order.created_at).format("D MMMM YYYY · HH:mm")}
+            {date.dateTime(order.created_at, { style: "long" })}
           </span>
           <span className="flex items-center gap-1.5">
             <FiUsers size={12} className="text-gray-400" />
@@ -241,10 +242,10 @@ export const FlightTicketDetail = ({ orderId }: FlightTicketDetailProps) => {
                         <MdFlightTakeoff size={16} className="text-primary mb-0.5 rtl:-scale-x-100 rtl:origin-center" />
                         <p className="text-lg font-black text-gray-900 leading-none">{seg.origin}</p>
                         <p className="text-xs font-semibold text-gray-700 mt-0.5">
-                          {dayjs(seg.departure_datetime).format("HH:mm")}
+                          {date.time(seg.departure_datetime)}
                         </p>
                         <p className="text-[10px] text-gray-400 text-center">
-                          {dayjs(seg.departure_datetime).format("D MMM YYYY")}
+                          {date.medium(seg.departure_datetime)}
                         </p>
                         {seg.departure_terminal && (
                           <p className="text-[10px] text-gray-400 mt-0.5">T{seg.departure_terminal}</p>
@@ -272,10 +273,10 @@ export const FlightTicketDetail = ({ orderId }: FlightTicketDetailProps) => {
                         <MdFlightLand size={16} className="text-primary mb-0.5 rtl:-scale-x-100 rtl:origin-center" />
                         <p className="text-lg font-black text-gray-900 leading-none">{seg.destination}</p>
                         <p className="text-xs font-semibold text-gray-700 mt-0.5">
-                          {dayjs(seg.arrival_datetime).format("HH:mm")}
+                          {date.time(seg.arrival_datetime)}
                         </p>
                         <p className="text-[10px] text-gray-400 text-center">
-                          {dayjs(seg.arrival_datetime).format("D MMM YYYY")}
+                          {date.medium(seg.arrival_datetime)}
                         </p>
                         {seg.arrival_terminal && (
                           <p className="text-[10px] text-gray-400 mt-0.5">T{seg.arrival_terminal}</p>
@@ -322,7 +323,7 @@ export const FlightTicketDetail = ({ orderId }: FlightTicketDetailProps) => {
                     {p.nationality_country_code}
                   </span>
                   <span className="text-xs text-gray-400">
-                    {dayjs(p.birth_date).format("D MMM YYYY")}
+                    {date.medium(p.birth_date)}
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-x-4 gap-y-0.5 mt-0.5">
@@ -386,7 +387,7 @@ export const FlightTicketDetail = ({ orderId }: FlightTicketDetailProps) => {
                   <p className="text-sm font-medium text-gray-700 capitalize">{tx.gateway}</p>
                   {tx.paid_at && (
                     <p className="text-xs text-gray-400 mt-0.5">
-                      {dayjs(tx.paid_at).format("D MMM YYYY · HH:mm")}
+                      {date.dateTime(tx.paid_at)}
                     </p>
                   )}
                 </div>
