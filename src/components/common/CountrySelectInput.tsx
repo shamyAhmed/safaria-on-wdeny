@@ -1,8 +1,7 @@
 "use client";
 import { Form, Select } from "antd";
-import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { IoMdClose } from "react-icons/io";
 import useGetCountries from "@/app/[locale]/_hooks/useGetCountries";
 import { Country } from "@/app/[locale]/_types/Country";
 
@@ -18,11 +17,12 @@ type Props = {
 export const CountrySelectInput = ({
   name,
   label,
-  placeholder = "اختر الدولة",
+  placeholder,
   onSelect,
   disabled = false,
   rules,
 }: Props) => {
+  const t = useTranslations("common");
   const { data, isLoading } = useGetCountries();
 
   const handleSelect = (val: string) => {
@@ -36,7 +36,7 @@ export const CountrySelectInput = ({
       name={name}
       rules={rules}>
       <Select
-        placeholder={placeholder}
+        placeholder={placeholder ?? t("selectCountry")}
         showSearch
         allowClear
         //@ts-expect-error this is an error

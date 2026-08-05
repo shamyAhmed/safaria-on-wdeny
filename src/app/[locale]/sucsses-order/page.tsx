@@ -4,7 +4,14 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import { privatePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = privatePageMetadata("SucssesOrder");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return privatePageMetadata("orderSuccess", locale);
+}
 
 const SucssesOrderPage: React.FC = (): JSX.Element => {
   return (

@@ -25,15 +25,22 @@ export const TicketStatusBadge = ({
 );
 
 /**
- * Buses and private trips both report a machine `status_code` next to an
- * English display string. The code is the one worth branching on — the display
- * string is not translated by the API.
+ * Every trip type reports a machine status next to an English display string —
+ * `status_code` on buses and private trips, `order_status` on flights. The code
+ * is the one worth branching on; the display string is not translated by the
+ * API. Flights spell theirs in PascalCase (`PendingPayment`, `Booked`), hence
+ * the substring matching rather than an exact lookup.
  */
 export const orderStatusColor = (code: string): BadgeColor => {
   const s = code.toLowerCase();
   if (s.includes("cancel")) return "red";
   if (s.includes("pending") || s.includes("hold")) return "yellow";
-  if (s.includes("paid") || s.includes("confirm") || s.includes("complete"))
+  if (
+    s.includes("paid") ||
+    s.includes("confirm") ||
+    s.includes("complete") ||
+    s.includes("book")
+  )
     return "green";
   return "gray";
 };
@@ -41,12 +48,16 @@ export const orderStatusColor = (code: string): BadgeColor => {
 /**
  * Maps a status code onto a translation key under `profile.myTrips.status`,
  * falling back to the API's own label when a new code shows up.
+ *
+ * `pending` is tested before `book` so that a flight sitting on
+ * `PendingPayment` reads as pending rather than booked.
  */
 export const orderStatusKey = (code: string): string | null => {
   const s = code.toLowerCase();
   if (s.includes("cancel")) return "cancelled";
   if (s.includes("pending")) return "pending";
   if (s.includes("hold")) return "onHold";
+  if (s.includes("book")) return "booked";
   if (s.includes("paid")) return "paid";
   if (s.includes("confirm")) return "confirmed";
   if (s.includes("complete")) return "completed";

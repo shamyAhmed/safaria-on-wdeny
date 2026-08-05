@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { Modal, Input, Button } from "antd";
-
-const CONFIRM_WORD = "حذف";
+import { useTranslations } from "next-intl";
 
 interface DeleteAccountConfirmModalProps {
   open: boolean;
@@ -18,8 +17,12 @@ export const DeleteAccountConfirmModal = ({
   onConfirm,
   onCancel,
 }: DeleteAccountConfirmModalProps) => {
+  const t = useTranslations("profile.deleteAccountModal");
+  // The word the user has to type is itself translated, so it has to come from
+  // the messages rather than a module constant.
+  const confirmWord = t("confirmWord");
   const [typedWord, setTypedWord] = useState("");
-  const isConfirmed = typedWord.trim() === CONFIRM_WORD;
+  const isConfirmed = typedWord.trim() === confirmWord;
 
   const handleCancel = () => {
     setTypedWord("");
@@ -28,24 +31,27 @@ export const DeleteAccountConfirmModal = ({
 
   return (
     <Modal
-      title="تأكيد حذف الحساب نهائياً"
+      title={t("title")}
       open={open}
       onCancel={handleCancel}
       centered
       footer={null}
     >
       <p className="text-sm text-gray-500 mb-4">
-        هذا إجراء نهائي لا يمكن التراجع عنه. للتأكيد، اكتب كلمة{" "}
-        <span className="font-bold text-red-600">&quot;{CONFIRM_WORD}&quot;</span> في الحقل أدناه.
+        {t.rich("description", {
+          word: () => (
+            <span className="font-bold text-red-600">&quot;{confirmWord}&quot;</span>
+          ),
+        })}
       </p>
       <Input
         value={typedWord}
         onChange={(e) => setTypedWord(e.target.value)}
-        placeholder={CONFIRM_WORD}
+        placeholder={confirmWord}
         className="mb-4"
       />
       <div className="flex items-center justify-end gap-2">
-        <Button onClick={handleCancel}>إلغاء</Button>
+        <Button onClick={handleCancel}>{t("cancel")}</Button>
         <Button
           type="primary"
           danger
@@ -53,7 +59,7 @@ export const DeleteAccountConfirmModal = ({
           loading={loading}
           onClick={onConfirm}
         >
-          تأكيد الحذف نهائياً
+          {t("confirm")}
         </Button>
       </div>
     </Modal>

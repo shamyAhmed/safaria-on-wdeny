@@ -34,8 +34,8 @@ export const FaqsComponent: React.FC = () => {
                 <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-5">
                   <FiHelpCircle className="text-4xl text-gray-300" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-600 mb-2">لا توجد أسئلة شائعة</h3>
-                <p className="text-sm text-gray-400 max-w-xs">لم يتم إضافة أي أسئلة بعد. تفقد الصفحة لاحقاً.</p>
+                <h3 className="text-lg font-semibold text-gray-600 mb-2">{t("empty.title")}</h3>
+                <p className="text-sm text-gray-400 max-w-xs">{t("empty.description")}</p>
               </div>
             ) : (
               <div className="faqs-categories">

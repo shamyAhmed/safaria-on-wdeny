@@ -11,10 +11,12 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/appStore";
 import { setBusCities, setBusReturnDate } from "@/store/slices/bus/busSlice";
 import dayjs from "dayjs";
+import { useDatePickerFormat } from "@/hooks/useFormatDate";
 import { useEffect } from "react";
 
 export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
   const [form] = Form.useForm();
+  const dateFormat = useDatePickerFormat();
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const searchParams = useSearchParams();
@@ -234,6 +236,7 @@ export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
               name="departureDate"
               rules={[{ required: true, message: "" }]}>
               <DatePicker
+                      format={dateFormat}
                 placeholder={t("fields.departureDate.placeholder")}
                 suffixIcon={<DatePickerIcon />}
                 disabled={readonly}
@@ -274,6 +277,7 @@ export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
               name="returnDate"
               rules={[{ required: isRoundTrip, message: "" }]}>
               <DatePicker
+                      format={dateFormat}
                 placeholder={t("fields.returnDate.placeholder")}
                 suffixIcon={<DatePickerIcon />}
                 inputReadOnly={readonly}

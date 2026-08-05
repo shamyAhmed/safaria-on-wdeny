@@ -2,14 +2,24 @@ import { ProfileChangePassword_form } from "@/components/user/change-password/fo
 import { ProfileLayout } from "@/components/user/profile/ProfileLayout";
 import { Metadata } from "next";
 import { privatePageMetadata } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = privatePageMetadata("تغيير كلمة المرور");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return privatePageMetadata("changePassword", locale);
+}
 
-const ChangePasswordPage: React.FC = (): JSX.Element => {
+const ChangePasswordPage = async () => {
+  const t = await getTranslations("profile.nav");
+
   return (
     <ProfileLayout
-      title="تغيير كلمة المرور"
-      currentPage="تغيير كلمة المرور"
+      title={t("changePassword")}
+      currentPage={t("changePassword")}
       currentLink="/user/change-password"
     >
       <ProfileChangePassword_form />

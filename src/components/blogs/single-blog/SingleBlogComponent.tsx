@@ -8,12 +8,14 @@ import { Col, Row } from "antd";
 import { BlogCard } from "../cards/BlogCard";
 import useGetBlogs, { BlogPostDetail } from "@/app/[locale]/_hooks/useGetBlogs";
 import useFormatDate from "@/hooks/useFormatDate";
+import { useTranslations } from "next-intl";
 
 interface SingleBlogComponentProps {
   blog: BlogPostDetail;
 }
 
 export function SingleBlogComponent({ blog }: SingleBlogComponentProps) {
+  const t = useTranslations("blogsPage");
   const { data: relatedBlogs = [] } = useGetBlogs(blog.category?.id);
   const date = useFormatDate();
   const filtered = relatedBlogs.filter((b) => b.id !== blog.id);
@@ -28,14 +30,14 @@ export function SingleBlogComponent({ blog }: SingleBlogComponentProps) {
             className="underline font-bold text-[#333] hover:text-[#333] flex items-center gap-2"
           >
             <FaHome className="text-lg" />
-            الرئيسية
+            {t("breadcrumbHome")}
           </Link>
           <span>-</span>
           <Link
             href="/blogs"
             className="underline font-bold text-[#333] hover:text-[#333]"
           >
-            المدونة
+            {t("title")}
           </Link>
           <span>-</span>
           <span className="text-[#89878F] font-medium">{blog.title}</span>
@@ -87,14 +89,14 @@ export function SingleBlogComponent({ blog }: SingleBlogComponentProps) {
         {filtered.length > 0 && (
           <div className="bg-white rounded-[40px] p-8 mt-10">
             <h4 className="text-primary font-bold text-3xl mb-8">
-              مقالات ذات صلة
+              {t("relatedArticles")}
             </h4>
             <Row gutter={[24, 24]}>
               {filtered.map((related) => (
                 <Col key={related.id} xs={24} md={8}>
                   <BlogCard
                     title={related.title}
-                    buttonText="تفاصيل أكثر"
+                    buttonText={t("moreDetails")}
                     backgroundImage={related.image.url}
                     slug={related.slug}
                   />

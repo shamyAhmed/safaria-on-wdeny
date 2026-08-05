@@ -3,6 +3,7 @@
 import { Collapse } from "antd";
 import type { CollapseProps } from "antd";
 import { FaChevronDown } from "react-icons/fa6";
+import { useTranslations } from "next-intl";
 import { BusCheckboxFilter } from "./filter-section/BusCheckboxFilter";
 import { PriceRangeFilter } from "@/components/discoverAirplan/sections/filter-section/PriceRangeFilter";
 import { useBusFiltersContext } from "../context/BusFiltersContext";
@@ -26,12 +27,13 @@ export const BusFiltersSection = ({
   minPrice,
   maxPrice,
 }: BusFiltersSectionProps) => {
+  const t = useTranslations("discoverBus.filters");
   const { filters, onChange } = useBusFiltersContext();
 
   const items: CollapseProps["items"] = [
     {
       key: "companies",
-      label: <PanelHeader title="الشركات" />,
+      label: <PanelHeader title={t("companies")} />,
       children: (
         <BusCheckboxFilter
           options={companyOptions}
@@ -42,7 +44,7 @@ export const BusFiltersSection = ({
     },
     {
       key: "toStations",
-      label: <PanelHeader title="محطات الوصول" />,
+      label: <PanelHeader title={t("arrivalStations")} />,
       children: (
         <BusCheckboxFilter
           options={toStationOptions}
@@ -53,7 +55,7 @@ export const BusFiltersSection = ({
     },
     {
       key: "fromStations",
-      label: <PanelHeader title="محطات المغادرة" />,
+      label: <PanelHeader title={t("departureStations")} />,
       children: (
         <BusCheckboxFilter
           options={fromStationOptions}
@@ -64,11 +66,11 @@ export const BusFiltersSection = ({
     },
     {
       key: "price",
-      label: <PanelHeader title="نطاق الأسعار" />,
+      label: <PanelHeader title={t("priceRange")} />,
       children: (
         <PriceRangeFilter
-          fromLabel="من"
-          toLabel="إلى"
+          fromLabel={t("priceFrom")}
+          toLabel={t("priceTo")}
           min={minPrice}
           max={maxPrice || 1000}
           onChange={(from, to) => onChange("priceRange", { from, to })}

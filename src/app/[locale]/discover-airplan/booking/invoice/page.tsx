@@ -4,7 +4,14 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import { privatePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = privatePageMetadata("تذكرة الحجز");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return privatePageMetadata("bookingTicket", locale);
+}
 
 const InvoicePage: React.FC = (): JSX.Element => {
     return (

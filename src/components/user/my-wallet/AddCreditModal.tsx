@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Modal, Button, Input, Form } from "antd";
 import { RiShieldCheckLine } from "react-icons/ri";
+import { useTranslations } from "next-intl";
 import { useAddBalance } from "@/hooks/auth/useAddBalance";
 
 const QUICK_AMOUNTS = [50, 100, 200, 300, 400, 500];
@@ -13,6 +14,7 @@ interface AddCreditModalProps {
 }
 
 export const AddCreditModal = ({ open, onClose }: AddCreditModalProps) => {
+  const t = useTranslations("wallet.addCredit");
   const [form] = Form.useForm();
   const [activeQuick, setActiveQuick] = useState<number | null>(100);
   const { addBalanceMutation, addBalanceLoading } = useAddBalance();
@@ -44,7 +46,7 @@ export const AddCreditModal = ({ open, onClose }: AddCreditModalProps) => {
       footer={null}
       centered
       className="add-credit-modal"
-      title={<p className="text-black text-start">أضف رصيد</p>}
+      title={<p className="text-black text-start">{t("title")}</p>}
       afterOpenChange={(visible) => {
         if (visible) {
           form.setFieldValue("amount", "100.00");
@@ -56,13 +58,13 @@ export const AddCreditModal = ({ open, onClose }: AddCreditModalProps) => {
         {/* Amount input */}
         <div className="inputS1 mb-8">
           <Form.Item
-            label="المبلغ المراد إضافته"
+            label={t("amountLabel")}
             name="amount"
-            rules={[{ required: true, message: "يرجى إدخال المبلغ" }]}
+            rules={[{ required: true, message: t("amountRequired") }]}
           >
             <Input
               suffix={
-                <span className="text-gray-400 text-sm">ريال سعودي</span>
+                <span className="text-gray-400 text-sm">{t("currency")}</span>
               }
               type="number"
               min={0}
@@ -85,7 +87,7 @@ export const AddCreditModal = ({ open, onClose }: AddCreditModalProps) => {
                   : "bg-gray-50 text-gray-500 border-gray-200 hover:border-primary hover:text-primary"
               }`}
             >
-              {val} ر.س
+              {t("quickAmount", { amount: val })}
             </button>
           ))}
         </div>
@@ -97,7 +99,7 @@ export const AddCreditModal = ({ open, onClose }: AddCreditModalProps) => {
           loading={addBalanceLoading}
           onClick={handleSubmit}
         >
-          الاستمرار بالدفع
+          {t("continueToPayment")}
         </Button>
       </Form>
 
@@ -105,8 +107,7 @@ export const AddCreditModal = ({ open, onClose }: AddCreditModalProps) => {
       <div className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-green-50 border border-green-100 px-4 py-3">
         <RiShieldCheckLine className="text-green-500 text-lg shrink-0" />
         <p className="text-xs text-green-700 text-center">
-          سيتم توجيهك إلى بوابة دفع آمنة مشفرة ومتطورة بمعايير عالمية لضمان
-          سلامة بياناتك
+          {t("securityNote")}
         </p>
       </div>
     </Modal>

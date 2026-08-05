@@ -297,12 +297,40 @@ export function toMetaDescription(
 }
 
 /**
+ * Titles for the noindex screens. They never reach a search result, but they
+ * are what the browser tab shows, so they still have to follow the locale.
+ */
+export const PRIVATE_PAGE_TITLES = {
+  passengerDetails: { ar: "تفاصيل الركاب", en: "Passenger Details" },
+  bookingTicket: { ar: "تذكرة الحجز", en: "Booking Ticket" },
+  paymentSuccess: { ar: "تم الدفع بنجاح", en: "Payment Successful" },
+  paymentFailed: { ar: "فشل الدفع", en: "Payment Failed" },
+  login: { ar: "الدخول إلى حسابك", en: "Sign In to Your Account" },
+  register: { ar: "اكمل بياناتك", en: "Complete Your Details" },
+  registerCompany: { ar: "انضم كشركة أتوبيسات", en: "Join as a Bus Company" },
+  verifyOtp: { ar: "تحقق من رمز التأكيد", en: "Verify Confirmation Code" },
+  forgetPassword: { ar: "نسيت كلمة المرور", en: "Forgot Password" },
+  resetPassword: { ar: "إعادة تعيين كلمة المرور", en: "Reset Password" },
+  changePassword: { ar: "تغيير كلمة المرور", en: "Change Password" },
+  checkout: { ar: "إتمام الشراء", en: "Checkout" },
+  availableRewards: { ar: "المكافآت المتاحة", en: "Available Rewards" },
+  confirmReward: { ar: "تأكيد المكافأة", en: "Confirm Reward" },
+  pointsHistory: { ar: "سجل النقاط", en: "Points History" },
+  orderSuccess: { ar: "تم إتمام الطلب", en: "Order Complete" },
+} as const satisfies Record<string, Record<AppLocale, string>>;
+
+export type PrivatePageKey = keyof typeof PRIVATE_PAGE_TITLES;
+
+/**
  * Auth, account and checkout screens: keep them out of the index entirely
  * rather than giving them canonicals and descriptions they don't need.
  */
-export function privatePageMetadata(title: string): Metadata {
+export function privatePageMetadata(
+  page: PrivatePageKey,
+  locale: string,
+): Metadata {
   return {
-    title,
+    title: PRIVATE_PAGE_TITLES[page][normalizeLocale(locale)],
     robots: { index: false, follow: false },
   };
 }

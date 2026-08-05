@@ -6,6 +6,7 @@ import { useUpdateProfile } from "@/hooks/auth/useUpdateProfile";
 import { handleFormErrors } from "@/utils/handleFormError";
 import { Button, Col, Form, Input, Row } from "antd";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export const PersonalInfoForm = () => {
   const [form] = Form.useForm();
@@ -23,6 +24,8 @@ export const PersonalInfoForm = () => {
     }
   }, [user, form]);
 
+  const t = useTranslations("profile.personalInfo");
+
   const onFinish = (values: any) => {
     updateProfileMutation({
       ...values,
@@ -35,7 +38,7 @@ export const PersonalInfoForm = () => {
   return (
     <div className="formS1 !border-none">
       <h2 className="text-2xl font-bold mb-8 text-center lg:text-start border-b border-[#E2E2E2] pb-6">
-        المعلومات الشخصية
+        {t("title")}
       </h2>
 
       <Form
@@ -52,13 +55,13 @@ export const PersonalInfoForm = () => {
           <Col xs={24}>
             <div className="inputS1">
               <Form.Item
-                label="الاسم بالكامل"
+                label={t("fullName.label")}
                 name="name"
                 rules={[
-                  { required: true, message: "يرجى إدخال الاسم بالكامل" },
+                  { required: true, message: t("fullName.required") },
                 ]}
               >
-                <Input placeholder="الاسم بالكامل" className="max-w-[360px]" />
+                <Input placeholder={t("fullName.placeholder")} className="max-w-[360px]" />
               </Form.Item>
             </div>
           </Col>
@@ -66,15 +69,15 @@ export const PersonalInfoForm = () => {
           <Col xs={24}>
             <div className="inputS1">
               <Form.Item
-                label="البريد الإلكتروني"
+                label={t("email.label")}
                 name="email"
                 rules={[
-                  { required: true, message: "يرجى إدخال البريد الإلكتروني" },
-                  { type: "email", message: "البريد الإلكتروني غير صحيح" },
+                  { required: true, message: t("email.required") },
+                  { type: "email", message: t("email.invalid") },
                 ]}
               >
                 <Input
-                  placeholder="البريد الإلكتروني"
+                  placeholder={t("email.placeholder")}
                   className="max-w-[360px]"
                 />
               </Form.Item>
@@ -89,7 +92,7 @@ export const PersonalInfoForm = () => {
               loading={updateProfileLoading}
               disabled={updateProfileLoading || isLoading}
             >
-              تحديث
+              {t("submit")}
             </Button>
           </Col>
         </Row>

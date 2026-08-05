@@ -2,6 +2,7 @@
 
 import { Modal, Button } from "antd";
 import { FiTrash2 } from "react-icons/fi";
+import { useTranslations } from "next-intl";
 import useDeleteAddress from "@/app/[locale]/_hooks/useDeleteAddress";
 
 interface DeleteAddressModalProps {
@@ -11,6 +12,7 @@ interface DeleteAddressModalProps {
 }
 
 export const DeleteAddressModal = ({ open, addressId, onClose }: DeleteAddressModalProps) => {
+  const t = useTranslations("savedAddresses.deleteModal");
   const { mutate: deleteAddress, isPending } = useDeleteAddress(addressId ?? 0, onClose);
 
   return (
@@ -23,16 +25,16 @@ export const DeleteAddressModal = ({ open, addressId, onClose }: DeleteAddressMo
       title={
         <div className="flex items-center gap-2 text-red-500">
           <FiTrash2 />
-          <span className="font-bold">حذف العنوان</span>
+          <span className="font-bold">{t("title")}</span>
         </div>
       }
     >
       <p className="text-gray-600 text-sm mb-6 mt-2">
-        هل أنت متأكد من حذف هذا العنوان؟ لا يمكن التراجع عن هذا الإجراء.
+        {t("description")}
       </p>
       <div className="flex items-center justify-end gap-3">
         <Button onClick={onClose} disabled={isPending}>
-          إلغاء
+          {t("cancel")}
         </Button>
         <Button
           danger
@@ -40,7 +42,7 @@ export const DeleteAddressModal = ({ open, addressId, onClose }: DeleteAddressMo
           loading={isPending}
           onClick={() => deleteAddress()}
         >
-          حذف
+          {t("confirm")}
         </Button>
       </div>
     </Modal>

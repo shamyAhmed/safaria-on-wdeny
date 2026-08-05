@@ -356,6 +356,10 @@
           "title": "أفضل وجهات السفر في مصر",
           "description": "اكتشف أجمل المدن والأماكن في مصر من القاهرة إلى الإسكندرية والأقصر"
         }
+      },
+      "empty": {
+        "title": "لا توجد مقالات",
+        "description": "لم يتم نشر أي مقالات بعد. تفقد الصفحة لاحقاً."
       }
     },
     "allInOneApp": {
@@ -561,6 +565,22 @@
         "bigBags": "{count} حقائب كبيرة",
         "smallBag": "{count} حقيبة صغيرة"
       }
+    },
+    "pageTitle": "رحلات خاصة",
+    "filters": {
+      "title": "التصفية",
+      "reset": "إعادة ضبط",
+      "carType": "نوع السيارة",
+      "priceRange": "نطاق السعر",
+      "passengersCount": "عدد الركاب",
+      "comingSoon": "قريباً..."
+    },
+    "emptyState": {
+      "noResultsTitle": "لا توجد رحلات متاحة",
+      "noResultsDescription": "لم نجد رحلات تطابق بحثك، حاول تغيير التاريخ أو الوجهة",
+      "startTitle": "ابحث عن رحلتك الخاصة",
+      "startDescription": "أدخل بيانات رحلتك في النموذج أعلاه وسنعرض لك أفضل الخيارات المتاحة",
+      "backHome": "العودة للرئيسية"
     }
   },
   "discoverBus": {
@@ -568,7 +588,16 @@
     "filters": {
       "title": "التصفية",
       "reset": "إعادة ضبط",
-      "resetFilters": "إعادة ضبط الفلاتر"
+      "resetFilters": "إعادة ضبط الفلاتر",
+      "companies": "الشركات",
+      "arrivalStations": "محطات الوصول",
+      "departureStations": "محطات المغادرة",
+      "priceRange": "نطاق الأسعار",
+      "priceFrom": "من",
+      "priceTo": "إلى",
+      "search": "بحث",
+      "showMore": "المزيد",
+      "showLess": "أقل"
     },
     "card": {
       "fromLabel": "من: {city}",
@@ -601,7 +630,8 @@
       "loginToContinue": "سجّل دخولك للمتابعة",
       "bookingCreated": "تم إنشاء الحجز بنجاح",
       "outboundBooked": "تم حجز رحلة الذهاب، اختر الآن رحلة العودة",
-      "routeError": "تعذّر تحميل مسار الرحلة"
+      "routeError": "تعذّر تحميل مسار الرحلة",
+      "level": "الدور {number}"
     },
     "loadMore": "تحميل المزيد",
     "emptyState": {
@@ -804,6 +834,10 @@
     "cta": {
       "text": "لم تجد الإجابة التي تبحث عنها؟ فريق الدعم لدينا متاح على مدار الساعة لمساعدتك.",
       "button": "تواصل معنا"
+    },
+    "empty": {
+      "title": "لا توجد أسئلة شائعة",
+      "description": "لم يتم إضافة أي أسئلة بعد. تفقد الصفحة لاحقاً."
     }
   },
   "auth": {
@@ -1095,7 +1129,20 @@
     "logoAlt": "شعار سفرية"
   },
   "privateBooking": {
-    "proceedToPay": "الذهاب للدفع"
+    "proceedToPay": "الذهاب للدفع",
+    "route": "المسار",
+    "pickup": "نقطة الانطلاق",
+    "destination": "الوجهة",
+    "paymentDetails": "بيانات الدفع",
+    "tripPrice": "سعر الرحلة",
+    "total": "الإجمالي",
+    "dates": "التواريخ",
+    "departureDate": "تاريخ المغادرة",
+    "returnDate": "تاريخ العودة",
+    "selectDepartureDate": "اختر تاريخ المغادرة",
+    "selectReturnDate": "اختر تاريخ العودة",
+    "agreeTo": "الموافقة على",
+    "termsAndConditions": "الشروط والأحكام"
   },
   "flightModal": {
     "priceRules": {
@@ -1138,6 +1185,9 @@
       "unspecifiedYet": "غير محدد بعد",
       "total": "السعر الكلي",
       "disclaimer": "قد يكون هناك اختلاف بسيط في ملخص الأجرة بسبب التقريب للفئة التاليه."
+    },
+    "baggage": {
+      "empty": "لم تنشر شركة الطيران تفاصيل الأمتعة لهذه التذكرة."
     }
   },
   "profile": {
@@ -1156,11 +1206,6 @@
         "description": "لم تقم بحجز أي رحلة طيران حتى الآن. ابدأ باستكشاف الرحلات المتاحة واحجز تذكرتك."
       },
       "card": {
-        "orderStatus": {
-          "onHold": "قيد الانتظار",
-          "booked": "تم الحجز",
-          "cancelled": "ملغي"
-        },
         "paymentStatus": {
           "paid": "مدفوع",
           "failed": "فشل الدفع",
@@ -1187,11 +1232,6 @@
       "detail": {
         "pageTitle": "تفاصيل التذكرة",
         "errorMessage": "تعذّر تحميل تفاصيل الطلب",
-        "orderStatus": {
-          "onHold": "قيد الانتظار",
-          "booked": "تم الحجز",
-          "cancelled": "ملغي"
-        },
         "paymentStatus": {
           "paid": "مدفوع",
           "failed": "فشل الدفع",
@@ -1230,6 +1270,7 @@
       "status": {
         "pending": "قيد الانتظار",
         "onHold": "محجوزة مؤقتاً",
+        "booked": "تم الحجز",
         "confirmed": "مؤكدة",
         "paid": "مدفوعة",
         "completed": "مكتملة",
@@ -1298,6 +1339,49 @@
       "wallet": "محفظتي",
       "deleteAccount": "حذف الحساب",
       "logout": "تسجيل الخروج"
+    },
+    "personalInfo": {
+      "title": "المعلومات الشخصية",
+      "fullName": {
+        "label": "الاسم بالكامل",
+        "placeholder": "الاسم بالكامل",
+        "required": "يرجى إدخال الاسم بالكامل"
+      },
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "البريد الإلكتروني",
+        "required": "يرجى إدخال البريد الإلكتروني",
+        "invalid": "البريد الإلكتروني غير صحيح"
+      },
+      "submit": "تحديث"
+    },
+    "verifyPhone": {
+      "pageTitle": "تأكيد رقم الهاتف",
+      "enterCode": "أدخل رمز التحقق",
+      "sentTo": "تم إرسال رمز التحقق إلى",
+      "codeLabel": "رمز التحقق",
+      "didNotReceive": "لم تستلم الرمز؟",
+      "resend": "إعادة الإرسال",
+      "confirm": "تأكيد"
+    },
+    "logoutPage": {
+      "pageTitle": "تسجيل الخروج",
+      "cardTitle": "تسجيل الخروج؟",
+      "cardSubtitle": "هل أنت متأكد أنك تريد تسجيل الخروج من حسابك؟",
+      "confirm": "سجل خروجي"
+    },
+    "deleteAccountPage": {
+      "pageTitle": "حذف الحساب",
+      "cardTitle": "حذف الحساب؟",
+      "cardSubtitle": "هل أنت متأكد أنك تريد حذف حسابك نهائياً؟ لا يمكن التراجع عن هذا الإجراء.",
+      "confirm": "احذف حسابي"
+    },
+    "deleteAccountModal": {
+      "title": "تأكيد حذف الحساب نهائياً",
+      "confirmWord": "حذف",
+      "description": "هذا إجراء نهائي لا يمكن التراجع عنه. للتأكيد، اكتب كلمة <word></word> في الحقل أدناه.",
+      "cancel": "إلغاء",
+      "confirm": "تأكيد الحذف نهائياً"
     }
   },
   "airplaneCard": {
@@ -1472,6 +1556,104 @@
     "complaintsAndInquiries": "للأستفسارات والشكاوى"
   },
   "common": {
-    "home": "الرئيسية"
+    "home": "الرئيسية",
+    "selectCountry": "اختر الدولة",
+    "back": "تراجع"
+  },
+  "paymentResult": {
+    "success": {
+      "title": "تم الدفع بنجاح! 🎉",
+      "description": "تم تأكيد حجزك وإتمام عملية الدفع بنجاح",
+      "nextTitle": "ماذا بعد؟",
+      "next": {
+        "confirmationMessage": "ستتلقى رسالة تأكيد على بريدك الإلكتروني ورقم هاتفك",
+        "trackBooking": "يمكنك متابعة تفاصيل حجزك من صفحة الرحلات في حسابك",
+        "arriveEarly": "تأكد من الحضور قبل موعد الرحلة بوقت كافٍ"
+      },
+      "home": "الرئيسية",
+      "myTrips": "رحلاتي"
+    },
+    "failed": {
+      "title": "فشلت عملية الدفع",
+      "description": "لم نتمكن من إتمام عملية الدفع، يرجى المحاولة مرة أخرى",
+      "reasonsTitle": "أسباب محتملة",
+      "reasons": {
+        "insufficientFunds": "رصيد غير كافٍ في البطاقة أو المحفظة",
+        "invalidCardDetails": "انتهاء صلاحية بيانات الدفع أو خطأ في إدخالها",
+        "sessionExpired": "انتهت مهلة الجلسة، يرجى البدء من جديد"
+      },
+      "retry": "حاول مجدداً",
+      "home": "الرئيسية"
+    }
+  },
+  "blogsPage": {
+    "title": "المدونة",
+    "breadcrumbHome": "الرئيسية",
+    "moreDetails": "تفاصيل أكثر",
+    "loadMore": "المزيد",
+    "relatedArticles": "مقالات ذات صلة",
+    "empty": {
+      "title": "لا توجد مقالات",
+      "description": "لم يتم نشر أي مقالات بعد. تفقد الصفحة لاحقاً."
+    }
+  },
+  "wallet": {
+    "title": "محفظتي",
+    "subtitle": "ادر اموالك واطلع على سجل عملياتك المالية",
+    "addCreditButton": "إضافة رصيد",
+    "currentBalance": "إجمالي رصيدك الحالي",
+    "historyTitle": "سجل العمليات",
+    "allTypes": "كل الأنواع",
+    "credits": "رصيد",
+    "showingCount": "عرض {shown} من {total}",
+    "transactionTypes": {
+      "deposit": "إيداع",
+      "booking": "حجز",
+      "refund": "مسترد"
+    },
+    "columns": {
+      "id": "رقم العملية",
+      "type": "نوع العملية",
+      "description": "الوصف",
+      "amount": "المبلغ"
+    },
+    "empty": {
+      "title": "لا توجد عمليات بعد",
+      "description": "لم يتم تسجيل أي عمليات في محفظتك حتى الآن. أضف رصيداً للبدء."
+    },
+    "addCredit": {
+      "title": "أضف رصيد",
+      "amountLabel": "المبلغ المراد إضافته",
+      "amountRequired": "يرجى إدخال المبلغ",
+      "currency": "ريال سعودي",
+      "quickAmount": "{amount} ر.س",
+      "continueToPayment": "الاستمرار بالدفع",
+      "securityNote": "سيتم توجيهك إلى بوابة دفع آمنة مشفرة ومتطورة بمعايير عالمية لضمان سلامة بياناتك"
+    }
+  },
+  "savedAddresses": {
+    "title": "العناوين المحفوظة",
+    "resultsCount": "يوجد {count} من النتائج",
+    "addButton": "إضافة عنوان جديد",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "empty": {
+      "title": "لا توجد عناوين محفوظة",
+      "description": "لم تقم بحفظ أي عنوان حتى الآن. أضف عنوانك الأول لتسهيل عمليات الحجز."
+    },
+    "addModal": {
+      "title": "اختيار موقع على الخريطة",
+      "searchPlaceholder": "ابحث عن موقعك...",
+      "namePlaceholder": "اسم العنوان (مثال: المنزل، العمل...)",
+      "pickOnMapFirst": "اضغط على الخريطة لتحديد موقعك أولاً",
+      "notesPlaceholder": "ملاحظات إضافية (اختياري)",
+      "confirm": "تأكيد العنوان"
+    },
+    "deleteModal": {
+      "title": "حذف العنوان",
+      "description": "هل أنت متأكد من حذف هذا العنوان؟ لا يمكن التراجع عن هذا الإجراء.",
+      "cancel": "إلغاء",
+      "confirm": "حذف"
+    }
   }
 }

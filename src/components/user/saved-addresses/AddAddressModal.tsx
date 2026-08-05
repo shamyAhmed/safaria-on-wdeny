@@ -13,6 +13,7 @@ import {
 import { IoSearchOutline, IoLocationSharp } from "react-icons/io5";
 import useAddAddress, { type AddAddressPayload } from "@/app/[locale]/_hooks/useAddAddress";
 import type { UserAddress } from "@/app/[locale]/_hooks/useGetUserAddresses";
+import { useTranslations } from "next-intl";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!;
 
@@ -42,6 +43,7 @@ interface SearchBoxProps {
 }
 
 const SearchBox = ({ onPlaceSelected }: SearchBoxProps) => {
+  const t = useTranslations("savedAddresses.addModal");
   const map = useMap();
   const placesLib = useMapsLibrary("places");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -76,8 +78,8 @@ const SearchBox = ({ onPlaceSelected }: SearchBoxProps) => {
         <input
           ref={attachAutocomplete}
           type="text"
-          placeholder="ابحث عن موقعك..."
-          aria-label="ابحث عن موقعك"
+          placeholder={t("searchPlaceholder")}
+          aria-label={t("searchPlaceholder")}
           className="w-full h-11 rounded-xl border border-gray-200 bg-white shadow-sm px-4 pe-10 text-sm text-right outline-none focus:border-primary"
         />
         <IoSearchOutline className="absolute top-1/2 -translate-y-1/2 end-3 text-gray-400 text-lg pointer-events-none" />
@@ -149,6 +151,7 @@ interface ModalInnerProps {
 }
 
 const ModalInner = ({ mutate, isPending, address }: ModalInnerProps) => {
+  const t = useTranslations("savedAddresses.addModal");
   const initialPos = address
     ? { lat: parseFloat(address.map_location.lat), lng: parseFloat(address.map_location.lng) }
     : null;
@@ -194,7 +197,7 @@ const ModalInner = ({ mutate, isPending, address }: ModalInnerProps) => {
       {/* Address name input */}
       <div className="mb-4">
         <Input
-          placeholder="اسم العنوان (مثال: المنزل، العمل...)"
+          placeholder={t("namePlaceholder")}
           value={addressName}
           onChange={(e) => setAddressName(e.target.value)}
           prefix={<IoLocationSharp className="text-primary" />}
@@ -203,14 +206,14 @@ const ModalInner = ({ mutate, isPending, address }: ModalInnerProps) => {
           disabled={!markerPos}
         />
         {!markerPos && (
-          <p className="text-xs text-gray-400 mt-1 text-center">اضغط على الخريطة لتحديد موقعك أولاً</p>
+          <p className="text-xs text-gray-400 mt-1 text-center">{t("pickOnMapFirst")}</p>
         )}
       </div>
 
       {/* Notes textarea */}
       <div className="mb-4">
         <TextArea
-          placeholder="ملاحظات إضافية (اختياري)"
+          placeholder={t("notesPlaceholder")}
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           rows={3}
@@ -240,7 +243,7 @@ const ModalInner = ({ mutate, isPending, address }: ModalInnerProps) => {
           mutate(payload);
         }}
       >
-        تأكيد العنوان
+        {t("confirm")}
       </Button>
     </>
   );
@@ -253,6 +256,7 @@ export const AddAddressModal = ({
   mutate: externalMutate,
   isPending: externalPending,
 }: AddAddressModalProps) => {
+  const t = useTranslations("savedAddresses.addModal");
   const { mutate: internalMutate, isPending: internalPending } = useAddAddress(onClose);
 
   const mutate = externalMutate ?? internalMutate;
@@ -265,7 +269,7 @@ export const AddAddressModal = ({
       footer={null}
       centered
       className="add-address-modal"
-      title={<p className="text-black text-start font-bold">اختيار موقع على الخريطة</p>}
+      title={<p className="text-black text-start font-bold">{t("title")}</p>}
     >
       <APIProvider apiKey={API_KEY}>
         <ModalInner mutate={mutate} isPending={isPending} address={address} />

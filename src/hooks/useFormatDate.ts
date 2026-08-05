@@ -3,12 +3,17 @@
 import { useLocale } from "next-intl";
 import { useMemo } from "react";
 import {
+  datePickerFormat,
   formatDateLong,
   formatDateMedium,
   formatDateNumeric,
   formatDateTime,
   formatTime,
 } from "@/utils/formatDate";
+
+/** The `format` an antd `DatePicker` should render in the active locale. */
+export const useDatePickerFormat = (): string =>
+  datePickerFormat(useLocale());
 
 /**
  * Locale-bound date helpers. Every date the user reads should go through one of

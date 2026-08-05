@@ -18,6 +18,11 @@ import { useRouter } from "@/i18n/navigation";
 import useFormatDate from "@/hooks/useFormatDate";
 import { useTranslations } from "next-intl";
 import useGetFlightOrder from "@/app/[locale]/_hooks/useGetFlightOrder";
+import {
+  TicketStatusBadge as StatusBadge,
+  orderStatusColor,
+  orderStatusKey,
+} from "@/components/user/my-trips/TicketStatusBadge";
 import type {
   FlightOrder,
   FlightOrderJourney,
@@ -26,19 +31,6 @@ import type {
 } from "@/app/[locale]/_types/FlightOrder";
 
 // ── Status helpers (labels resolved inside component with t()) ─────────────────
-
-const BADGE: Record<string, string> = {
-  green:  "bg-green-50  text-green-700  border-green-200",
-  yellow: "bg-amber-50  text-amber-700  border-amber-200",
-  red:    "bg-red-50    text-red-600    border-red-200",
-  gray:   "bg-gray-50   text-gray-600   border-gray-200",
-};
-
-const StatusBadge = ({ label, color }: { label: string; color: string }) => (
-  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border ${BADGE[color] ?? BADGE.gray}`}>
-    {label}
-  </span>
-);
 
 const TxStatusBadge = ({ status, labels }: { status: string; labels: Record<string, { label: string; color: string }> }) => {
   const s = status.toLowerCase();
@@ -95,6 +87,8 @@ interface FlightTicketDetailProps {
 export const FlightTicketDetail = ({ orderId }: FlightTicketDetailProps) => {
   const router = useRouter();
   const t = useTranslations("profile.myTrips.detail");
+  const tStatus = useTranslations("profile.myTrips.status");
+  const tRefund = useTranslations("airplaneCard");
   const tTimeline = useTranslations("flightModal.timeline");
   const date = useFormatDate();
   const formatDuration = (mins: number) => tTimeline("durationFormat", { h: Math.floor(mins / 60), m: mins % 60 });
@@ -112,13 +106,20 @@ export const FlightTicketDetail = ({ orderId }: FlightTicketDetailProps) => {
     pending: { label: t("paymentStatus.pending"), color: "yellow" },
   };
 
+  // `order_status` arrives untranslated from the API, so it is mapped onto a
+  // message key and only shown raw when the code is one we don't recognise.
   const resolveOrderStatus = (o: FlightOrder) => {
-    const s = (o.order_status ?? o.status ?? "").toLowerCase();
-    if (s.includes("hold") || s === "held")   return { label: t("orderStatus.onHold"),    color: "yellow" };
-    if (s.includes("book") || s === "booked") return { label: t("orderStatus.booked"),    color: "green"  };
-    if (s.includes("cancel"))                 return { label: t("orderStatus.cancelled"), color: "red"    };
-    return { label: o.order_status || o.status, color: "gray" };
+    const code = o.order_status ?? o.status ?? "";
+    const key = orderStatusKey(code);
+    return { label: key ? tStatus(key) : code, color: orderStatusColor(code) };
   };
+
+  const refundabilityLabel = (value: string): string =>
+    value === "Refundable"
+      ? tRefund("refundable")
+      : value === "PartiallyRefundable"
+        ? tRefund("partiallyRefundable")
+        : tRefund("nonRefundable");
 
   const resolvePaymentStatus = (transactions: FlightPaymentTransaction[]) => {
     if (!transactions.length) return null;
@@ -197,7 +198,7 @@ export const FlightTicketDetail = ({ orderId }: FlightTicketDetailProps) => {
           {order.refundability && (
             <span className="flex items-center gap-1.5">
               <BsTagFill size={11} className="text-gray-400" />
-              {order.refundability}
+              {refundabilityLabel(order.refundability)}
             </span>
           )}
         </div>

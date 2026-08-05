@@ -10,14 +10,17 @@ import type { FlightOrder } from "@/app/[locale]/_types/FlightOrder";
 
 // ── Filter helpers ─────────────────────────────────────────────────────────────
 
-type TabKey = "all" | "pending" | "booked";
+type TabKey = "all" | "pending" | "booked" | "cancelled";
 
+// `PendingPayment` contains "pending" and "booked" doesn't, so pending has to
+// be tested first — the same ordering `orderStatusKey` uses.
 const matchesTab = (order: FlightOrder, tab: TabKey): boolean => {
   if (tab === "all") return true;
   const s = (order.order_status ?? order.status ?? "").toLowerCase();
-  if (tab === "pending") return s.includes("hold") || s === "held";
-  if (tab === "booked")  return s.includes("book") || s === "booked";
-  return true;
+  if (s.includes("cancel")) return tab === "cancelled";
+  if (tab === "pending") return s.includes("pending") || s.includes("hold");
+  if (tab === "booked") return s.includes("book") || s.includes("confirm");
+  return false;
 };
 
 // ── Skeleton ───────────────────────────────────────────────────────────────────
@@ -47,9 +50,10 @@ export const FlightTicketsContent = () => {
   const t = useTranslations("profile.myTrips");
 
   const FILTER_TABS: { key: TabKey; label: string }[] = [
-    { key: "all",     label: t("tabs.all")     },
-    { key: "pending", label: t("tabs.pending") },
-    { key: "booked",  label: t("tabs.booked")  },
+    { key: "all",       label: t("tabs.all")       },
+    { key: "pending",   label: t("tabs.pending")   },
+    { key: "booked",    label: t("tabs.booked")    },
+    { key: "cancelled", label: t("tabs.cancelled") },
   ];
 
   const visible = useMemo(
@@ -58,9 +62,10 @@ export const FlightTicketsContent = () => {
   );
 
   const counts: Record<TabKey, number> = useMemo(() => ({
-    all:     (data ?? []).length,
-    pending: (data ?? []).filter((o) => matchesTab(o, "pending")).length,
-    booked:  (data ?? []).filter((o) => matchesTab(o, "booked")).length,
+    all:       (data ?? []).length,
+    pending:   (data ?? []).filter((o) => matchesTab(o, "pending")).length,
+    booked:    (data ?? []).filter((o) => matchesTab(o, "booked")).length,
+    cancelled: (data ?? []).filter((o) => matchesTab(o, "cancelled")).length,
   }), [data]);
 
   return (

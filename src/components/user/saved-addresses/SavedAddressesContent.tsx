@@ -9,8 +9,10 @@ import { AddAddressModal } from "./AddAddressModal";
 import { EditAddressModal } from "./EditAddressModal";
 import { DeleteAddressModal } from "./DeleteAddressModal";
 import useGetUserAddresses, { type UserAddress } from "@/app/[locale]/_hooks/useGetUserAddresses";
+import { useTranslations } from "next-intl";
 
 export const SavedAddressesContent = () => {
+  const t = useTranslations("savedAddresses");
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editAddress, setEditAddress] = useState<UserAddress | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
@@ -21,14 +23,12 @@ export const SavedAddressesContent = () => {
     <div className="formS1 !border-none">
       {/* ── Header ───────────────────────────────────────────────────── */}
       <div className="flex items-center justify-between flex-wrap gap-4 border-b border-[#E2E2E2] pb-6 mb-6">
-        <h2 className="text-2xl font-bold">العناوين المحفوظة</h2>
+        <h2 className="text-2xl font-bold">{t("title")}</h2>
       </div>
 
       <div className="flex justify-between items-center mb-4">
         <span className="text-sm text-gray-400">
-          يوجد{" "}
-          <span className="font-semibold text-gray-600">{addresses.length}</span>{" "}
-          من النتائج
+          {t("resultsCount", { count: addresses.length })}
         </span>
         <Button
           type="primary"
@@ -37,7 +37,7 @@ export const SavedAddressesContent = () => {
           className="!flex !items-center !gap-2"
           onClick={() => setAddModalOpen(true)}
         >
-          إضافة عنوان جديد
+          {t("addButton")}
         </Button>
       </div>
 
@@ -66,10 +66,10 @@ export const SavedAddressesContent = () => {
             <FiMapPin className="text-4xl text-gray-300" />
           </div>
           <h3 className="text-lg font-semibold text-gray-600 mb-2">
-            لا توجد عناوين محفوظة
+            {t("empty.title")}
           </h3>
           <p className="text-sm text-gray-400 max-w-xs">
-            لم تقم بحفظ أي عنوان حتى الآن. أضف عنوانك الأول لتسهيل عمليات الحجز.
+            {t("empty.description")}
           </p>
         </div>
       )}

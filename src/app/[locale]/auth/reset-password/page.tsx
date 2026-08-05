@@ -4,7 +4,14 @@ import { getTranslations } from "next-intl/server";
 import { ResetPasswordFormDynamic } from "@/components/user/AuthDynamicComponents";
 import { privatePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = privatePageMetadata("إعادة تعيين كلمة المرور");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return privatePageMetadata("resetPassword", locale);
+}
 
 const ResetPasswordPage: React.FC = async (): Promise<JSX.Element> => {
   const t = await getTranslations("auth.resetPassword");

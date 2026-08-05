@@ -46,8 +46,8 @@ export const HomeBlogsSection = () => {
             <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-5">
               <HiNewspaper className="text-4xl text-white/50" />
             </div>
-            <h3 className="text-lg font-semibold text-white mb-2">لا توجد مقالات</h3>
-            <p className="text-sm text-white/60 max-w-xs">لم يتم نشر أي مقالات بعد. تفقد الصفحة لاحقاً.</p>
+            <h3 className="text-lg font-semibold text-white mb-2">{t("empty.title")}</h3>
+            <p className="text-sm text-white/60 max-w-xs">{t("empty.description")}</p>
           </div>
         ) : (
           <>

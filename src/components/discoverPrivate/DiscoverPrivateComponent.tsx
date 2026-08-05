@@ -1,4 +1,6 @@
 "use client";
+
+import { useTranslations } from "next-intl";
 import { Col, Drawer, Row } from "antd";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -55,6 +57,7 @@ export const DiscoverPrivateComponent = () => {
     return_date: returnDate,
   });
 
+  const t = useTranslations("discoverPrivate");
   const trips = data ?? [];
   const hasSearch = !!(fromLat && fromLng && toLat && toLng && date);
 
@@ -63,9 +66,9 @@ export const DiscoverPrivateComponent = () => {
   return (
     <div className={style.discover}>
       <PageBannerSection
-        title="رحلات خاصة"
+        title={t("pageTitle")}
         currentLink="/discover-private"
-        currentPage="رحلات خاصة"
+        currentPage={t("pageTitle")}
       />
 
       <div className="container">
@@ -86,9 +89,9 @@ export const DiscoverPrivateComponent = () => {
                   size={24}
                   className="text-[#B6B6B6] rotate-90"
                 />
-                <p>التصفية</p>
+                <p>{t("filters.title")}</p>
               </h4>
-              <button className="text-primary">إعادة ضبط</button>
+              <button className="text-primary">{t("filters.reset")}</button>
             </div>
             <div className="rounded-[20px] bg-white py-8 px-6 mb-6">
               {filterSidebar}
@@ -107,7 +110,7 @@ export const DiscoverPrivateComponent = () => {
                 onClick={() => setIsFiltersDrawerOpen(true)}
                 className="xl:hidden fixed bottom-6 end-6 z-40 h-12 px-5 rounded-full bg-primary text-white font-bold flex items-center gap-2 shadow-lg">
                 <FaFilter size={14} />
-                التصفية
+                {t("filters.title")}
               </button>
 
               {isLoading ? (
@@ -127,19 +130,19 @@ export const DiscoverPrivateComponent = () => {
                     <MdDirectionsCar size={44} />
                   </div>
                   <h3 className="text-xl font-bold text-[#111113]">
-                    {hasSearch ? "لا توجد رحلات متاحة" : "ابحث عن رحلتك الخاصة"}
+                    {hasSearch ? t("emptyState.noResultsTitle") : t("emptyState.startTitle")}
                   </h3>
                   <p className="text-[#B0B0B3] max-w-sm text-sm leading-relaxed">
                     {hasSearch
-                      ? "لم نجد رحلات تطابق بحثك، حاول تغيير التاريخ أو الوجهة"
-                      : "أدخل بيانات رحلتك في النموذج أعلاه وسنعرض لك أفضل الخيارات المتاحة"}
+                      ? t("emptyState.noResultsDescription")
+                      : t("emptyState.startDescription")}
                   </p>
                   {hasSearch && (
                     <button
                       type="button"
                       onClick={handleBackToHome}
                       className="mt-2 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity">
-                      العودة للرئيسية
+                      {t("emptyState.backHome")}
                     </button>
                   )}
                 </div>
@@ -151,7 +154,7 @@ export const DiscoverPrivateComponent = () => {
 
       {/* Mobile filters drawer */}
       <Drawer
-        title="التصفية"
+        title={t("filters.title")}
         placement="right"
         width={360}
         open={isFiltersDrawerOpen}

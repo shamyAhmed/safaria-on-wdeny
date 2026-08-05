@@ -1,21 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { BusSeatsPayload, BusSeat } from "@/app/[locale]/_types/BusSeats";
 import { GiSteeringWheel } from "react-icons/gi";
 import { LuDoorOpen } from "react-icons/lu";
 import { MdOutlineWc } from "react-icons/md";
-
-// ── Level labels ──────────────────────────────────────────────────────────────
-
-const LEVEL_LABELS: Record<number, string> = {
-  1: "الدور الأول",
-  2: "الدور الثاني",
-  3: "الدور الثالث",
-  4: "الدور الرابع",
-};
-
-const levelLabel = (n: number) => LEVEL_LABELS[n] ?? `الدور ${n}`;
 
 // ── Individual cell ───────────────────────────────────────────────────────────
 
@@ -101,6 +91,7 @@ interface SeatMapProps {
 }
 
 const SeatMap = ({ data, selectedSeats, onToggleSeat }: SeatMapProps) => {
+  const t = useTranslations("discoverBus.booking");
   const { salon, seats_map } = data;
   const isMultiLevel = salon.levels > 1;
 
@@ -126,7 +117,7 @@ const SeatMap = ({ data, selectedSeats, onToggleSeat }: SeatMapProps) => {
                   ? "text-primary font-bold border-primary"
                   : "text-gray-400 font-normal border-transparent hover:text-gray-600"
               }`}>
-              {levelLabel(level)}
+              {t("level", { number: level })}
             </button>
           ))}
         </div>

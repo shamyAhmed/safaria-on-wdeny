@@ -86,6 +86,14 @@ export const formatDateLong = (
   return `${d.date()} ${month} ${d.year()}`;
 };
 
+/**
+ * dayjs pattern for an antd `DatePicker`, following the same reasoning as
+ * `formatDateNumeric`: the field is one left-to-right run of digits, so Arabic
+ * needs the year written first for it to land on the left of the input.
+ */
+export const datePickerFormat = (locale: string): string =>
+  isArabic(locale) ? "YYYY/MM/DD" : "DD/MM/YYYY";
+
 /** 24-hour clock. Kept separate so callers can place it either side of a date. */
 export const formatTime = (
   value: string | number | Date | null | undefined,

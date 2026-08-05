@@ -1,6 +1,9 @@
+"use client";
+
 import { useState } from "react";
 import { Checkbox, Input } from "antd";
 import { CiSearch } from "react-icons/ci";
+import { useTranslations } from "next-intl";
 
 const INITIAL_VISIBLE = 5;
 
@@ -11,6 +14,7 @@ type BusCheckboxFilterProps = {
 };
 
 export const BusCheckboxFilter = ({ options, selected, onChange }: BusCheckboxFilterProps) => {
+  const t = useTranslations("discoverBus.filters");
   const [search, setSearch] = useState("");
   const [showAll, setShowAll] = useState(false);
 
@@ -33,7 +37,7 @@ export const BusCheckboxFilter = ({ options, selected, onChange }: BusCheckboxFi
     <div className="flex flex-col gap-3">
       <div className="inputS1">
         <Input
-          placeholder="بحث"
+          placeholder={t("search")}
           prefix={<CiSearch size={20} />}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -55,7 +59,7 @@ export const BusCheckboxFilter = ({ options, selected, onChange }: BusCheckboxFi
           type="button"
           onClick={() => setShowAll((v) => !v)}
           className="text-primary text-sm font-medium text-start hover:opacity-75 transition-opacity">
-          {showAll ? "أقل" : "المزيد"}
+          {showAll ? t("showLess") : t("showMore")}
         </button>
       )}
     </div>

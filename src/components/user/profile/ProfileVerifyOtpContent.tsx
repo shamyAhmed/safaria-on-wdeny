@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { RiSmartphoneLine } from "react-icons/ri";
 import { useVerifyAltPhone } from "@/hooks/auth/useVerifyAltPhone";
+import { useTranslations } from "next-intl";
 
 const formatTime = (seconds: number) => {
   const mins = Math.floor(seconds / 60);
@@ -41,6 +42,8 @@ export const ProfileVerifyOtpContent = () => {
     router.push("/user/profile");
   };
 
+  const t = useTranslations("profile.verifyPhone");
+
   const handleResend = async () => {
     setTimer(153);
   };
@@ -48,7 +51,7 @@ export const ProfileVerifyOtpContent = () => {
   return (
     <div className="formS1 !border-none">
       <h2 className="text-2xl font-bold mb-8 text-center lg:text-start border-b border-[#E2E2E2] pb-6">
-        تأكيد رقم الهاتف
+        {t("pageTitle")}
       </h2>
 
       <div className="w-full flex flex-col items-center justify-center max-w-[420px] mx-auto py-6">
@@ -56,9 +59,9 @@ export const ProfileVerifyOtpContent = () => {
           <RiSmartphoneLine />
         </div>
 
-        <h3 className="text-xl font-bold mb-2 text-center">أدخل رمز التحقق</h3>
+        <h3 className="text-xl font-bold mb-2 text-center">{t("enterCode")}</h3>
         <p className="text-gray-400 text-sm mb-8 text-center">
-          تم إرسال رمز التحقق إلى{" "}
+          {t("sentTo")}{" "}
           <span className="font-semibold text-gray-700 dir-ltr inline-block">
             +{phonecode} {mobile}
           </span>
@@ -66,7 +69,7 @@ export const ProfileVerifyOtpContent = () => {
 
         <div className="w-full flex justify-between items-center mb-3">
           <span className="text-lg font-bold text-gray-700">{formatTime(timer)}</span>
-          <span className="text-sm text-gray-400">رمز التحقق</span>
+          <span className="text-sm text-gray-400">{t("codeLabel")}</span>
         </div>
 
         <div dir="ltr" className="mb-8 w-full flex justify-center">
@@ -93,14 +96,14 @@ export const ProfileVerifyOtpContent = () => {
         </div>
 
         <p className="text-center text-sm text-gray-500 mb-8">
-          لم تستلم الرمز؟{" "}
+          {t("didNotReceive")}{" "}
           <button
             type="button"
             onClick={handleResend}
             disabled={timer > 0}
             className="text-primary font-bold hover:underline disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            إعادة الإرسال
+            {t("resend")}
           </button>
         </p>
 
@@ -111,7 +114,7 @@ export const ProfileVerifyOtpContent = () => {
           disabled={otp.length !== 4}
           className="w-full h-12 rounded-2xl text-base font-bold"
         >
-          تأكيد
+          {t("confirm")}
         </Button>
       </div>
     </div>

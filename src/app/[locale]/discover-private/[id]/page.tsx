@@ -18,6 +18,7 @@ import { Button, Checkbox, DatePicker } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import { DatePickerIcon } from "@/components/tools/icons/DatePickerIcon";
 import { CurrencyLabel } from "@/components/discoverAirplan/CurrencyLabel";
+import { useDatePickerFormat } from "@/hooks/useFormatDate";
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
@@ -28,6 +29,7 @@ const DiscoverPrivatePage = ({ params }: { params: Promise<{ id: string }> }) =>
   const searchParams = useSearchParams();
 
   const t = useTranslations("privateBooking");
+  const dateFormat = useDatePickerFormat();
   const currency = useSelector(
     (state: RootState) => state.currency.selected?.code ?? "",
   );
@@ -137,14 +139,14 @@ const DiscoverPrivatePage = ({ params }: { params: Promise<{ id: string }> }) =>
       {/* Route */}
       {(pickupLocation || destinationLocation) && (
         <div className="bg-white rounded-2xl border border-gray-200 shadow-sm px-5 py-4 space-y-3">
-          <p className="text-base font-bold text-gray-900">المسار</p>
+          <p className="text-base font-bold text-gray-900">{t("route")}</p>
           <div className="h-px bg-gray-100" />
           <div className="flex flex-col gap-3">
             {pickupLocation && (
               <div className="flex items-center gap-3">
                 <MdOutlineLocationOn size={20} className="text-primary shrink-0" />
                 <div>
-                  <p className="text-xs text-gray-400 mb-0.5">نقطة الانطلاق</p>
+                  <p className="text-xs text-gray-400 mb-0.5">{t("pickup")}</p>
                   <p className="text-sm font-medium text-gray-800">{pickupLocation.text}</p>
                 </div>
               </div>
@@ -153,7 +155,7 @@ const DiscoverPrivatePage = ({ params }: { params: Promise<{ id: string }> }) =>
               <div className="flex items-center gap-3">
                 <MdOutlineLocationOn size={20} className="text-green-500 shrink-0" />
                 <div>
-                  <p className="text-xs text-gray-400 mb-0.5">الوجهة</p>
+                  <p className="text-xs text-gray-400 mb-0.5">{t("destination")}</p>
                   <p className="text-sm font-medium text-gray-800">{destinationLocation.text}</p>
                 </div>
               </div>
@@ -164,19 +166,19 @@ const DiscoverPrivatePage = ({ params }: { params: Promise<{ id: string }> }) =>
 
       {/* Payment details card */}
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm px-5 py-4 space-y-2">
-        <p className="text-base font-bold text-gray-900">بيانات الدفع</p>
+        <p className="text-base font-bold text-gray-900">{t("paymentDetails")}</p>
 
         <div className="h-px bg-gray-100" />
 
         <div className="flex items-center justify-between py-1">
-          <span className="text-sm text-gray-500">سعر الرحلة</span>
+          <span className="text-sm text-gray-500">{t("tripPrice")}</span>
           <span className="text-sm font-semibold text-gray-800">
             {seatPrice} <CurrencyLabel currency={currency} />
           </span>
         </div>
 
         <div className="flex items-center justify-between py-1">
-          <span className="text-base font-bold text-gray-900">الإجمالي</span>
+          <span className="text-base font-bold text-gray-900">{t("total")}</span>
           <span className="text-lg font-bold text-primary">
             {seatPrice} <CurrencyLabel currency={currency} />
           </span>
@@ -185,18 +187,19 @@ const DiscoverPrivatePage = ({ params }: { params: Promise<{ id: string }> }) =>
 
       {/* Dates section */}
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm px-5 py-4 space-y-2">
-        <p className="text-base font-bold text-gray-900">التواريخ</p>
+        <p className="text-base font-bold text-gray-900">{t("dates")}</p>
 
         <div className="h-px bg-gray-100" />
 
         <div className="grid grid-cols-2 gap-4 pt-2">
           {/* Departure date */}
           <div className="space-y-2">
-            <p className="text-sm font-bold text-gray-800">تاريخ المغادرة</p>
+            <p className="text-sm font-bold text-gray-800">{t("departureDate")}</p>
             <div className="inputS1">
               <DatePicker
                 className="w-full"
-                placeholder="اختر تاريخ المغادرة"
+                placeholder={t("selectDepartureDate")}
+                format={dateFormat}
                 suffixIcon={<DatePickerIcon />}
                 value={departureDate}
                 disabledDate={(current) =>
@@ -220,12 +223,13 @@ const DiscoverPrivatePage = ({ params }: { params: Promise<{ id: string }> }) =>
           <div className="space-y-2">
             <p
               className={`text-sm font-bold ${isRound ? "text-gray-800" : "text-gray-400"}`}>
-              تاريخ العودة
+              {t("returnDate")}
             </p>
             <div className={`inputS1 ${!isRound ? "disabled" : ""}`}>
               <DatePicker
                 className="w-full"
-                placeholder="اختر تاريخ العودة"
+                placeholder={t("selectReturnDate")}
+                format={dateFormat}
                 suffixIcon={<DatePickerIcon />}
                 disabled={!isRound}
                 value={returnDate}
@@ -248,9 +252,9 @@ const DiscoverPrivatePage = ({ params }: { params: Promise<{ id: string }> }) =>
         <div className="flex items-center gap-2">
           <Checkbox checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
           <span className="text-sm text-gray-600">
-            الموافقة على{" "}
+            {t("agreeTo")}{" "}
             <span className="text-primary cursor-pointer underline">
-              الشروط والأحكام
+              {t("termsAndConditions")}
             </span>
           </span>
         </div>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Skeleton } from "antd";
 import { LuArrowDownToLine } from "react-icons/lu";
 import { IoLocationSharp } from "react-icons/io5";
+import { useTranslations } from "next-intl";
 
 interface WalletBalanceCardProps {
   balance?: string;
@@ -11,6 +12,8 @@ interface WalletBalanceCardProps {
 }
 
 export const WalletBalanceCard = ({ balance, isLoading }: WalletBalanceCardProps) => {
+  const t = useTranslations("wallet");
+
   return (
     <div className="bg-primary rounded-[24px] px-6 py-4 pb-12 flex flex-col items-center justify-center text-white text-center mb-8 relative overflow-hidden mx-auto max-w-md">
       <IoLocationSharp
@@ -39,7 +42,7 @@ export const WalletBalanceCard = ({ balance, isLoading }: WalletBalanceCardProps
         {isLoading ? (
           <Skeleton.Input active size="small" className="!w-32 !h-3 !rounded !bg-white/20 !min-w-0" />
         ) : (
-          <span>إجمالي رصيدك الحالي</span>
+          <span>{t("currentBalance")}</span>
         )}
       </div>
 
@@ -50,7 +53,7 @@ export const WalletBalanceCard = ({ balance, isLoading }: WalletBalanceCardProps
         ) : (
           <p className="text-5xl font-semibold tracking-tight flex items-end gap-2">
             {parseFloat(balance ?? "0").toLocaleString()}
-            <span className="text-base mb-1 opacity-70">credits</span>
+            <span className="text-base mb-1 opacity-70">{t("credits")}</span>
           </p>
         )}
       </div>

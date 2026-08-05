@@ -16,6 +16,7 @@ import {
 } from "@/store/slices/private/privateTripSlice";
 import { useEffect } from "react";
 import dayjs from "dayjs";
+import { useDatePickerFormat } from "@/hooks/useFormatDate";
 import {
   PRIVATE_DATE_FORMAT,
   PRIVATE_TIME_FORMAT,
@@ -29,6 +30,7 @@ const range = (start: number, end: number) =>
 
 export const PrivetTripsForm = ({ readonly = false }: { readonly?: boolean }) => {
   const [form] = Form.useForm();
+  const dateFormat = useDatePickerFormat();
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const searchParams = useSearchParams();
@@ -185,6 +187,7 @@ export const PrivetTripsForm = ({ readonly = false }: { readonly?: boolean }) =>
             <div className="inputS1">
               <Form.Item label={t("fields.departureDate.label")} name="date">
                 <DatePicker
+                      format={dateFormat}
                   className="w-full"
                   placeholder={t("fields.departureDate.placeholder")}
                   suffixIcon={<DatePickerIcon />}
@@ -237,6 +240,7 @@ export const PrivetTripsForm = ({ readonly = false }: { readonly?: boolean }) =>
                     label={t("fields.returnDate.label")}
                     name="returnDate">
                     <DatePicker
+                      format={dateFormat}
                       className="w-full"
                       placeholder={t("fields.returnDate.placeholder")}
                       suffixIcon={<DatePickerIcon />}

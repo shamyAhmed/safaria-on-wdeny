@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Button } from "antd";
+import { useTranslations } from "next-intl";
 
 interface DangerActionCardProps {
   title: string;
@@ -22,6 +23,8 @@ export const DangerActionCard = ({
   onConfirm,
   onBack,
 }: DangerActionCardProps) => {
+  const t = useTranslations("common");
+
   return (
     <div className="flex flex-col items-center justify-center py-10 px-6 text-center border-2 border-dashed border-gray-200 rounded-3xl">
       {/* Icon */}
@@ -55,7 +58,7 @@ export const DangerActionCard = ({
           onClick={onBack}
           className="min-w-[100px]"
         >
-          تراجع
+          {t("back")}
         </Button>
       </div>
     </div>

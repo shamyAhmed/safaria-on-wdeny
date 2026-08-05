@@ -7,23 +7,12 @@ import { BsCreditCard2Front } from "react-icons/bs";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import useFormatDate from "@/hooks/useFormatDate";
+import {
+  TicketStatusBadge as StatusBadge,
+  orderStatusColor,
+  orderStatusKey,
+} from "@/components/user/my-trips/TicketStatusBadge";
 import type { FlightOrder, FlightPaymentTransaction } from "@/app/[locale]/_types/FlightOrder";
-
-const StatusBadge = ({ label, color }: { label: string; color: string }) => {
-  const classes: Record<string, string> = {
-    green:  "bg-green-50  text-green-700  border-green-200",
-    yellow: "bg-amber-50  text-amber-700  border-amber-200",
-    red:    "bg-red-50    text-red-600    border-red-200",
-    gray:   "bg-gray-50   text-gray-600   border-gray-200",
-  };
-  return (
-    <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border ${classes[color] ?? classes.gray}`}>
-      {label}
-    </span>
-  );
-};
-
 
 // ── Card ───────────────────────────────────────────────────────────────────────
 
@@ -34,6 +23,8 @@ interface FlightTicketCardProps {
 export const FlightTicketCard = ({ order }: FlightTicketCardProps) => {
   const router = useRouter();
   const t = useTranslations("profile.myTrips.card");
+  const tStatus = useTranslations("profile.myTrips.status");
+  const tRefund = useTranslations("airplaneCard");
   const tTimeline = useTranslations("flightModal.timeline");
   const date = useFormatDate();
 
@@ -51,13 +42,24 @@ export const FlightTicketCard = ({ order }: FlightTicketCardProps) => {
     return statusMap[latest.status] ?? { label: latest.status, color: "gray" };
   };
 
+  // The API sends `order_status` untranslated ("PendingPayment", "Booked"), so
+  // the code is mapped onto a message key and only falls back to the raw string
+  // when a status we don't know about turns up.
   const resolveOrderStatus = (o: FlightOrder): { label: string; color: string } => {
-    const s = (o.order_status ?? o.status ?? "").toLowerCase();
-    if (s.includes("hold") || s === "held")  return { label: t("orderStatus.onHold"),    color: "yellow" };
-    if (s.includes("book") || s === "booked") return { label: t("orderStatus.booked"),   color: "green"  };
-    if (s.includes("cancel"))                 return { label: t("orderStatus.cancelled"), color: "red"    };
-    return { label: o.order_status || o.status, color: "gray" };
+    const code = o.order_status ?? o.status ?? "";
+    const key = orderStatusKey(code);
+    return {
+      label: key ? tStatus(key) : code,
+      color: orderStatusColor(code),
+    };
   };
+
+  const refundabilityLabel = (value: string): string =>
+    value === "Refundable"
+      ? tRefund("refundable")
+      : value === "PartiallyRefundable"
+        ? tRefund("partiallyRefundable")
+        : tRefund("nonRefundable");
 
   const orderStatus  = resolveOrderStatus(order);
   const payStatus    = resolvePaymentStatus(order.payment_transactions);
@@ -170,7 +172,9 @@ export const FlightTicketCard = ({ order }: FlightTicketCardProps) => {
           <span className="text-gray-400 font-normal">{order.currency}</span>
         </div>
         {order.refundability && (
-          <span className="text-xs text-gray-400">{order.refundability}</span>
+          <span className="text-xs text-gray-400">
+            {refundabilityLabel(order.refundability)}
+          </span>
         )}
       </div>
 

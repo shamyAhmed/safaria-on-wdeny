@@ -5,6 +5,7 @@ import { Dropdown, Skeleton } from "antd";
 import type { MenuProps } from "antd";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import { useTranslations } from "next-intl";
 import type { UserAddress } from "@/app/[locale]/_hooks/useGetUserAddresses";
 
 export type { UserAddress as Address };
@@ -16,16 +17,17 @@ interface AddressCardProps {
 }
 
 export const AddressCard = ({ address, onEdit, onDelete }: AddressCardProps) => {
+  const t = useTranslations("savedAddresses");
   const menuItems: MenuProps["items"] = [
     {
       key: "edit",
-      label: "تعديل",
+      label: t("edit"),
       icon: <FiEdit2 />,
       onClick: () => onEdit(address.id),
     },
     {
       key: "delete",
-      label: "حذف",
+      label: t("delete"),
       icon: <FiTrash2 />,
       danger: true,
       onClick: () => onDelete(address.id),

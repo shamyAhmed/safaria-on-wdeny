@@ -356,6 +356,10 @@
           "title": "Top travel destinations across Egypt",
           "description": "Discover the most beautiful cities and attractions across Egypt from Cairo to Alexandria and Luxor."
         }
+      },
+      "empty": {
+        "title": "No articles yet",
+        "description": "Nothing has been published yet. Check back later."
       }
     },
     "allInOneApp": {
@@ -561,6 +565,22 @@
         "bigBags": "{count} large bags",
         "smallBag": "{count} small bag"
       }
+    },
+    "pageTitle": "Private trips",
+    "filters": {
+      "title": "Filters",
+      "reset": "Reset",
+      "carType": "Car type",
+      "priceRange": "Price range",
+      "passengersCount": "Passengers",
+      "comingSoon": "Coming soon..."
+    },
+    "emptyState": {
+      "noResultsTitle": "No trips available",
+      "noResultsDescription": "We couldn't find trips matching your search. Try a different date or destination.",
+      "startTitle": "Find your private trip",
+      "startDescription": "Enter your trip details in the form above and we'll show you the best options available.",
+      "backHome": "Back to home"
     }
   },
   "discoverBus": {
@@ -568,7 +588,16 @@
     "filters": {
       "title": "Filters",
       "reset": "Reset",
-      "resetFilters": "Reset filters"
+      "resetFilters": "Reset filters",
+      "companies": "Companies",
+      "arrivalStations": "Arrival stations",
+      "departureStations": "Departure stations",
+      "priceRange": "Price range",
+      "priceFrom": "From",
+      "priceTo": "To",
+      "search": "Search",
+      "showMore": "More",
+      "showLess": "Less"
     },
     "card": {
       "fromLabel": "From: {city}",
@@ -601,7 +630,8 @@
       "loginToContinue": "Log in to continue",
       "bookingCreated": "Booking created successfully",
       "outboundBooked": "Outbound trip booked — now choose your return trip",
-      "routeError": "Couldn't load the trip route"
+      "routeError": "Couldn't load the trip route",
+      "level": "Level {number}"
     },
     "loadMore": "Load more",
     "emptyState": {
@@ -1043,6 +1073,10 @@
     "cta": {
       "text": "Didn't find the answer you were looking for? Our support team is available around the clock to help you.",
       "button": "Contact Us"
+    },
+    "empty": {
+      "title": "No questions yet",
+      "description": "No questions have been added yet. Check back later."
     }
   },
   "notificationsPage": {
@@ -1095,7 +1129,20 @@
     "logoAlt": "Safaria logo"
   },
   "privateBooking": {
-    "proceedToPay": "Proceed to Pay"
+    "proceedToPay": "Proceed to Pay",
+    "route": "Route",
+    "pickup": "Pickup point",
+    "destination": "Destination",
+    "paymentDetails": "Payment details",
+    "tripPrice": "Trip price",
+    "total": "Total",
+    "dates": "Dates",
+    "departureDate": "Departure date",
+    "returnDate": "Return date",
+    "selectDepartureDate": "Choose a departure date",
+    "selectReturnDate": "Choose a return date",
+    "agreeTo": "I agree to the",
+    "termsAndConditions": "terms and conditions"
   },
   "flightModal": {
     "priceRules": {
@@ -1138,6 +1185,9 @@
       "unspecifiedYet": "Unspecified yet",
       "total": "Total",
       "disclaimer": "There may be a slight difference in the fare summary due to rounding to the next tier."
+    },
+    "baggage": {
+      "empty": "The airline hasn't published baggage details for this fare."
     }
   },
   "profile": {
@@ -1156,11 +1206,6 @@
         "description": "You haven't booked any flights yet. Start exploring available flights and book your ticket."
       },
       "card": {
-        "orderStatus": {
-          "onHold": "On Hold",
-          "booked": "Booked",
-          "cancelled": "Cancelled"
-        },
         "paymentStatus": {
           "paid": "Paid",
           "failed": "Payment Failed",
@@ -1187,11 +1232,6 @@
       "detail": {
         "pageTitle": "Ticket Details",
         "errorMessage": "Failed to load order details",
-        "orderStatus": {
-          "onHold": "On Hold",
-          "booked": "Booked",
-          "cancelled": "Cancelled"
-        },
         "paymentStatus": {
           "paid": "Paid",
           "failed": "Payment Failed",
@@ -1230,6 +1270,7 @@
       "status": {
         "pending": "Pending",
         "onHold": "On Hold",
+        "booked": "Booked",
         "confirmed": "Confirmed",
         "paid": "Paid",
         "completed": "Completed",
@@ -1298,6 +1339,49 @@
       "wallet": "My Wallet",
       "deleteAccount": "Delete Account",
       "logout": "Log Out"
+    },
+    "personalInfo": {
+      "title": "Personal information",
+      "fullName": {
+        "label": "Full name",
+        "placeholder": "Full name",
+        "required": "Please enter your full name"
+      },
+      "email": {
+        "label": "Email address",
+        "placeholder": "Email address",
+        "required": "Please enter your email address",
+        "invalid": "That email address isn't valid"
+      },
+      "submit": "Update"
+    },
+    "verifyPhone": {
+      "pageTitle": "Confirm phone number",
+      "enterCode": "Enter the verification code",
+      "sentTo": "We sent a verification code to",
+      "codeLabel": "Verification code",
+      "didNotReceive": "Didn't get the code?",
+      "resend": "Resend",
+      "confirm": "Confirm"
+    },
+    "logoutPage": {
+      "pageTitle": "Log out",
+      "cardTitle": "Log out?",
+      "cardSubtitle": "Are you sure you want to log out of your account?",
+      "confirm": "Log me out"
+    },
+    "deleteAccountPage": {
+      "pageTitle": "Delete account",
+      "cardTitle": "Delete account?",
+      "cardSubtitle": "Are you sure you want to permanently delete your account? This action can't be undone.",
+      "confirm": "Delete my account"
+    },
+    "deleteAccountModal": {
+      "title": "Confirm permanent account deletion",
+      "confirmWord": "delete",
+      "description": "This is permanent and can't be undone. To confirm, type <word></word> in the field below.",
+      "cancel": "Cancel",
+      "confirm": "Permanently delete"
     }
   },
   "airplaneCard": {
@@ -1472,6 +1556,104 @@
     "complaintsAndInquiries": "Complaints & Inquiries"
   },
   "common": {
-    "home": "Home"
+    "home": "Home",
+    "selectCountry": "Select a country",
+    "back": "Back"
+  },
+  "paymentResult": {
+    "success": {
+      "title": "Payment successful! 🎉",
+      "description": "Your booking is confirmed and the payment went through.",
+      "nextTitle": "What's next?",
+      "next": {
+        "confirmationMessage": "You'll receive a confirmation on your email and phone number.",
+        "trackBooking": "You can follow your booking details from the trips page in your account.",
+        "arriveEarly": "Make sure to arrive well before the trip's departure time."
+      },
+      "home": "Home",
+      "myTrips": "My Trips"
+    },
+    "failed": {
+      "title": "Payment failed",
+      "description": "We couldn't complete the payment. Please try again.",
+      "reasonsTitle": "Possible reasons",
+      "reasons": {
+        "insufficientFunds": "Not enough balance on the card or in the wallet.",
+        "invalidCardDetails": "The payment details have expired or were entered incorrectly.",
+        "sessionExpired": "The session timed out. Please start again."
+      },
+      "retry": "Try again",
+      "home": "Home"
+    }
+  },
+  "blogsPage": {
+    "title": "Blog",
+    "breadcrumbHome": "Home",
+    "moreDetails": "More details",
+    "loadMore": "More",
+    "relatedArticles": "Related articles",
+    "empty": {
+      "title": "No articles yet",
+      "description": "Nothing has been published yet. Check back later."
+    }
+  },
+  "wallet": {
+    "title": "My Wallet",
+    "subtitle": "Manage your money and review your transaction history",
+    "addCreditButton": "Add credit",
+    "currentBalance": "Your current total balance",
+    "historyTitle": "Transaction history",
+    "allTypes": "All types",
+    "credits": "credits",
+    "showingCount": "Showing {shown} of {total}",
+    "transactionTypes": {
+      "deposit": "Deposit",
+      "booking": "Booking",
+      "refund": "Refund"
+    },
+    "columns": {
+      "id": "Transaction ID",
+      "type": "Type",
+      "description": "Description",
+      "amount": "Amount"
+    },
+    "empty": {
+      "title": "No transactions yet",
+      "description": "No transactions have been recorded in your wallet yet. Add credit to get started."
+    },
+    "addCredit": {
+      "title": "Add credit",
+      "amountLabel": "Amount to add",
+      "amountRequired": "Please enter an amount",
+      "currency": "Saudi Riyal",
+      "quickAmount": "{amount} SAR",
+      "continueToPayment": "Continue to payment",
+      "securityNote": "You'll be redirected to a secure, encrypted payment gateway built to international standards to keep your data safe."
+    }
+  },
+  "savedAddresses": {
+    "title": "Saved addresses",
+    "resultsCount": "{count, plural, one {# result} other {# results}} found",
+    "addButton": "Add a new address",
+    "edit": "Edit",
+    "delete": "Delete",
+    "empty": {
+      "title": "No saved addresses",
+      "description": "You haven't saved an address yet. Add your first one to make booking faster."
+    },
+    "addModal": {
+      "title": "Pick a location on the map",
+      "searchPlaceholder": "Search for your location...",
+      "namePlaceholder": "Address name (e.g. Home, Work...)",
+      "pickOnMapFirst": "Tap the map to set your location first",
+      "notesPlaceholder": "Additional notes (optional)",
+      "confirm": "Confirm address"
+    },
+    "deleteModal": {
+      "title": "Delete address",
+      "description": "Are you sure you want to delete this address? This action can't be undone.",
+      "cancel": "Cancel",
+      "confirm": "Delete"
+    }
   }
 }

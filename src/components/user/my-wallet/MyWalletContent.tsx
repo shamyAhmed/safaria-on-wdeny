@@ -7,8 +7,10 @@ import { WalletBalanceCard } from "./WalletBalanceCard";
 import { WalletTransactionsTable } from "./WalletTransactionsTable";
 import { AddCreditModal } from "./AddCreditModal";
 import { useGetWallet } from "@/hooks/auth/useGetWallet";
+import { useTranslations } from "next-intl";
 
 export const MyWalletContent = () => {
+  const t = useTranslations("wallet");
   const [creditModalOpen, setCreditModalOpen] = useState(false);
   const { wallet, isLoading } = useGetWallet();
 
@@ -19,9 +21,9 @@ export const MyWalletContent = () => {
       {/* ── Page Header ──────────────────────────────────────────────── */}
       <div className="flex items-start justify-between flex-wrap gap-4 border-b border-[#E2E2E2] pb-6 mb-8">
         <div>
-          <h2 className="text-2xl font-bold">محفظتي</h2>
+          <h2 className="text-2xl font-bold">{t("title")}</h2>
           <p className="text-sm text-gray-400 mt-1">
-            ادر اموالك واطلع على سجل عملياتك المالية
+            {t("subtitle")}
           </p>
         </div>
         <div className="flex items-center gap-3 flex-wrap">
@@ -32,7 +34,7 @@ export const MyWalletContent = () => {
             className="!flex !items-center !gap-1"
             onClick={() => setCreditModalOpen(true)}
           >
-            إضافة رصيد
+            {t("addCreditButton")}
           </Button>
         </div>
       </div>

@@ -20,6 +20,7 @@ import { PassengersPopoverContent } from "./PassengersPopoverContent";
 import { useSearchParams } from "next/navigation";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import dayjs from "dayjs";
+import { useDatePickerFormat } from "@/hooks/useFormatDate";
 import { useTranslations } from "next-intl";
 
 const { Option } = Select;
@@ -30,6 +31,7 @@ const MAX_PASSENGERS = 9;
 
 export const AirplaneForm = ({ readonly = false }: { readonly?: boolean }) => {
   const [form] = Form.useForm();
+  const dateFormat = useDatePickerFormat();
   const router = useRouter();
   const classRef = useRef(null);
   const searchParams = useSearchParams();
@@ -288,6 +290,7 @@ export const AirplaneForm = ({ readonly = false }: { readonly?: boolean }) => {
                     label={t("fields.departureDate.label")}
                     name={`date_${idx}`}>
                     <DatePicker
+                      format={dateFormat}
                       className="w-full"
                       placeholder={t("fields.departureDate.placeholder")}
                       suffixIcon={<DatePickerIcon />}
@@ -356,6 +359,7 @@ export const AirplaneForm = ({ readonly = false }: { readonly?: boolean }) => {
                       label={t("fields.returnDate.label")}
                       name={`returnDate_${idx}`}>
                       <DatePicker
+                      format={dateFormat}
                         className="w-full"
                         placeholder={t("fields.returnDate.placeholder")}
                         suffixIcon={<DatePickerIcon />}

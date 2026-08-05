@@ -1,5 +1,5 @@
 "use client";
-import { Modal, Button } from "antd";
+import { Modal } from "antd";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { FaPlane, FaSuitcase, FaInfoCircle } from "react-icons/fa";
@@ -7,7 +7,6 @@ import { MdOutlinePriceCheck } from "react-icons/md";
 import { FlightTimelineTab } from "./tabs/FlightTimelineTab";
 import { PriceSummaryTab } from "./tabs/PriceSummaryTab";
 import { PriceRulesTab } from "./tabs/PriceRulesTab";
-import { BaggageDetailsTab } from "./tabs/BaggageDetailsTab";
 import { useTranslations } from "next-intl";
 
 interface FlightDetailsModalProps {
@@ -19,6 +18,7 @@ interface FlightDetailsModalProps {
 export const FlightDetailsModal = ({ isOpen, onClose, flight }: FlightDetailsModalProps) => {
     const [activeTab, setActiveTab] = useState<"timeline" | "summary" | "rules" | "baggage">("timeline");
     const t = useTranslations("flightModal.tabs");
+    const tBaggage = useTranslations("flightModal.baggage");
     const haveBundles: boolean = flight?.haveBundles ?? true;
 
     const tabs = [
@@ -35,13 +35,18 @@ export const FlightDetailsModal = ({ isOpen, onClose, flight }: FlightDetailsMod
             case "timeline": return <FlightTimelineTab flight={flight} />;
             case "summary": return <PriceSummaryTab flight={flight} />;
             case "rules": return <PriceRulesTab flight={flight} />;
+            // The airline supplies these as free English text, or not at all.
             case "baggage": return (
                 <div className="baggage-details p-6">
-                    <div className="flex flex-col gap-4">
-                        {rulesAndPenalties.map((rule, idx) => (
-                            <div key={idx} className="text-sm text-[#333] text-left" dir="ltr">{rule}</div>
-                        ))}
-                    </div>
+                    {rulesAndPenalties.length === 0 ? (
+                        <p className="text-sm text-gray-400 text-center py-10">{tBaggage("empty")}</p>
+                    ) : (
+                        <div className="flex flex-col gap-4">
+                            {rulesAndPenalties.map((rule, idx) => (
+                                <div key={idx} className="text-sm text-[#333] text-left" dir="ltr">{rule}</div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             );
             default: return null;
