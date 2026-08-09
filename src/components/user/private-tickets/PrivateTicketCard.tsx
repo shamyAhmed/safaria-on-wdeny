@@ -13,6 +13,10 @@ import {
   orderStatusColor,
   orderStatusKey,
 } from "@/components/user/my-trips/TicketStatusBadge";
+import {
+  OrderActions,
+  orderPaymentState,
+} from "@/components/user/my-trips/OrderActions";
 import type { PrivateOrder } from "@/app/[locale]/_types/PrivateOrder";
 
 interface PrivateTicketCardProps {
@@ -33,7 +37,12 @@ export const PrivateTicketCard = ({
   const payStatus = order.transaction?.status ?? "";
   const payKey = orderStatusKey(payStatus);
   const vehicle = order.trip?.vehicle;
-  const isCancelled = order.status.toLowerCase().includes("cancel");
+
+  // The order status settles a cancellation; otherwise the transaction says
+  // whether it is still waiting to be paid.
+  const paymentState = order.status.toLowerCase().includes("cancel")
+    ? "closed"
+    : orderPaymentState(payStatus || order.status);
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
@@ -144,20 +153,17 @@ export const PrivateTicketCard = ({
           ) : (
             <span className="text-xs text-gray-400">{tCard("noTransactions")}</span>
           )}
-          {!isCancelled &&
-            payStatus.toLowerCase() === "pending" &&
-            order.transaction?.invoice_url && (
-              <a href={order.transaction.invoice_url}>
-                <Button
-                  size="small"
-                  type="primary"
-                  className="!rounded-lg !h-7 !px-3 !text-xs !font-semibold">
-                  {tCard("actions.pay")}
-                </Button>
-              </a>
-            )}
         </div>
-        <div className="flex items-center gap-2 self-end sm:self-auto">
+        <div className="flex items-center gap-2 self-end sm:self-auto flex-wrap">
+          <OrderActions
+            cycle="private"
+            orderId={order.id}
+            paymentState={paymentState}
+            payUrl={order.transaction?.invoice_url}
+            invoiceUrl={order.transaction?.invoice_url}
+            departureAt={order.departure_date}
+            canCancel={order.can_be_cancel ?? true}
+          />
           <Button
             size="small"
             className="!rounded-lg !h-8 !px-4 !text-xs !font-semibold"

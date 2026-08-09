@@ -9,6 +9,9 @@ import { HoldResponse } from "../_types/FlightOffer";
 import { SubmitPassengersPayload } from "@/components/discoverAirplan/booking/types";
 import toast from "react-hot-toast";
 import { toastError } from "@/utils/toastError";
+import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import usePayOrder, { type PaymentMethod } from "./usePayOrder";
 
 type AddPassengerResult = { offerId: string };
 
@@ -20,12 +23,20 @@ type PendingTripBody = {
   }[];
 };
 
-const useAddPassenger = (offerId: string) => {
+const useAddPassenger = (
+  offerId: string,
+  paymentMethod: PaymentMethod = "card",
+) => {
   const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
+  const tPay = useTranslations("checkoutPayment");
   const chosenBundle = useSelector((state: RootState) => state.flight.chosenBundle);
   const currency = useSelector((state: RootState) => state.currency.selected?.code ?? "");
 
-  return useMutation({
+  const payMutation = usePayOrder("flights");
+  const { mutate: payOrder } = payMutation;
+
+  const submitMutation = useMutation({
     mutationFn: async (payload: SubmitPassengersPayload) => {
       // Step 1 — submit passengers
       const passengersRes = await axiosInstance.post<
@@ -62,12 +73,34 @@ const useAddPassenger = (offerId: string) => {
       // dispatch(clearFlight());
       // dispatch(clearSearchState());
 
-      toast.success("تم الحجز بنجاح! جارٍ تحويلك إلى صفحة الدفع...");
+      // Wallet: the hold already produced an order, so charge it against the
+      // balance instead of sending the browser to the gateway invoice.
+      if (paymentMethod === "wallet" && data?.id) {
+        payOrder(
+          { orderId: data.id },
+          {
+            onSuccess: () => {
+              toast.success(tPay("walletPaid"));
+              router.push("/success-payment");
+            },
+          },
+        );
+        return;
+      }
+
+      toast.success(tPay("redirectingToGateway"));
 
       // Navigate to the payment invoice URL returned by the hold endpoint
       window.location.href = data.transaction.invoice_url;
     },
   });
+
+  // Passengers → hold → wallet charge is one action to the user, so the submit
+  // button stays busy across all of it.
+  return {
+    ...submitMutation,
+    isPending: submitMutation.isPending || payMutation.isPending,
+  };
 };
 
 export default useAddPassenger;

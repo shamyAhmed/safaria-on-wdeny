@@ -537,6 +537,9 @@
       },
       "actions": {
         "search": "ابحث"
+      },
+      "places": {
+        "recentlyUsed": "المستخدمة مؤخرًا"
       }
     },
     "getApp": {
@@ -772,6 +775,21 @@
     "back": "العودة",
     "departed": "غادر",
     "passengerCount": "{count} راكب"
+  },
+  "checkoutPayment": {
+    "title": "طريقة الدفع",
+    "balanceLabel": "رصيد المحفظة:",
+    "card": {
+      "label": "بطاقة ائتمانية",
+      "hint": "سيتم تحويلك إلى صفحة الدفع الآمنة"
+    },
+    "wallet": {
+      "label": "محفظة سفاريا",
+      "hint": "ادفع فورًا من رصيدك",
+      "insufficient": "الرصيد لا يغطي قيمة الرحلة"
+    },
+    "walletPaid": "تم الدفع من محفظتك بنجاح",
+    "redirectingToGateway": "تم الحجز بنجاح! جارٍ تحويلك إلى صفحة الدفع..."
   },
   "faqs": {
     "banner": {
@@ -1221,13 +1239,22 @@
           "pay": "دفع",
           "invoice": "تحميل الفاتورة",
           "orderInvoice": "فاتورة الطلب",
-          "details": "التفاصيل"
+          "details": "التفاصيل",
+          "cancel": "إلغاء الحجز",
+          "printInvoice": "طباعة الفاتورة"
         },
         "direct": "مباشر",
         "stop": "توقف",
         "stops": "توقفات",
         "durationFormat": "{h}س {m}د",
-        "seats": "المقاعد:"
+        "seats": "المقاعد:",
+        "cancel": {
+          "confirmTitle": "هل تريد إلغاء هذا الحجز؟",
+          "confirmDescription": "لا يمكن التراجع عن هذا الإجراء، ويخضع الاسترداد لسياسة الناقل.",
+          "confirmOk": "نعم، ألغِ الحجز",
+          "confirmCancel": "الاحتفاظ بالحجز",
+          "success": "تم إلغاء الحجز"
+        }
       },
       "detail": {
         "pageTitle": "تفاصيل التذكرة",

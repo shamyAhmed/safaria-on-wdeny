@@ -6,6 +6,10 @@ import { RootState } from "@/store/appStore";
 import { ApiResponse } from "@/app/[locale]/_types/Api";
 import { PrivateTrip } from "@/app/[locale]/_types/PrivateTrip";
 import { toastError } from "@/utils/toastError";
+import usePayOrder, { type PaymentMethod } from "@/app/[locale]/_hooks/usePayOrder";
+import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import toast from "react-hot-toast";
 
 export type CreatePrivateOrderPayload = {
   trip_id: number | string;
@@ -53,10 +57,15 @@ export type PrivateOrder = {
   created_at: string;
 };
 
-const useCreatePrivateTicket = () => {
+const useCreatePrivateTicket = (paymentMethod: PaymentMethod = "card") => {
   const currency = useSelector((state: RootState) => state.currency.selected?.code ?? "");
+  const router = useRouter();
+  const t = useTranslations("checkoutPayment");
 
-  return useMutation({
+  const payMutation = usePayOrder("private");
+  const { mutate: payOrder } = payMutation;
+
+  const createMutation = useMutation({
     mutationFn: async (payload: CreatePrivateOrderPayload) => {
       const response = await axiosInstance.post<ApiResponse<PrivateOrder>>(
         apiRoutes.privateCreateOrder,
@@ -68,10 +77,31 @@ const useCreatePrivateTicket = () => {
       toastError(error);
     },
     onSuccess: (order) => {
+      // Wallet: settle the freshly created order off the balance rather than
+      // handing the browser over to the gateway.
+      if (paymentMethod === "wallet" && order?.id) {
+        payOrder(
+          { orderId: order.id },
+          {
+            onSuccess: () => {
+              toast.success(t("walletPaid"));
+              router.push("/success-payment");
+            },
+          },
+        );
+        return;
+      }
+
       const url = order?.transaction?.invoice_url;
       if (url) window.location.href = url;
     },
   });
+
+  // Two calls, one action — keep the button busy until the wallet charge lands.
+  return {
+    ...createMutation,
+    isPending: createMutation.isPending || payMutation.isPending,
+  };
 };
 
 export default useCreatePrivateTicket;

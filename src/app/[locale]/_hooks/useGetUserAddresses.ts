@@ -16,9 +16,14 @@ export type UserAddress = {
 
 export const USER_ADDRESSES_KEY = ["userAddresses"] as const;
 
-const useGetUserAddresses = () => {
+/**
+ * `enabled` lets guest-facing callers (the private-trip search form) skip the
+ * request instead of firing a 401 the address book page would never see.
+ */
+const useGetUserAddresses = ({ enabled = true }: { enabled?: boolean } = {}) => {
   return useQuery({
     queryKey: USER_ADDRESSES_KEY,
+    enabled,
     queryFn: async () => {
       const res = await axiosInstance.get<ApiResponse<UserAddress[]>>(
         apiRoutes.addressBook,

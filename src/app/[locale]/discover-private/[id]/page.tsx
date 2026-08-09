@@ -18,6 +18,8 @@ import { Button, Checkbox, DatePicker } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import { DatePickerIcon } from "@/components/tools/icons/DatePickerIcon";
 import { CurrencyLabel } from "@/components/discoverAirplan/CurrencyLabel";
+import { PaymentMethodSelector } from "@/components/checkout/PaymentMethodSelector";
+import type { PaymentMethod } from "@/app/[locale]/_hooks/usePayOrder";
 import { useDatePickerFormat } from "@/hooks/useFormatDate";
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -46,6 +48,7 @@ const DiscoverPrivatePage = ({ params }: { params: Promise<{ id: string }> }) =>
   const isRound = searchParams.get("rounded") === "true";
 
   const [agreed, setAgreed] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
   // Both legs were already picked on the search form and travel in the URL, so
   // the pickers open on them instead of making the user choose twice.
   const [departureDate, setDepartureDate] = useState<Dayjs | null>(() => {
@@ -58,7 +61,7 @@ const DiscoverPrivatePage = ({ params }: { params: Promise<{ id: string }> }) =>
   });
 
   const { mutate: createOrder, isPending: creatingOrder } =
-    useCreatePrivateTicket();
+    useCreatePrivateTicket(paymentMethod);
 
   const handleProceedToPay = () => {
     if (!departureDate) return;
@@ -246,6 +249,13 @@ const DiscoverPrivatePage = ({ params }: { params: Promise<{ id: string }> }) =>
           </div>
         </div>
       </div>
+
+      {/* Payment method */}
+      <PaymentMethodSelector
+        value={paymentMethod}
+        onChange={setPaymentMethod}
+        total={Number(seatPrice) || 0}
+      />
 
       {/* Confirm section */}
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm px-5 py-4 space-y-3">

@@ -537,6 +537,9 @@
       },
       "actions": {
         "search": "Search"
+      },
+      "places": {
+        "recentlyUsed": "Recently used"
       }
     },
     "getApp": {
@@ -772,6 +775,21 @@
     "back": "Back",
     "departed": "Departed",
     "passengerCount": "{count} passenger"
+  },
+  "checkoutPayment": {
+    "title": "Payment method",
+    "balanceLabel": "Wallet balance:",
+    "card": {
+      "label": "Credit card",
+      "hint": "You'll be redirected to the secure payment page"
+    },
+    "wallet": {
+      "label": "Safaria wallet",
+      "hint": "Pay instantly from your balance",
+      "insufficient": "Balance doesn't cover this trip"
+    },
+    "walletPaid": "Paid from your wallet successfully",
+    "redirectingToGateway": "Booking confirmed — taking you to the payment page..."
   },
   "auth": {
     "imageAlts": {
@@ -1221,13 +1239,22 @@
           "pay": "Pay",
           "invoice": "Download Invoice",
           "orderInvoice": "Order Invoice",
-          "details": "Details"
+          "details": "Details",
+          "cancel": "Cancel booking",
+          "printInvoice": "Print invoice"
         },
         "direct": "Direct",
         "stop": "stop",
         "stops": "stops",
         "durationFormat": "{h}h {m}m",
-        "seats": "Seats:"
+        "seats": "Seats:",
+        "cancel": {
+          "confirmTitle": "Cancel this booking?",
+          "confirmDescription": "This cannot be undone. Any refund follows the carrier's policy.",
+          "confirmOk": "Yes, cancel it",
+          "confirmCancel": "Keep booking",
+          "success": "Booking cancelled"
+        }
       },
       "detail": {
         "pageTitle": "Ticket Details",

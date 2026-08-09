@@ -19,6 +19,8 @@ import { Link } from "@/i18n/navigation";
 import { PiBusBold } from "react-icons/pi";
 import { IoCalendarOutline } from "react-icons/io5";
 import { CurrencyLabel } from "@/components/discoverAirplan/CurrencyLabel";
+import { PaymentMethodSelector } from "@/components/checkout/PaymentMethodSelector";
+import type { PaymentMethod } from "@/app/[locale]/_hooks/usePayOrder";
 import useFormatDate from "@/hooks/useFormatDate";
 import type { BusTrip, BusTripStation } from "@/app/[locale]/_types/BusTrip";
 
@@ -49,6 +51,8 @@ const BookingSummaryPanel = ({
   selectedSeats: string[];
 }) => {
   const currency = useSelector((state: RootState) => state.currency.selected?.code ?? "");
+  const busReturnDate = useSelector((state: RootState) => state.bus.returnDate);
+  const busParentOrderId = useSelector((state: RootState) => state.bus.parentOrderId);
   const { isAuthenticated } = useGetUserProfile();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -56,8 +60,12 @@ const BookingSummaryPanel = ({
   const formatDate = useFormatDate();
 
   const [agreed, setAgreed] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
 
-  const { mutate: createTicket, isPending } = useCreateTicket(trip.id);
+  const { mutate: createTicket, isPending } = useCreateTicket(
+    trip.id,
+    paymentMethod,
+  );
 
   const fromCityName = trip.cities_from[0]?.name ?? fromStation?.city_name ?? "—";
   const toCityName   = trip.cities_to[0]?.name   ?? toStation?.city_name   ?? "—";
@@ -68,6 +76,14 @@ const BookingSummaryPanel = ({
 
   const seatPrice = trip.price_start_with;
   const total = seatPrice * seatCount;
+
+  // A round trip is two linked orders and only the return leg is charged, so
+  // the outbound leg has nothing to pick a payment method for. Mirrors the
+  // condition useCreateTicket settles on.
+  const activeReturnDate = busReturnDate ?? searchParams.get("return_date");
+  const activeParentOrderId =
+    busParentOrderId ?? (Number(searchParams.get("parent_order_id")) || null);
+  const isOutboundOfRoundTrip = !!activeReturnDate && !activeParentOrderId;
 
   const handleConfirm = () => {
     if (!fromStation || !toStation) return;
@@ -219,6 +235,16 @@ const BookingSummaryPanel = ({
           <span className="text-primary text-lg font-bold">{total} <CurrencyLabel currency={currency} /></span>
         </div>
       </div>
+
+      {/* Payment method */}
+      {isAuthenticated && !isOutboundOfRoundTrip && (
+        <PaymentMethodSelector
+          value={paymentMethod}
+          onChange={setPaymentMethod}
+          total={total}
+          className="!rounded-2xl !border-0 !px-4"
+        />
+      )}
 
       {/* Terms + Confirm */}
       <div className="bg-white rounded-2xl shadow-sm px-4 py-4 space-y-4">

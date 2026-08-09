@@ -1,3 +1,6 @@
+/** The API path segment each booking cycle lives under. */
+export type OrderCycle = "flights" | "buses" | "private";
+
 const apiRoutes = {
   airports: "/flights/iata",
   airportsSearch: "/flights/airports/search",
@@ -31,6 +34,12 @@ const apiRoutes = {
   busSeats: (id: string | number) => `/buses/trips/${id}/seats`,
   busCreateTicket: (id: string | number) =>
     `/buses/trips/${id}/create-ticket`,
+  // ── Order settlement ────────────────────────────────────────────────────────
+  // Same shape across the three cycles; `cycle` is the API's own path segment.
+  payOrder: (cycle: OrderCycle, id: number | string) =>
+    `/${cycle}/orders/${id}/pay`,
+  cancelOrder: (cycle: OrderCycle, id: number | string) =>
+    `/${cycle}/orders/${id}/cancel`,
   faqs: "/faq",
   posts: "/posts",
   postBySlug: (slug: string) => `/posts/${slug}`,

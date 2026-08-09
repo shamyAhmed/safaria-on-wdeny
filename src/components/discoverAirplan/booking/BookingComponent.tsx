@@ -23,22 +23,29 @@ import { CurrencyLabel } from "@/components/discoverAirplan/CurrencyLabel";
 import { useTranslations } from "next-intl";
 import { handleFormErrors } from "@/utils/handleFormError";
 import { useGetUserProfile } from "@/hooks/auth/useGetProfile";
+import { PaymentMethodSelector } from "@/components/checkout/PaymentMethodSelector";
+import type { PaymentMethod } from "@/app/[locale]/_hooks/usePayOrder";
 
 export const BookingComponent = () => {
     const [form] = Form.useForm();
     const searchParams = useSearchParams();
     const [agreedToTerms, setAgreedToTerms] = useState(false);
+    const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
     const [membershipVisibility, setMembershipVisibility] = useState<Record<number, boolean>>({});
     const router = useRouter();
     const t = useTranslations("bookingPage");
 
     const storedFlight = useSelector((state: RootState) => state.flight.flight);
+    const chosenBundle = useSelector((state: RootState) => state.flight.chosenBundle);
     const confirmCode = useSelector((state: RootState) => state.flight.confirmCode);
     const isLogged = useSelector((state: RootState) => state.auth.isLogged);
     const currency = useSelector((state: RootState) => state.currency.selected?.code ?? "");
     const pathname = usePathname();
 
-    const { mutate: addPassenger, isPending: isSubmitting } = useAddPassenger(confirmCode ?? "");
+    const { mutate: addPassenger, isPending: isSubmitting } = useAddPassenger(
+        confirmCode ?? "",
+        paymentMethod,
+    );
     const { user } = useGetUserProfile();
 
     // Autofill contact info from the logged-in user's saved profile (#57) —
@@ -72,6 +79,15 @@ export const BookingComponent = () => {
     const adults   = Math.max(1, parseInt(searchParams.get("adt") || "1", 10));
     const children = Math.max(0, parseInt(searchParams.get("chd") || "0", 10));
     const infants  = Math.max(0, parseInt(searchParams.get("inf") || "0", 10));
+
+    // Same arithmetic PriceSummary shows in the sidebar — the wallet has to
+    // cover the grand total, bundle included, not just the fare.
+    const grandTotal = (() => {
+        if (!storedFlight) return 0;
+        const bundleTotal =
+            (chosenBundle?.bundle_prices.total_amount ?? 0) * (adults + children);
+        return storedFlight.price + bundleTotal;
+    })();
 
     const [passengers, setPassengers] = useState<PassengerState[]>(() =>
         buildPassengerList(adults, children, infants)
@@ -212,6 +228,14 @@ export const BookingComponent = () => {
                                 ))}
                             </Form>
                         </BookingStepSection>
+
+                        {/* Payment method */}
+                        <PaymentMethodSelector
+                            value={paymentMethod}
+                            onChange={setPaymentMethod}
+                            total={grandTotal}
+                            className="!rounded-[20px] !border-gray-100 !px-6 !py-5 mb-4"
+                        />
 
                         {/* Terms & Pay */}
                         <div className="bg-white rounded-[20px] px-6 py-5 border border-gray-100 shadow-sm">

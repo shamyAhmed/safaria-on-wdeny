@@ -11,6 +11,7 @@ import { setBusParentOrderId } from "@/store/slices/bus/busSlice";
 import { ApiResponse } from "../_types/Api";
 import { BusOrder, CreateTicketPayload } from "../_types/BusOrder";
 import { toastError } from "@/utils/toastError";
+import usePayOrder, { type PaymentMethod } from "./usePayOrder";
 
 // POST /buses/trips/:id/create-ticket
 //
@@ -18,7 +19,10 @@ import { toastError } from "@/utils/toastError";
 // linked one-way orders: the outbound is created first, then the return is
 // created with `parent_order_id` pointing at it, and only that second call
 // settles the payment for both legs.
-const useCreateTicket = (tripId: string | number) => {
+const useCreateTicket = (
+  tripId: string | number,
+  paymentMethod: PaymentMethod = "card",
+) => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const searchParams = useSearchParams();
@@ -40,7 +44,10 @@ const useCreateTicket = (tripId: string | number) => {
 
   const isOutboundOfRoundTrip = !!activeReturnDate && !activeParentOrderId;
 
-  return useMutation({
+  const payMutation = usePayOrder("buses");
+  const { mutate: payOrder } = payMutation;
+
+  const createMutation = useMutation({
     mutationFn: async (payload: CreateTicketPayload) => {
       const response = await axiosInstance.post<ApiResponse<BusOrder>>(
         apiRoutes.busCreateTicket(tripId),
@@ -75,6 +82,21 @@ const useCreateTicket = (tripId: string | number) => {
         return;
       }
 
+      // Wallet: the order is already created, so settle it against the balance
+      // instead of handing the browser to the gateway.
+      if (paymentMethod === "wallet" && order?.id) {
+        payOrder(
+          { orderId: order.id },
+          {
+            onSuccess: () => {
+              toast.success(t("walletPaid"));
+              router.push("/success-payment");
+            },
+          },
+        );
+        return;
+      }
+
       // One-way, or the return leg that settles both: go and pay.
       //
       // `payment_data.invoice_url` is the gateway's own page and the only
@@ -95,6 +117,13 @@ const useCreateTicket = (tripId: string | number) => {
       router.push("/success-payment");
     },
   });
+
+  // Creating and settling are two calls but one action to the user, so the
+  // button stays busy until the wallet charge lands too.
+  return {
+    ...createMutation,
+    isPending: createMutation.isPending || payMutation.isPending,
+  };
 };
 
 export default useCreateTicket;

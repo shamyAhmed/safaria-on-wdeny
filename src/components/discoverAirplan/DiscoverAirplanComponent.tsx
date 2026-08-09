@@ -1,6 +1,6 @@
 "use client";
-import { Col, Drawer, Row } from "antd";
-import { useEffect, useMemo, useState } from "react";
+import { Col, Drawer, Row, Spin } from "antd";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FaFilter } from "react-icons/fa6";
 import { PageBannerSection } from "../tools/sections/PageBannerSection";
 import { AirplaneForm } from "../homePage/forms/AirplaneForm";
@@ -133,6 +133,13 @@ export interface CarrierOption {
   name: string;
 }
 
+/**
+ * The search returns every matching offer in one response, so the list is
+ * paged in the browser: a page's worth is rendered, and scrolling to the
+ * sentinel at the bottom widens the slice.
+ */
+const RESULTS_PAGE_SIZE = 10;
+
 const INITIAL_EXTREMES: FlightExtremes = {
   cheapestPrice: null,
   mostExpensivePrice: null,
@@ -238,6 +245,40 @@ export const DiscoverAirplanComponent = () => {
       return true;
     });
   }, [flights, deferredFilters.priceRange, deferredFilters.selectedCarriers]);
+
+  // ── Local pagination ───────────────────────────────────────────────────────
+  const [visibleCount, setVisibleCount] = useState(RESULTS_PAGE_SIZE);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
+
+  const pagedFlights = useMemo(
+    () => visibleFlights.slice(0, visibleCount),
+    [visibleFlights, visibleCount],
+  );
+  const hasMore = visibleCount < visibleFlights.length;
+
+  // A new search or a filter change makes the old offset meaningless.
+  useEffect(() => {
+    setVisibleCount(RESULTS_PAGE_SIZE);
+  }, [visibleFlights.length, deferredFilters]);
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel || !hasMore) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisibleCount((prev) =>
+            Math.min(prev + RESULTS_PAGE_SIZE, visibleFlights.length),
+          );
+        }
+      },
+      { rootMargin: "200px" },
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [hasMore, visibleFlights.length]);
 
   const [cachedExtremes, setCachedExtremes] =
     useState<FlightExtremes>(INITIAL_EXTREMES);
@@ -405,12 +446,21 @@ export const DiscoverAirplanComponent = () => {
                   </Link>
                 </div>
               ) : (
-                visibleFlights.map((flight) => (
-                  <AirplaneCard
-                    key={flight.id}
-                    flight={flight}
-                  />
-                ))
+                <>
+                  {pagedFlights.map((flight) => (
+                    <AirplaneCard
+                      key={flight.id}
+                      flight={flight}
+                    />
+                  ))}
+                  {hasMore && (
+                    <div
+                      ref={sentinelRef}
+                      className="flex justify-center py-6">
+                      <Spin />
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </Col>

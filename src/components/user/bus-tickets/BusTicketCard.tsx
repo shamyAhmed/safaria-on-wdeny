@@ -12,6 +12,10 @@ import {
   orderStatusColor,
   orderStatusKey,
 } from "@/components/user/my-trips/TicketStatusBadge";
+import {
+  OrderActions,
+  orderPaymentState,
+} from "@/components/user/my-trips/OrderActions";
 import type { BusOrder } from "@/app/[locale]/_types/BusOrder";
 
 /** "2026-08-20 05:45 am" — the station stamps are not ISO, so split them. */
@@ -38,8 +42,13 @@ export const BusTicketCard = ({ order, onShowDetails }: BusTicketCardProps) => {
 
   const seats = order.tickets ?? [];
   const gatewayUrl = order.payment_data?.invoice_url;
-  const isCancelled = statusCode.toLowerCase().includes("cancel");
   const logo = order.company_data?.avatar;
+
+  // A cancelled order reports its own status as cancelled while the payment
+  // record may still read "pending", so the order status wins.
+  const paymentState = statusCode.toLowerCase().includes("cancel")
+    ? "closed"
+    : orderPaymentState(payCode || statusCode);
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
@@ -145,27 +154,17 @@ export const BusTicketCard = ({ order, onShowDetails }: BusTicketCardProps) => {
           ) : (
             <span className="text-xs text-gray-400">{tCard("noTransactions")}</span>
           )}
-          {!isCancelled && payCode.toLowerCase() === "pending" && gatewayUrl && (
-            <a href={gatewayUrl}>
-              <Button
-                size="small"
-                type="primary"
-                className="!rounded-lg !h-7 !px-3 !text-xs !font-semibold">
-                {tCard("actions.pay")}
-              </Button>
-            </a>
-          )}
         </div>
-        <div className="flex items-center gap-2 self-end sm:self-auto">
-          {order.invoice_url && (
-            <a href={order.invoice_url} target="_blank" rel="noopener noreferrer">
-              <Button
-                size="small"
-                className="!rounded-lg !h-8 !px-4 !text-xs !font-semibold">
-                {tCard("actions.invoice")}
-              </Button>
-            </a>
-          )}
+        <div className="flex items-center gap-2 self-end sm:self-auto flex-wrap">
+          <OrderActions
+            cycle="buses"
+            orderId={order.id}
+            paymentState={paymentState}
+            payUrl={gatewayUrl}
+            invoiceUrl={order.invoice_url}
+            departureAt={order.date_time ?? order.date}
+            canCancel={order.can_be_cancel ?? true}
+          />
           <Button
             size="small"
             className="!rounded-lg !h-8 !px-4 !text-xs !font-semibold"

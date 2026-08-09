@@ -2,7 +2,10 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { useMapsLibrary } from "@vis.gl/react-google-maps";
-import { MdOutlineLocationOn } from "react-icons/md";
+import { MdOutlineLocationOn, MdHistory } from "react-icons/md";
+import { useTranslations } from "next-intl";
+import useGetUserAddresses from "@/app/[locale]/_hooks/useGetUserAddresses";
+import { useGetUserProfile } from "@/hooks/auth/useGetProfile";
 import type { PrivateTripLocation } from "@/store/slices/private/privateTripSlice";
 
 type PrivatePlacesInputProps = {
@@ -22,6 +25,14 @@ export const PrivatePlacesInput = ({
 }: PrivatePlacesInputProps) => {
   const placesLib = useMapsLibrary("places");
   const inputId = useId();
+  const t = useTranslations("homePage.privateTripsForm.places");
+
+  // With nothing typed the dropdown offers the customer's own address book
+  // instead of an empty panel; typing hands the field back to Google.
+  const { isAuthenticated } = useGetUserProfile();
+  const { data: savedAddresses = [] } = useGetUserAddresses({
+    enabled: isAuthenticated && !readonly,
+  });
 
   const [inputValue, setInputValue] = useState(value?.text ?? "");
   const [predictions, setPredictions] = useState<
@@ -62,13 +73,19 @@ export const PrivatePlacesInput = ({
     };
   }, []);
 
+  const usableAddresses = savedAddresses.filter(
+    (address) => address.map_location?.lat && address.map_location?.lng,
+  );
+  const showSavedAddresses = !inputValue.trim() && usableAddresses.length > 0;
+
   const handleChange = (text: string) => {
     setInputValue(text);
     if (debounceRef.current) clearTimeout(debounceRef.current);
 
     if (!text.trim() || !serviceRef.current) {
       setPredictions([]);
-      setOpen(false);
+      // Clearing the box falls back to the saved addresses rather than closing.
+      setOpen(usableAddresses.length > 0);
       return;
     }
 
@@ -113,6 +130,20 @@ export const PrivatePlacesInput = ({
     sessionTokenRef.current = new placesLib.AutocompleteSessionToken();
   };
 
+  // Saved addresses already carry coordinates, so they skip the Places
+  // round-trip entirely.
+  const handleSelectSaved = (address: (typeof usableAddresses)[number]) => {
+    const label = address.map_location.address_name || address.name;
+    setInputValue(label);
+    setOpen(false);
+    setPredictions([]);
+    onSelect({
+      text: label,
+      lat: Number(address.map_location.lat),
+      lng: Number(address.map_location.lng),
+    });
+  };
+
   return (
     <div className="inputS1">
       <label htmlFor={inputId} className="block mb-2">{label}</label>
@@ -128,27 +159,57 @@ export const PrivatePlacesInput = ({
             readOnly={readonly}
             onChange={(e) => handleChange(e.target.value)}
             onFocus={() => {
-              if (predictions.length) setOpen(true);
+              if (predictions.length || showSavedAddresses) setOpen(true);
             }}
             autoComplete="off"
           />
           <MdOutlineLocationOn className="absolute end-3 text-2xl text-[#819DAF] pointer-events-none" />
         </div>
 
-        {open && predictions.length > 0 && (
+        {open && (showSavedAddresses || predictions.length > 0) && (
           <ul className="absolute z-30 top-full mt-1 inset-x-0 max-h-[200px] overflow-auto rounded-2xl bg-white border border-gray-100 shadow-lg py-1">
-            {predictions.map((prediction) => (
-              <li
-                key={prediction.place_id}
-                className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-50"
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  handleSelect(prediction);
-                }}
-              >
-                {prediction.description}
-              </li>
-            ))}
+            {showSavedAddresses ? (
+              <>
+                <li className="px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+                  {t("recentlyUsed")}
+                </li>
+                {usableAddresses.map((address) => (
+                  <li
+                    key={address.id}
+                    className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-50 flex items-center gap-2"
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      handleSelectSaved(address);
+                    }}
+                  >
+                    <MdHistory className="text-lg text-[#819DAF] shrink-0" />
+                    <span className="min-w-0">
+                      <span className="block truncate font-medium text-gray-800">
+                        {address.name}
+                      </span>
+                      {address.map_location.address_name && (
+                        <span className="block truncate text-xs text-gray-400">
+                          {address.map_location.address_name}
+                        </span>
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </>
+            ) : (
+              predictions.map((prediction) => (
+                <li
+                  key={prediction.place_id}
+                  className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-50"
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    handleSelect(prediction);
+                  }}
+                >
+                  {prediction.description}
+                </li>
+              ))
+            )}
           </ul>
         )}
       </div>

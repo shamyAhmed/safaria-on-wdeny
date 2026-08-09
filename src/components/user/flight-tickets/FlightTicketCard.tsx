@@ -12,6 +12,10 @@ import {
   orderStatusColor,
   orderStatusKey,
 } from "@/components/user/my-trips/TicketStatusBadge";
+import {
+  OrderActions,
+  orderPaymentState,
+} from "@/components/user/my-trips/OrderActions";
 import type { FlightOrder, FlightPaymentTransaction } from "@/app/[locale]/_types/FlightOrder";
 
 // ── Card ───────────────────────────────────────────────────────────────────────
@@ -83,6 +87,15 @@ export const FlightTicketCard = ({ order }: FlightTicketCardProps) => {
 
   const carrierCode  = firstSeg?.marketing_carrier_code ?? "—";
   const flightNumber = firstSeg?.marketing_flight_number ?? "";
+
+  // A cancelled order can still carry a pending transaction, so the order
+  // status decides and the payment record only breaks the paid/unpaid tie.
+  const paymentState = orderPaymentState(order.order_status ?? order.status)
+    === "closed"
+    ? "closed"
+    : isPaid
+      ? "paid"
+      : "pending";
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
@@ -188,31 +201,17 @@ export const FlightTicketCard = ({ order }: FlightTicketCardProps) => {
           ) : (
             <span className="text-xs text-gray-400">{t("noTransactions")}</span>
           )}
-          {pendingPayUrl && (
-            <a href={pendingPayUrl}>
-              <Button
-                size="small"
-                type="primary"
-                className="!rounded-lg !h-7 !px-3 !text-xs !font-semibold">
-                {t("actions.pay")}
-              </Button>
-            </a>
-          )}
         </div>
-        <div className="flex items-center gap-2 self-end sm:self-auto">
-          {invoiceUrl && (
-            <a
-              href={invoiceUrl}
-              target="_blank"
-              rel="noopener noreferrer">
-              <Button
-                size="small"
-                className="!rounded-lg !h-8 !px-4 !text-xs !font-semibold">
-                {t("actions.invoice")}
-              </Button>
-            </a>
-          )}
-<Button
+        <div className="flex items-center gap-2 self-end sm:self-auto flex-wrap">
+          <OrderActions
+            cycle="flights"
+            orderId={order.id}
+            paymentState={paymentState}
+            payUrl={pendingPayUrl}
+            invoiceUrl={invoiceUrl}
+            departureAt={firstSeg?.departure_datetime}
+          />
+          <Button
             size="small"
             className="!rounded-lg !h-8 !px-4 !text-xs !font-semibold"
             onClick={() => router.push(`/user/my-trips/${order.id}`)}>
