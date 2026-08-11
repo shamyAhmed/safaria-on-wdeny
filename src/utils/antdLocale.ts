@@ -23,11 +23,14 @@ const AR_MONTHS =
     "_",
   );
 
+/** Sunday-first, the order both dayjs and antd index weekdays by. */
+const AR_WEEKDAYS_MIN = "ح_ن_ث_ر_خ_ج_س".split("_");
+
 const AR_LOCALE: ILocale & { meridiem: (hour: number) => string } = {
   name: "ar",
   weekdays: "الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت".split("_"),
   weekdaysShort: "أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت".split("_"),
-  weekdaysMin: "ح_ن_ث_ر_خ_ج_س".split("_"),
+  weekdaysMin: AR_WEEKDAYS_MIN,
   months: AR_MONTHS,
   monthsShort: AR_MONTHS,
   weekStart: 6,
@@ -60,8 +63,26 @@ const AR_LOCALE: ILocale & { meridiem: (hour: number) => string } = {
 
 dayjs.locale(AR_LOCALE, undefined, true);
 
+/**
+ * antd's own `ar_EG` bundle fills `shortWeekDays` with the *full* day names, so
+ * the seven header columns render as `السبتالأحدالإثنين…` — each one wider than
+ * its column and running into the next. The single-letter forms are what the
+ * grid has room for.
+ */
+const AR_BUNDLE: Locale = {
+  ...arEG,
+  DatePicker: arEG.DatePicker && {
+    ...arEG.DatePicker,
+    lang: { ...arEG.DatePicker.lang, shortWeekDays: AR_WEEKDAYS_MIN },
+  },
+  Calendar: arEG.Calendar && {
+    ...arEG.Calendar,
+    lang: { ...arEG.Calendar.lang, shortWeekDays: AR_WEEKDAYS_MIN },
+  },
+};
+
 /** The antd locale bundle (calendar, empty states, pagination…) for a page locale. */
 export const antdLocale = (locale: string): Locale =>
-  locale.startsWith("ar") ? arEG : enUS;
+  locale.startsWith("ar") ? AR_BUNDLE : enUS;
 
 export default antdLocale;
