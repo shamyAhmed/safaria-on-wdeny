@@ -10,7 +10,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/appStore";
 import { useGetWallet } from "@/hooks/auth/useGetWallet";
 import { CurrencyLabel } from "@/components/discoverAirplan/CurrencyLabel";
-import type { PaymentMethod } from "@/app/[locale]/_hooks/usePayOrder";
+import {
+  DEFAULT_PAYMENT_METHOD,
+  type PaymentMethod,
+} from "@/app/[locale]/_types/Payment";
 
 /**
  * Reads the wallet balance and says whether it covers `total`.
@@ -52,7 +55,8 @@ export const PaymentMethodSelector = ({
   // The total moves while the user picks seats or dates, so a wallet that
   // stops covering it has to hand the selection back to the card.
   useEffect(() => {
-    if (value === "wallet" && !isLoading && !canPayWithWallet) onChange("card");
+    if (value === "wallet" && !isLoading && !canPayWithWallet)
+      onChange(DEFAULT_PAYMENT_METHOD);
   }, [value, isLoading, canPayWithWallet, onChange]);
 
   const options: {
@@ -63,10 +67,10 @@ export const PaymentMethodSelector = ({
     disabled: boolean;
   }[] = [
     {
-      key: "card",
+      key: "credit",
       icon: <BsCreditCard2Front size={20} />,
-      label: t("card.label"),
-      hint: t("card.hint"),
+      label: t("credit.label"),
+      hint: t("credit.hint"),
       disabled: false,
     },
     {

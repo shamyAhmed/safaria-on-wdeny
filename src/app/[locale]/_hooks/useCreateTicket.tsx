@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "next/navigation";
@@ -11,7 +11,10 @@ import { setBusParentOrderId } from "@/store/slices/bus/busSlice";
 import { ApiResponse } from "../_types/Api";
 import { BusOrder, CreateTicketPayload } from "../_types/BusOrder";
 import { toastError } from "@/utils/toastError";
-import usePayOrder, { type PaymentMethod } from "./usePayOrder";
+import {
+  DEFAULT_PAYMENT_METHOD,
+  type PaymentMethod,
+} from "../_types/Payment";
 
 // POST /buses/trips/:id/create-ticket
 //
@@ -21,9 +24,10 @@ import usePayOrder, { type PaymentMethod } from "./usePayOrder";
 // settles the payment for both legs.
 const useCreateTicket = (
   tripId: string | number,
-  paymentMethod: PaymentMethod = "card",
+  paymentMethod: PaymentMethod = DEFAULT_PAYMENT_METHOD,
 ) => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const dispatch = useDispatch<AppDispatch>();
   const searchParams = useSearchParams();
   const t = useTranslations("discoverBus.booking");
@@ -44,16 +48,17 @@ const useCreateTicket = (
 
   const isOutboundOfRoundTrip = !!activeReturnDate && !activeParentOrderId;
 
-  const payMutation = usePayOrder("buses");
-  const { mutate: payOrder } = payMutation;
-
-  const createMutation = useMutation({
+  return useMutation({
     mutationFn: async (payload: CreateTicketPayload) => {
       const response = await axiosInstance.post<ApiResponse<BusOrder>>(
         apiRoutes.busCreateTicket(tripId),
         {
           ...payload,
           currency,
+          // Only the call that settles carries the method: the outbound leg of
+          // a round trip is paid for by the return leg that links back to it,
+          // so naming the wallet there too would charge the balance twice.
+          ...(isOutboundOfRoundTrip ? {} : { payment_method: paymentMethod }),
           ...(activeParentOrderId
             ? { parent_order_id: activeParentOrderId }
             : {}),
@@ -82,18 +87,12 @@ const useCreateTicket = (
         return;
       }
 
-      // Wallet: the order is already created, so settle it against the balance
-      // instead of handing the browser to the gateway.
-      if (paymentMethod === "wallet" && order?.id) {
-        payOrder(
-          { orderId: order.id },
-          {
-            onSuccess: () => {
-              toast.success(t("walletPaid"));
-              router.push("/success-payment");
-            },
-          },
-        );
+      // Wallet: the booking call already charged the balance, so there is no
+      // gateway to visit — and the cached balance is now stale.
+      if (paymentMethod === "wallet") {
+        queryClient.invalidateQueries({ queryKey: ["wallet"] });
+        toast.success(t("walletPaid"));
+        router.push("/success-payment");
         return;
       }
 
@@ -117,13 +116,6 @@ const useCreateTicket = (
       router.push("/success-payment");
     },
   });
-
-  // Creating and settling are two calls but one action to the user, so the
-  // button stays busy until the wallet charge lands too.
-  return {
-    ...createMutation,
-    isPending: createMutation.isPending || payMutation.isPending,
-  };
 };
 
 export default useCreateTicket;

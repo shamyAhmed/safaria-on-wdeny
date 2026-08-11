@@ -12,6 +12,7 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { useLocale } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { useScrollTop } from "@/hooks/useScrollTop";
+import { antdLocale } from "@/utils/antdLocale";
 import { useBusCleanup } from "@/hooks/useBusCleanup";
 import { usePrivateCleanup } from "@/hooks/usePrivateCleanup";
 
@@ -97,6 +98,7 @@ export function Providers({ children }: Props) {
         <AntdRegistry>
           <ConfigProvider
             theme={theme}
+            locale={antdLocale(locale)}
             direction={locale === "ar" ? "rtl" : "ltr"}
           >
             {children}

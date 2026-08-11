@@ -19,7 +19,10 @@ import dayjs, { Dayjs } from "dayjs";
 import { DatePickerIcon } from "@/components/tools/icons/DatePickerIcon";
 import { CurrencyLabel } from "@/components/discoverAirplan/CurrencyLabel";
 import { PaymentMethodSelector } from "@/components/checkout/PaymentMethodSelector";
-import type { PaymentMethod } from "@/app/[locale]/_hooks/usePayOrder";
+import {
+  DEFAULT_PAYMENT_METHOD,
+  type PaymentMethod,
+} from "@/app/[locale]/_types/Payment";
 import { useDatePickerFormat } from "@/hooks/useFormatDate";
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -48,7 +51,7 @@ const DiscoverPrivatePage = ({ params }: { params: Promise<{ id: string }> }) =>
   const isRound = searchParams.get("rounded") === "true";
 
   const [agreed, setAgreed] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(DEFAULT_PAYMENT_METHOD);
   // Both legs were already picked on the search form and travel in the URL, so
   // the pickers open on them instead of making the user choose twice.
   const [departureDate, setDepartureDate] = useState<Dayjs | null>(() => {

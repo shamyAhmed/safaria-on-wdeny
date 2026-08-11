@@ -20,7 +20,10 @@ import { PiBusBold } from "react-icons/pi";
 import { IoCalendarOutline } from "react-icons/io5";
 import { CurrencyLabel } from "@/components/discoverAirplan/CurrencyLabel";
 import { PaymentMethodSelector } from "@/components/checkout/PaymentMethodSelector";
-import type { PaymentMethod } from "@/app/[locale]/_hooks/usePayOrder";
+import {
+  DEFAULT_PAYMENT_METHOD,
+  type PaymentMethod,
+} from "@/app/[locale]/_types/Payment";
 import useFormatDate from "@/hooks/useFormatDate";
 import type { BusTrip, BusTripStation } from "@/app/[locale]/_types/BusTrip";
 
@@ -60,7 +63,7 @@ const BookingSummaryPanel = ({
   const formatDate = useFormatDate();
 
   const [agreed, setAgreed] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(DEFAULT_PAYMENT_METHOD);
 
   const { mutate: createTicket, isPending } = useCreateTicket(
     trip.id,

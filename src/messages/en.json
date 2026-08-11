@@ -799,7 +799,7 @@
   "checkoutPayment": {
     "title": "Payment method",
     "balanceLabel": "Wallet balance:",
-    "card": {
+    "credit": {
       "label": "Credit card",
       "hint": "You'll be redirected to the secure payment page"
     },

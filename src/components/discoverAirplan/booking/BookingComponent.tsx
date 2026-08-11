@@ -24,13 +24,16 @@ import { useTranslations } from "next-intl";
 import { handleFormErrors } from "@/utils/handleFormError";
 import { useGetUserProfile } from "@/hooks/auth/useGetProfile";
 import { PaymentMethodSelector } from "@/components/checkout/PaymentMethodSelector";
-import type { PaymentMethod } from "@/app/[locale]/_hooks/usePayOrder";
+import {
+  DEFAULT_PAYMENT_METHOD,
+  type PaymentMethod,
+} from "@/app/[locale]/_types/Payment";
 
 export const BookingComponent = () => {
     const [form] = Form.useForm();
     const searchParams = useSearchParams();
     const [agreedToTerms, setAgreedToTerms] = useState(false);
-    const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
+    const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(DEFAULT_PAYMENT_METHOD);
     const [membershipVisibility, setMembershipVisibility] = useState<Record<number, boolean>>({});
     const router = useRouter();
     const t = useTranslations("bookingPage");
