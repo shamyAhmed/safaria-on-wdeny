@@ -12,6 +12,7 @@ import { TopBar } from "./TopBar";
 import LanguageSelect from "./language-select/LanguageSelect";
 import NotificationButton from "./NotificationButton";
 import { useAuth } from "@/hooks/auth/useAuth";
+import useGetBlogs from "@/app/[locale]/_hooks/useGetBlogs";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,10 +22,15 @@ export const Header = () => {
   const { isAuthenticated } = useAuth();
   const shouldReduceMotion = useReducedMotion();
 
+  // Nothing published means the blog page has nothing to show, so the link only
+  // appears once at least one post comes back.
+  const { data: blogs } = useGetBlogs();
+  const hasBlogs = (blogs?.length ?? 0) > 0;
+
   const navlinks = [
     { linkKey: "home", path: "" },
     { linkKey: "about", path: "/about-us" },
-    { linkKey: "blogs", path: "/blogs" },
+    ...(hasBlogs ? [{ linkKey: "blogs", path: "/blogs" }] : []),
     { linkKey: "contactUs", path: "/contact-us" },
   ];
 
@@ -99,7 +105,7 @@ export const Header = () => {
             <div className="flex items-center">
               <Link href={"/"}>
                 <Image
-                  src="/images/logo-blue.png"
+                  src="/images/logo-full.svg"
                   alt={t("header.logoAlt")}
                   width={135}
                   height={30}

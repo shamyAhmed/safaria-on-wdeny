@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "antd";
+import { useState } from "react";
 import { FaShare } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa6";
 import { MdDirectionsCar } from "react-icons/md";
@@ -13,9 +14,11 @@ import { RootState } from "@/store/appStore";
 import { useRouter } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { PrivateTripDetailsModal } from "../modals/PrivateTripDetailsModal";
 
 export const PrivateCard = ({ trip }: { trip: PrivateTrip }) => {
   const t = useTranslations("discoverPrivate.card");
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const currency = useSelector((state: RootState) => state.currency.selected);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -160,6 +163,7 @@ export const PrivateCard = ({ trip }: { trip: PrivateTrip }) => {
               <div className="flex items-center gap-[8px] mt-1">
                 <button
                   type="button"
+                  onClick={() => setIsDetailsOpen(true)}
                   className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-primary transition-colors border border-gray-200 rounded-full p-[10px]">
                   <IoInformationCircleOutline size={16} />
                   {t("details")}
@@ -182,6 +186,12 @@ export const PrivateCard = ({ trip }: { trip: PrivateTrip }) => {
           </div>
         </div>
       </div>
+
+      <PrivateTripDetailsModal
+        trip={trip}
+        open={isDetailsOpen}
+        onClose={() => setIsDetailsOpen(false)}
+      />
     </div>
   );
 };

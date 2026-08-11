@@ -569,6 +569,26 @@
         "smallBag": "{count} small bag"
       }
     },
+    "detailsModal": {
+      "title": "Trip details",
+      "route": "Route",
+      "departure": "Departure",
+      "arrival": "Arrival",
+      "vehicle": "Vehicle",
+      "model": "Model",
+      "seats": "Seats",
+      "seatsCount": "{count} seats",
+      "gearType": "Transmission",
+      "luggage": "Luggage",
+      "bagsSummary": "{big} large · {small} small",
+      "category": "Category",
+      "price": "Price",
+      "oneWay": "One way",
+      "roundTrip": "Round trip",
+      "refundPolicy": "Refund policy",
+      "refundableNoPolicy": "This trip is refundable. Contact the operator for the exact terms.",
+      "nonRefundable": "This trip is non-refundable."
+    },
     "pageTitle": "Private trips",
     "filters": {
       "title": "Filters",
@@ -1652,8 +1672,8 @@
       "title": "Add credit",
       "amountLabel": "Amount to add",
       "amountRequired": "Please enter an amount",
-      "currency": "Saudi Riyal",
-      "quickAmount": "{amount} SAR",
+      "currencyLabel": "Currency",
+      "quickAmount": "{amount} {currency}",
       "continueToPayment": "Continue to payment",
       "securityNote": "You'll be redirected to a secure, encrypted payment gateway built to international standards to keep your data safe."
     }

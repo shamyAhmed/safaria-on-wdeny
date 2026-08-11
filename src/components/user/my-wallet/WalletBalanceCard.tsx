@@ -27,11 +27,11 @@ export const WalletBalanceCard = ({ balance, isLoading }: WalletBalanceCardProps
         className="flex items-center w-full justify-start gap-2 mb-5 relative z-10"
       >
         <Image
-          src="/images/logo-small.png"
+          src="/images/logo-icon-white.svg"
           alt="logo"
           height={24}
-          width={24}
-          className="size-[24px]"
+          width={17}
+          className="h-6 w-auto"
         />
         <p className="font-bold">Safaria</p>
       </div>

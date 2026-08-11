@@ -18,9 +18,9 @@ export const LoaderS1 = () => {
         dir="ltr"
         className="flex items-center gap-3">
         <Image
-          src="/images/logo-small.png"
+          src="/images/logo-icon.svg"
           alt="Safaria logo"
-          width={36}
+          width={26}
           height={36}
           priority
         />

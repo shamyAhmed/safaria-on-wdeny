@@ -108,9 +108,9 @@ export function ContactFormSection() {
           />
           <div className="absolute inset-0 bg-black/20 flex items-center justify-center z-10">
             <Image
-              src="/images/logo-white.png"
+              src="/images/logo-full-white.svg"
               width={180}
-              height={90}
+              height={40}
               alt={t("logoAlt")}
             />
           </div>

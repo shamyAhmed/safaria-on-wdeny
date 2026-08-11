@@ -11,10 +11,10 @@ export const AboutUsSection = () => {
           <Col span={24} lg={7}>
             <div dir="ltr" className="bg-white rounded-3xl min-w-fit h-full flex items-center justify-center py-6">
               <Image
-                src={"/images/logo-blue.png"}
+                src={"/images/logo-full.svg"}
                 alt={t("logoAlt")}
                 width={200}
-                height={60}
+                height={45}
                 className="h-auto w-[200px]"
               />
             </div>

@@ -15,10 +15,10 @@ export const AllRightRecieved = () => {
         </p>
         <div className="flex gap-2">
           <Image
-            src="/images/logo-white.png"
+            src="/images/logo-full-white.svg"
             alt={t("logoAlt")}
             width={140}
-            height={50}
+            height={31}
           />
         </div>
       </div>

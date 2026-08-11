@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { Button } from "antd";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { HiNewspaper } from "react-icons/hi2";
 import { useTranslations } from "next-intl";
 import { BlogCard } from "@/components/blogs/cards/BlogCard";
 import { BlogCardSkeleton } from "@/components/blogs/cards/BlogCardSkeleton";
@@ -19,6 +18,10 @@ export const HomeBlogsSection = () => {
   const swiperRef = useRef<SwiperType | null>(null);
   const { data: allBlogs = [], isLoading } = useGetBlogs();
   const blogs = allBlogs.slice(0, 3);
+
+  // With nothing published there is no showcase to make — drop the whole band
+  // rather than leaving an empty section on the home page.
+  if (!isLoading && blogs.length === 0) return null;
 
   return (
     <HomeSection
@@ -41,14 +44,6 @@ export const HomeBlogsSection = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-        ) : blogs.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-16 text-center">
-            <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-5">
-              <HiNewspaper className="text-4xl text-white/50" />
-            </div>
-            <h3 className="text-lg font-semibold text-white mb-2">{t("empty.title")}</h3>
-            <p className="text-sm text-white/60 max-w-xs">{t("empty.description")}</p>
-          </div>
         ) : (
           <>
             <Swiper

@@ -87,12 +87,20 @@ export const formatDateLong = (
 };
 
 /**
- * dayjs pattern for an antd `DatePicker`, following the same reasoning as
- * `formatDateNumeric`: the field is one left-to-right run of digits, so Arabic
- * needs the year written first for it to land on the left of the input.
+ * What an antd `DatePicker` shows once a day is picked.
+ *
+ * `20/08/2026` is a single left-to-right run of digits and slashes, so an RTL
+ * page cannot reorder it — the day stays stuck on the left however the field is
+ * aligned. Arabic therefore gets a spelled month instead: the name splits the
+ * digits into separate runs, and bidi lays them out day-first from the right,
+ * which is how the date is actually read aloud.
  */
-export const datePickerFormat = (locale: string): string =>
-  isArabic(locale) ? "YYYY/MM/DD" : "DD/MM/YYYY";
+export const datePickerFormat = (
+  locale: string,
+): string | ((value: dayjs.Dayjs) => string) =>
+  isArabic(locale)
+    ? (value: dayjs.Dayjs) => formatDateLong(value.toDate(), locale)
+    : "DD/MM/YYYY";
 
 /** 24-hour clock. Kept separate so callers can place it either side of a date. */
 export const formatTime = (

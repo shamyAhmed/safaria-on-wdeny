@@ -12,7 +12,7 @@ import {
 } from "@/utils/formatDate";
 
 /** The `format` an antd `DatePicker` should render in the active locale. */
-export const useDatePickerFormat = (): string =>
+export const useDatePickerFormat = (): ReturnType<typeof datePickerFormat> =>
   datePickerFormat(useLocale());
 
 /**

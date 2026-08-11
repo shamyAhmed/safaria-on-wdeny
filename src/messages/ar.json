@@ -569,6 +569,26 @@
         "smallBag": "{count} حقيبة صغيرة"
       }
     },
+    "detailsModal": {
+      "title": "تفاصيل الرحلة",
+      "route": "المسار",
+      "departure": "المغادرة",
+      "arrival": "الوصول",
+      "vehicle": "المركبة",
+      "model": "الموديل",
+      "seats": "المقاعد",
+      "seatsCount": "{count} مقاعد",
+      "gearType": "ناقل الحركة",
+      "luggage": "الأمتعة",
+      "bagsSummary": "{big} كبيرة · {small} صغيرة",
+      "category": "الفئة",
+      "price": "السعر",
+      "oneWay": "ذهاب فقط",
+      "roundTrip": "ذهاب وعودة",
+      "refundPolicy": "سياسة الاسترجاع",
+      "refundableNoPolicy": "هذه الرحلة قابلة للاسترجاع، تواصل مع الشركة لمعرفة الشروط بالتفصيل.",
+      "nonRefundable": "هذه الرحلة غير قابلة للاسترجاع."
+    },
     "pageTitle": "رحلات خاصة",
     "filters": {
       "title": "التصفية",
@@ -1652,8 +1672,8 @@
       "title": "أضف رصيد",
       "amountLabel": "المبلغ المراد إضافته",
       "amountRequired": "يرجى إدخال المبلغ",
-      "currency": "ريال سعودي",
-      "quickAmount": "{amount} ر.س",
+      "currencyLabel": "العملة",
+      "quickAmount": "{amount} {currency}",
       "continueToPayment": "الاستمرار بالدفع",
       "securityNote": "سيتم توجيهك إلى بوابة دفع آمنة مشفرة ومتطورة بمعايير عالمية لضمان سلامة بياناتك"
     }

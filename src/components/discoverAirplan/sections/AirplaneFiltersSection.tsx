@@ -4,9 +4,13 @@ import type { CollapseProps } from "antd";
 import { FaChevronDown } from "react-icons/fa6";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { BookingClassFilter } from "./filter-section/BookingClassFilter";
+import {
+  BookingClassFilter,
+  type BookingClassOption,
+} from "./filter-section/BookingClassFilter";
 import { PriceRangeFilter } from "./filter-section/PriceRangeFilter";
 import type { CarrierOption } from "../DiscoverAirplanComponent";
+import type { CabinClass } from "@/app/[locale]/_types/SearchFlight";
 
 const FilterPanelHeader = ({ title }: { title: string }) => (
   <span className="font-medium text-base text-primary">{title}</span>
@@ -23,6 +27,8 @@ interface AirplaneFiltersSectionProps {
   carriers: CarrierOption[];
   selectedCarriers: string[];
   onCarriersChange: (codes: string[]) => void;
+  cabinClass: CabinClass | null;
+  onCabinClassChange: (value: CabinClass | null) => void;
 }
 
 export const AirplaneFiltersSection = ({
@@ -36,8 +42,29 @@ export const AirplaneFiltersSection = ({
   carriers,
   selectedCarriers,
   onCarriersChange,
+  cabinClass,
+  onCabinClassChange,
 }: AirplaneFiltersSectionProps) => {
   const t = useTranslations("discoverAirplaneFilters");
+
+  const bookingClassOptions: BookingClassOption[] = [
+    {
+      value: "CABIN_CLASS_ECONOMY",
+      label: t("panels.bookingClass.options.economy"),
+    },
+    {
+      value: "CABIN_CLASS_PREMIUM_ECONOMY",
+      label: t("panels.bookingClass.options.premiumEconomy"),
+    },
+    {
+      value: "CABIN_CLASS_BUSINESS",
+      label: t("panels.bookingClass.options.business"),
+    },
+    {
+      value: "CABIN_CLASS_FIRST",
+      label: t("panels.bookingClass.options.first"),
+    },
+  ];
 
   const toggleCarrier = (code: string, checked: boolean) => {
     if (checked) {
@@ -54,12 +81,9 @@ export const AirplaneFiltersSection = ({
       children: (
         <BookingClassFilter
           searchPlaceholder={t("common.searchPlaceholder")}
-          options={[
-            t("panels.bookingClass.options.economy"),
-            t("panels.bookingClass.options.premiumEconomy"),
-            t("panels.bookingClass.options.business"),
-            t("panels.bookingClass.options.first"),
-          ]}
+          options={bookingClassOptions}
+          selected={cabinClass}
+          onChange={onCabinClassChange}
         />
       ),
     },

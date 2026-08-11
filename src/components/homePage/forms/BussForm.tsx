@@ -87,6 +87,11 @@ export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
     </div>
   );
 
+  // A leg that starts and ends at the same station is not a trip, so each side
+  // drops whatever the other one is already set to.
+  const departureOptions = locationOptions.filter((o) => o.value !== arrival);
+  const arrivalOptions = locationOptions.filter((o) => o.value !== departure);
+
   const isRoundTrip = tripType === "round-trip";
   const isFormValid =
     !!departure &&
@@ -173,7 +178,7 @@ export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
                 disabled={readonly}
                 open={readonly ? false : undefined}
                 loading={locationsLoading}
-                options={locationOptions}
+                options={departureOptions}
                 notFoundContent={
                   locationsLoading ? t("fields.loading") : t("fields.noOptions")
                 }
@@ -208,7 +213,7 @@ export const BussForm = ({ readonly = false }: { readonly?: boolean }) => {
                 disabled={readonly}
                 open={readonly ? false : undefined}
                 loading={locationsLoading}
-                options={locationOptions}
+                options={arrivalOptions}
                 notFoundContent={
                   locationsLoading ? t("fields.loading") : t("fields.noOptions")
                 }

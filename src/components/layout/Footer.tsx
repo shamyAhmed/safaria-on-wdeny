@@ -21,9 +21,9 @@ export const Footer = () => {
             <div className="flex flex-col gap-4 sm:justify-between">
               <Link href={getLink("/")}>
                 <Image
-                  src={"/images/logo-white.png"}
+                  src={"/images/logo-full-white.svg"}
                   width={200}
-                  height={60}
+                  height={45}
                   alt={t("logoAlt")}
                   className="mb-8"
                 />

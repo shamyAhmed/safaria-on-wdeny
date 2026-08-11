@@ -1,12 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { Modal, Button, Input, Form } from "antd";
+import { Modal, Button, Input, Form, Select } from "antd";
 import { RiShieldCheckLine } from "react-icons/ri";
 import { useTranslations } from "next-intl";
 import { useAddBalance } from "@/hooks/auth/useAddBalance";
+import useGetCurrencies, {
+  type Currency,
+} from "@/app/[locale]/_hooks/useGetCurrencies";
 
 const QUICK_AMOUNTS = [50, 100, 200, 300, 400, 500];
+
+const DEFAULT_CURRENCY = "EGP";
+
+/** Egyptian pounds unless the account has no such currency to charge in. */
+const defaultCurrencyOf = (currencies: Currency[]) =>
+  currencies.some((c) => c.code === DEFAULT_CURRENCY)
+    ? DEFAULT_CURRENCY
+    : (currencies[0]?.code ?? DEFAULT_CURRENCY);
 
 interface AddCreditModalProps {
   open: boolean;
@@ -18,6 +29,9 @@ export const AddCreditModal = ({ open, onClose }: AddCreditModalProps) => {
   const [form] = Form.useForm();
   const [activeQuick, setActiveQuick] = useState<number | null>(100);
   const { addBalanceMutation, addBalanceLoading } = useAddBalance();
+  const { data: currencies = [], isLoading: currenciesLoading } =
+    useGetCurrencies();
+  const [currency, setCurrency] = useState(DEFAULT_CURRENCY);
 
   const handleQuickPick = (val: number) => {
     setActiveQuick(val);
@@ -36,7 +50,7 @@ export const AddCreditModal = ({ open, onClose }: AddCreditModalProps) => {
 
   const handleSubmit = async () => {
     const values = await form.validateFields();
-    await addBalanceMutation(Number(values.amount));
+    await addBalanceMutation({ amount: Number(values.amount), currency });
   };
 
   return (
@@ -51,25 +65,39 @@ export const AddCreditModal = ({ open, onClose }: AddCreditModalProps) => {
         if (visible) {
           form.setFieldValue("amount", "100.00");
           setActiveQuick(100);
+          setCurrency(defaultCurrencyOf(currencies));
         }
       }}
     >
       <Form form={form} layout="vertical" requiredMark={false}>
         {/* Amount input */}
-        <div className="inputS1 mb-8">
+        <div className="inputS1 mb-4">
           <Form.Item
             label={t("amountLabel")}
             name="amount"
             rules={[{ required: true, message: t("amountRequired") }]}
           >
             <Input
-              suffix={
-                <span className="text-gray-400 text-sm">{t("currency")}</span>
-              }
+              suffix={<span className="text-gray-400 text-sm">{currency}</span>}
               type="number"
               min={0}
               onChange={handleAmountChange}
               placeholder="0.00"
+            />
+          </Form.Item>
+        </div>
+
+        {/* Currency */}
+        <div className="inputS1 mb-8">
+          <Form.Item label={t("currencyLabel")}>
+            <Select
+              value={currency}
+              onChange={setCurrency}
+              loading={currenciesLoading}
+              options={currencies.map((c) => ({
+                value: c.code,
+                label: `${c.code} — ${c.name}`,
+              }))}
             />
           </Form.Item>
         </div>
@@ -87,7 +115,7 @@ export const AddCreditModal = ({ open, onClose }: AddCreditModalProps) => {
                   : "bg-gray-50 text-gray-500 border-gray-200 hover:border-primary hover:text-primary"
               }`}
             >
-              {t("quickAmount", { amount: val })}
+              {t("quickAmount", { amount: val, currency })}
             </button>
           ))}
         </div>

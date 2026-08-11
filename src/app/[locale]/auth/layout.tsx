@@ -36,7 +36,7 @@ export default async function AuthLayout({
               />
               <Link href="/" className="absolute top-4 left-4">
                 <Image
-                  src="/images/logo-white.png"
+                  src="/images/logo-full-white.svg"
                   width={135}
                   height={30}
                   alt={tAuth("logo")}

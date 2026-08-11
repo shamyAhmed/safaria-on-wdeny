@@ -178,10 +178,14 @@ export const DiscoverAirplanComponent = () => {
     { passengerTypeCode: "INF" as const, count: inf },
   ].filter((p) => p.count > 0);
 
+  // The class the current results were actually searched with — the filter wins
+  // over the one the search started from, and the cards must label it the same.
+  const activeCabinClass = deferredFilters.cabinClass ?? cabinClass;
+
   const sharedPayload = {
     passengers,
     sortingCriteria: deferredFilters.sort,
-    cabinClass: deferredFilters.cabinClass ?? cabinClass,
+    cabinClass: activeCabinClass,
     directFlightsOnly: deferredFilters.directFlightsOnly,
     ...(deferredFilters.refundableOnly ? { refundability: "Refundable" as const } : {}),
   };
@@ -225,7 +229,7 @@ export const DiscoverAirplanComponent = () => {
   const { data, isLoading } = useSearchFlights(payload);
 
   const flights = (data ?? [])
-    .map((offer) => mapOfferToFlight(offer, tripType, cabinClass, locale))
+    .map((offer) => mapOfferToFlight(offer, tripType, activeCabinClass, locale))
     .filter((flight) => flight.haveBundles === false);
 
   const visibleFlights = useMemo(() => {
@@ -382,7 +386,12 @@ export const DiscoverAirplanComponent = () => {
                 />
                 <p>{t("filters.title")}</p>
               </h4>
-              <button className="text-primary">{t("filters.reset")}</button>
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="text-primary">
+                {t("filters.reset")}
+              </button>
             </div>
             <div className="rounded-[20px] bg-white py-8 px-6 mb-6">
               <AirplaneFiltersSection
@@ -398,6 +407,8 @@ export const DiscoverAirplanComponent = () => {
                 carriers={cachedCarriers}
                 selectedCarriers={filters.selectedCarriers}
                 onCarriersChange={(codes) => onFilterChange("selectedCarriers", codes)}
+                cabinClass={filters.cabinClass}
+                onCabinClassChange={(value) => onFilterChange("cabinClass", value)}
               />
             </div>
           </Col>
@@ -489,6 +500,8 @@ export const DiscoverAirplanComponent = () => {
             carriers={cachedCarriers}
             selectedCarriers={filters.selectedCarriers}
             onCarriersChange={(codes) => onFilterChange("selectedCarriers", codes)}
+            cabinClass={filters.cabinClass}
+            onCabinClassChange={(value) => onFilterChange("cabinClass", value)}
           />
         </div>
       </Drawer>

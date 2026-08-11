@@ -1,6 +1,7 @@
 import apiRoutes from "@/lib/apiRoutes";
 import axiosInstance from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
+import { isAxiosError } from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/appStore";
 import { ApiResponse } from "../_types/Api";
@@ -14,12 +15,22 @@ const useSearchFlights = (payload: SearchFlightPayload | null) => {
         enabled: !!payload,
         queryKey: [apiRoutes.searchFlight, payload, currency],
         queryFn: async () => {
-            const response = await axiosInstance.post<ApiResponse<FlightOffer[]>>(
-                apiRoutes.searchFlight,
-                payload,
-                { params: { currency } },
-            );
-            return response.data.data;
+            try {
+                const response = await axiosInstance.post<ApiResponse<FlightOffer[]>>(
+                    apiRoutes.searchFlight,
+                    payload,
+                    { params: { currency } },
+                );
+                return response.data.data;
+            } catch (error) {
+                // A combination with nothing to sell (say, first class on a route
+                // that has none) comes back as a 400, not an empty list. That is
+                // an empty result, not a failure worth retrying.
+                if (isAxiosError(error) && error.response?.status === 400) {
+                    return [] as FlightOffer[];
+                }
+                throw error;
+            }
         },
     });
 };
