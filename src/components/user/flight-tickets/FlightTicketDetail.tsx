@@ -23,6 +23,7 @@ import {
   orderStatusColor,
   orderStatusKey,
 } from "@/components/user/my-trips/TicketStatusBadge";
+import { orderPaymentState } from "@/components/user/my-trips/OrderActions";
 import type {
   FlightOrder,
   FlightOrderJourney,
@@ -393,7 +394,9 @@ export const FlightTicketDetail = ({ orderId }: FlightTicketDetailProps) => {
                   )}
                 </div>
                 <TxStatusBadge status={tx.status} labels={paymentStatusLabels} />
-                {tx.invoice_url && (
+                {/* A pending or failed attempt links to the gateway's payment
+                    page rather than a receipt, so it gets no invoice link. */}
+                {orderPaymentState(tx.status) === "paid" && tx.invoice_url && (
                   <a
                     href={tx.invoice_url}
                     target="_blank"

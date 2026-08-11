@@ -14,6 +14,7 @@ import {
   orderStatusColor,
   orderStatusKey,
 } from "@/components/user/my-trips/TicketStatusBadge";
+import { orderPaymentState } from "@/components/user/my-trips/OrderActions";
 
 const Section = ({
   title,
@@ -62,6 +63,10 @@ export const BusTicketDetailModal = ({
   const statusKey = orderStatusKey(statusCode);
   const payCode = order?.payment_data?.status_code ?? "";
   const payKey = orderStatusKey(payCode);
+
+  // An unpaid order still carries invoice links — the gateway one is really its
+  // payment page — so neither is worth offering until the money has landed.
+  const isPaid = orderPaymentState(payCode || statusCode) === "paid";
 
   return (
     <Modal
@@ -242,7 +247,7 @@ export const BusTicketDetailModal = ({
                   color={orderStatusColor(payCode)}
                 />
               )}
-              {order.payment_data?.invoice_url && (
+              {isPaid && order.payment_data?.invoice_url && (
                 <a
                   href={order.payment_data.invoice_url}
                   className="flex items-center gap-1 text-xs text-primary hover:opacity-80 transition-opacity font-medium shrink-0">
@@ -253,7 +258,7 @@ export const BusTicketDetailModal = ({
             </div>
           </Section>
 
-          {order.invoice_url && (
+          {isPaid && order.invoice_url && (
             <div className="flex justify-end">
               <a href={order.invoice_url} target="_blank" rel="noopener noreferrer">
                 <Button className="!rounded-full !h-10 !px-6 !font-semibold">

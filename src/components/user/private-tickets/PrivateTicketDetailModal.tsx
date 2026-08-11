@@ -15,6 +15,7 @@ import {
   orderStatusColor,
   orderStatusKey,
 } from "@/components/user/my-trips/TicketStatusBadge";
+import { orderPaymentState } from "@/components/user/my-trips/OrderActions";
 
 const Section = ({
   title,
@@ -69,6 +70,11 @@ export const PrivateTicketDetailModal = ({
   const payStatus = order?.transaction?.status ?? "";
   const payKey = orderStatusKey(payStatus);
   const vehicle = order?.trip?.vehicle;
+
+  // The gateway link on an unpaid order is its payment page, not a receipt, so
+  // it only earns the "invoice" label once the money has landed.
+  const isPaid =
+    orderPaymentState(payStatus || order?.status || "") === "paid";
 
   return (
     <Modal
@@ -236,7 +242,7 @@ export const PrivateTicketDetailModal = ({
                   label={payKey ? t(`status.${payKey}`) : payStatus}
                   color={orderStatusColor(payStatus)}
                 />
-                {order.transaction.invoice_url && (
+                {isPaid && order.transaction.invoice_url && (
                   <a
                     href={order.transaction.invoice_url}
                     className="flex items-center gap-1 text-xs text-primary hover:opacity-80 transition-opacity font-medium shrink-0">
