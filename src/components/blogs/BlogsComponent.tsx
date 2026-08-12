@@ -50,7 +50,7 @@ export const BlogsComponent = () => {
                       title={blog.title}
                       description={blog.description?.slice(0, 100)}
                       buttonText={t("moreDetails")}
-                      backgroundImage={blog.image.url}
+                      backgroundImage={blog.image?.url}
                     />
                   </Col>
                 ))}

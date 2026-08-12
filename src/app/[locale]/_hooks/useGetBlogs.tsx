@@ -10,9 +10,10 @@ export type BlogPost = {
   description: string | null;
   seo_title: string | null;
   seo_description: string | null;
+  /** Null until the post is given artwork. */
   image: {
     url: string;
-  };
+  } | null;
   category: {
     id: number;
     name: string;

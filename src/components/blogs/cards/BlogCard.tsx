@@ -2,8 +2,8 @@
 import React from "react";
 import { Button } from "antd";
 import { FiChevronLeft } from "react-icons/fi";
-import Image from "next/image";
 import { useRouter } from "@/i18n/navigation";
+import { CmsImage } from "@/components/common/CmsImage";
 
 interface BlogCardProps {
   slug?: string;
@@ -11,7 +11,7 @@ interface BlogCardProps {
   title: string;
   description?: string;
   buttonText: string;
-  backgroundImage: string;
+  backgroundImage?: string;
 }
 
 export const BlogCard = ({
@@ -27,11 +27,14 @@ export const BlogCard = ({
     <div className="relative w-full h-[500px] rounded-3xl overflow-hidden group border border-white">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <Image
+        <CmsImage
           src={backgroundImage}
           alt={title}
           fill
           className="object-cover"
+          placeholderClassName="!bg-primary-800/40"
+          placeholderIconClassName="text-4xl"
+          showPlaceholderLabel={false}
           priority
         />
         {/* Gradient Overlay */}

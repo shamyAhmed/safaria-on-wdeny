@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { CmsImage } from "@/components/common/CmsImage";
 import { FaHome } from "react-icons/fa";
 import { BsCalendar2Date } from "react-icons/bs";
 import { Col, Row } from "antd";
@@ -47,11 +47,13 @@ export function SingleBlogComponent({ blog }: SingleBlogComponentProps) {
         <div className="bg-white rounded-[40px] p-6 relative">
           {/* Main Image */}
           <div className="relative w-full h-[340px] rounded-2xl overflow-hidden mb-6">
-            <Image
-              src={blog.image.url}
+            <CmsImage
+              src={blog.image?.url}
               alt={blog.title}
               fill
               className="object-cover"
+              placeholderIconClassName="text-5xl"
+              showPlaceholderLabel={false}
               priority
             />
           </div>
@@ -97,7 +99,7 @@ export function SingleBlogComponent({ blog }: SingleBlogComponentProps) {
                   <BlogCard
                     title={related.title}
                     buttonText={t("moreDetails")}
-                    backgroundImage={related.image.url}
+                    backgroundImage={related.image?.url}
                     slug={related.slug}
                   />
                 </Col>
