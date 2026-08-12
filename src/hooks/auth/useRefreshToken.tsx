@@ -19,14 +19,10 @@ export const useRefreshToken = (tokenType: TokenType = "user") => {
     tokenType === "admin" ? "/admin/auth/refresh" : "/auth/refresh";
   const loginPath = tokenType === "admin" ? "admin/login" : "user/login";
 
-  console.log("Refresh cookie:", refreshTokenName, getCookie(refreshTokenName));
-
   const mutation = useMutation({
     mutationFn: async () => {
       const currentRefreshToken = getCookie(refreshTokenName);
       if (!currentRefreshToken) throw new Error("No refresh token");
-
-      console.log(`🔄 Refreshing ${tokenType} token...`);
 
       // Don't send Authorization header for refresh requests
       const response = await axiosInstance.post(
