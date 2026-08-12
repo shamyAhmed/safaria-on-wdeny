@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { CmsImage } from "@/components/common/CmsImage";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,9 +18,11 @@ interface CompanyCardProps {
   companyName: string;
   companyLogo: string;
   images: string[];
-  detailsLabel: string;
+  detailsLabel?: string;
   isArabic?: boolean;
   imageHeightClass?: string;
+  /** Drop the "more details" affordance where the card is decorative. */
+  showDetailsLink?: boolean;
 }
 
 export const CompanyCard = ({
@@ -31,9 +33,13 @@ export const CompanyCard = ({
   detailsLabel,
   isArabic = true,
   imageHeightClass = "h-[290px]",
+  showDetailsLink = true,
 }: CompanyCardProps) => {
+  // A company with no gallery still gets one slide, so the card keeps its shape
+  // and shows a placeholder rather than collapsing to an empty box.
+  const slides = images.length > 0 ? images : [""];
   const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(images.length <= 1);
+  const [isEnd, setIsEnd] = useState(slides.length <= 1);
 
   const syncNavState = (swiper: SwiperType) => {
     setIsBeginning(swiper.isBeginning);
@@ -63,14 +69,16 @@ export const CompanyCard = ({
           onSlideChange={syncNavState}
           className="w-full h-full"
         >
-          {images.map((image, index) => (
+          {slides.map((image, index) => (
             <SwiperSlide key={`${companyId}-${index}`}>
               <div className="relative w-full h-full">
-                <Image
+                <CmsImage
                   src={image}
                   alt={`${companyName} ${index + 1}`}
                   fill
                   className="object-cover"
+                  placeholderIconClassName="text-3xl"
+                  showPlaceholderLabel={false}
                 />
               </div>
             </SwiperSlide>
@@ -104,11 +112,14 @@ export const CompanyCard = ({
           <div
             className={`relative w-[50px] h-[50px] flex-shrink-0 ${styles.logoWrap}`}
           >
-            <Image
+            <CmsImage
               src={companyLogo}
               alt={companyName}
               fill
               className="object-contain"
+              placeholderClassName="rounded-full !bg-gray-100"
+              placeholderIconClassName="text-lg"
+              showPlaceholderLabel={false}
             />
           </div>
           <div className="flex items-center gap-2">
@@ -118,17 +129,19 @@ export const CompanyCard = ({
           </div>
         </div>
 
-        <Link
-          href={`/companies/${companyId}`}
-          className={`text-primary font-medium flex items-center gap-2 ${styles.details}`}
-        >
-          {detailsLabel}
-          {isArabic ? (
-            <FiChevronLeft className={`text-sm ${styles.detailsIcon}`} />
-          ) : (
-            <FiChevronRight className={`text-sm ${styles.detailsIcon}`} />
-          )}
-        </Link>
+        {showDetailsLink && (
+          <Link
+            href={`/companies/${companyId}`}
+            className={`text-primary font-medium flex items-center gap-2 ${styles.details}`}
+          >
+            {detailsLabel}
+            {isArabic ? (
+              <FiChevronLeft className={`text-sm ${styles.detailsIcon}`} />
+            ) : (
+              <FiChevronRight className={`text-sm ${styles.detailsIcon}`} />
+            )}
+          </Link>
+        )}
       </div>
     </div>
   );

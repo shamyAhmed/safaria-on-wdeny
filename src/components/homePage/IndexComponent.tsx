@@ -1,8 +1,9 @@
+import { Fragment } from "react";
 import style from "./styles/homePage.module.scss";
 import StatsSection from "./sections/StatsSection";
 import AboutSection from "./sections/AboutSection";
-import Image from "next/image";
 import { WhyWodiniSection } from "./sections/WhyWodiniSection";
+import { BannerSection } from "./sections/BannerSection";
 import { PaymentMethodsSection } from "./sections/PaymentMethodsSection";
 import { PartnerCompaniesSection } from "./sections/PartnerCompaniesSection";
 import { TravelDestinationsSection } from "./sections/TravelDestinationsSection";
@@ -13,35 +14,56 @@ import { getTranslations } from "next-intl/server";
 import GetAppSection from "./sections/GetAppSection";
 import { SuccessPartnersSection } from "./sections/SuccessPartnersSection";
 import { ScrollToTopButton } from "./ScrollToTopButton";
+import { getSiteBlocks } from "@/apiCalls/home/getSiteBlocks";
+import { SiteBlock } from "@/app/[locale]/_types/SiteBlocks";
+
+/**
+ * Renders one CMS block. The switch is on `type` — the *behaviour* the block
+ * asks for — never on `id`, so the CMS is free to add, drop or reorder slots
+ * without a code change. Unknown types are skipped.
+ */
+const renderBlock = (block: SiteBlock) => {
+  switch (block.type) {
+    case "stats":
+      return <StatsSection data={block.data} />;
+    case "split_content":
+      return <AboutSection data={block.data} />;
+    case "feature_showcase":
+      return <WhyWodiniSection data={block.data} />;
+    case "banner":
+      return <BannerSection data={block.data} />;
+    case "logo_carousel":
+      return <PaymentMethodsSection data={block.data} />;
+    case "partners":
+      return <PartnerCompaniesSection data={block.data} />;
+    case "feature_grid":
+      return <AllInOneAppSection data={block.data} />;
+    case "media_cards":
+      return <TravelDestinationsSection data={block.data} />;
+    case "steps":
+      return <HowToBookSection data={block.data} />;
+    case "app_promo":
+      return <GetAppSection data={block.data} />;
+    case "posts":
+      return <HomeBlogsSection data={block.data} />;
+    case "logo_grid":
+      return <SuccessPartnersSection data={block.data} />;
+    default:
+      return null;
+  }
+};
+
 export const IndexComponent: React.FC = async () => {
   const t = await getTranslations("homePage");
 
   try {
+    const blocks = await getSiteBlocks();
+
     return (
       <>
-        <StatsSection />
-        <AboutSection />
-        <WhyWodiniSection />
-
-        <div className="container">
-            <div className="flex items-center justify-center relative h-[560px] rounded-2xl overflow-hidden">
-              <Image
-                src="/images/home-banner.webp"
-                fill
-                objectFit="cover"
-                alt={t("bannerImageAlt")}
-              />
-          </div>
-        </div>
-
-        <PaymentMethodsSection />
-        <PartnerCompaniesSection />
-        <AllInOneAppSection />
-        <TravelDestinationsSection />
-        <HowToBookSection />
-        <GetAppSection />
-        <HomeBlogsSection />
-        <SuccessPartnersSection />
+        {blocks.map((block) => (
+          <Fragment key={`${block.id}-${block.sort}`}>{renderBlock(block)}</Fragment>
+        ))}
         <ScrollToTopButton />
       </>
     );

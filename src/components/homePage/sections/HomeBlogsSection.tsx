@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { Button } from "antd";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { BlogCard } from "@/components/blogs/cards/BlogCard";
 import { BlogCardSkeleton } from "@/components/blogs/cards/BlogCardSkeleton";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,26 +12,34 @@ import { HomeSection } from "../HomeSection";
 import "swiper/css";
 import { Link } from "@/i18n/navigation";
 import useGetBlogs from "@/app/[locale]/_hooks/useGetBlogs";
+import { PostsBlockData } from "@/app/[locale]/_types/SiteBlocks";
+import { pickText } from "@/utils/localizedText";
 
-export const HomeBlogsSection = () => {
+export const HomeBlogsSection = ({ data }: { data: PostsBlockData }) => {
   const t = useTranslations("homePage.blogsShowcase");
+  const locale = useLocale();
   const swiperRef = useRef<SwiperType | null>(null);
   const { data: allBlogs = [], isLoading } = useGetBlogs();
-  const blogs = allBlogs.slice(0, 3);
+
+  // The block can hand-pick the posts to showcase; when it doesn't, fall back
+  // to the latest from the live blog feed.
+  const curated = data.posts ?? [];
+  const blogs = (curated.length > 0 ? curated : allBlogs).slice(0, 3);
+  const isPending = curated.length === 0 && isLoading;
 
   // With nothing published there is no showcase to make — drop the whole band
   // rather than leaving an empty section on the home page.
-  if (!isLoading && blogs.length === 0) return null;
+  if (!isPending && blogs.length === 0) return null;
 
   return (
     <HomeSection
-      title={t("title")}
-      description={t("description")}
+      title={pickText(data.title, locale)}
+      description={pickText(data.description, locale)}
       className="py-16 bg-primary"
       descriptionClassName="max-w-3xl"
       light>
       <div className="container">
-        {isLoading ? (
+        {isPending ? (
           <Swiper
             spaceBetween={20}
             slidesPerView={1}
@@ -61,7 +69,7 @@ export const HomeBlogsSection = () => {
                     title={blog.title}
                     description={blog.description?.slice(0, 100)}
                     buttonText={t("cardButton")}
-                    backgroundImage={blog.image.url}
+                    backgroundImage={blog.image?.url}
                   />
                 </SwiperSlide>
               ))}

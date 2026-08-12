@@ -22,10 +22,14 @@ function ContactFormSkeleton() {
         <Skeleton.Button active block style={{ height: 46, borderRadius: 12 }} />
       </div>
 
-      {/* Image skeleton */}
+      {/* Image skeleton — mirrors the real image panel's 450px-min, full-height box.
+          `style` lands on antd's inner element, whose wrapper is a shrink-to-fit
+          inline-block, so the wrapper needs sizing of its own or the skeleton
+          collapses to the width of the placeholder icon. */}
       <div className="flex-1">
         <Skeleton.Image
           active
+          rootClassName="!block !w-full !h-full"
           style={{ width: "100%", minHeight: 450, height: "100%", borderRadius: 30 }}
         />
       </div>

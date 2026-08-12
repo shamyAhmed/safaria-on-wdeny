@@ -3,44 +3,31 @@ import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import Image from "next/image";
 import type { Swiper as SwiperType } from "swiper";
 import { useTranslations, useLocale } from "next-intl";
 import { HomeSection } from "../HomeSection";
+import { LogoCarouselBlockData } from "@/app/[locale]/_types/SiteBlocks";
+import { pickText } from "@/utils/localizedText";
+import { CmsImage } from "@/components/common/CmsImage";
 
-interface PaymentMethod {
-  id: number;
-  name: string;
-  logo: string;
-}
-
-export const PaymentMethodsSection = () => {
+export const PaymentMethodsSection = ({ data }: { data: LogoCarouselBlockData }) => {
   const swiperRef = useRef<SwiperType>();
   const t = useTranslations("homePage.paymentMethods");
   const locale = useLocale();
   const isRtl = locale === "ar";
 
-  const paymentMethods: PaymentMethod[] = [
-    { id: 1,  name: t("methods.tabbyTamara"), logo: "/images/payments/payment-2.webp" },
-    { id: 2,  name: t("methods.visa"),         logo: "/images/payments/payment-3.png" },
-    { id: 3,  name: t("methods.applePay"),     logo: "/images/payments/payment-4.webp" },
-    { id: 4,  name: t("methods.mada"),         logo: "/images/payments/payment-5.webp" },
-    { id: 5,  name: t("methods.stcPay"),       logo: "/images/payments/payment-6.webp" },
-    { id: 6,  name: t("methods.moyasar"),      logo: "/images/payments/payment-2.webp" },
-    { id: 7,  name: "Mastercard",              logo: "/images/payments/payment-3.png" },
-    { id: 8,  name: "Google Pay",              logo: "/images/payments/payment-4.webp" },
-    { id: 9,  name: "PayPal",                  logo: "/images/payments/payment-5.webp" },
-    { id: 10, name: "Tabby",                   logo: "/images/payments/payment-6.webp" },
-    { id: 11, name: "Tamara",                  logo: "/images/payments/payment-2.webp" },
-    { id: 12, name: "Urpay",                   logo: "/images/payments/payment-3.png" },
-    { id: 13, name: "Benefit Pay",             logo: "/images/payments/payment-4.webp" },
-    { id: 14, name: "Bank Transfer",           logo: "/images/payments/payment-5.webp" },
-  ];
+  const paymentMethods = (data.items ?? []).map((item, index) => ({
+    id: `${item.alt}-${index}`,
+    name: item.alt,
+    logo: item.image,
+  }));
+
+  if (paymentMethods.length === 0) return null;
 
   return (
     <HomeSection
-      title={t("title")}
-      description={`${t("descriptionLine1")} ${t("descriptionLine2")}`}
+      title={pickText(data.title, locale)}
+      description={pickText(data.description, locale)}
       className="py-16 bg-[#FBFBFD]"
     >
       <div className="bg-white rounded-[28px] container py-10">
@@ -61,14 +48,15 @@ export const PaymentMethodsSection = () => {
           >
             {paymentMethods.map((method) => (
               <SwiperSlide key={method.id}>
-                <div className="bg-[#F7F7F7] rounded-2xl p-3 md:p-4 shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-center h-24 md:h-28">
+                <div className="bg-[#F7F7F7] rounded-2xl p-3 md:p-4 shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-center h-24 md:h-28 overflow-hidden">
                   <div className="relative w-full h-full flex items-center justify-center">
-                    <Image
+                    <CmsImage
                       src={method.logo}
                       alt={method.name}
                       width={150}
                       height={60}
                       className="object-contain max-w-full max-h-full"
+                      placeholderClassName="!bg-transparent rounded-xl"
                     />
                   </div>
                 </div>

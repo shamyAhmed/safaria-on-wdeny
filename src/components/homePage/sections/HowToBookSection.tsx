@@ -1,55 +1,31 @@
 "use client";
 import React, { useRef } from "react";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { HomeSection } from "../HomeSection";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { StepsBlockData } from "@/app/[locale]/_types/SiteBlocks";
+import { pickText } from "@/utils/localizedText";
+import { CmsImage } from "@/components/common/CmsImage";
 
-interface BookingStep {
-  id: number;
-  stepNumber: string;
-  title: string;
-  description?: string;
-  image: string;
-}
-
-export const HowToBookSection = () => {
-  const t = useTranslations("homePage.howToBook");
+export const HowToBookSection = ({ data }: { data: StepsBlockData }) => {
+  const locale = useLocale();
   const swiperRef = useRef<SwiperType | null>(null);
 
-  const steps: BookingStep[] = [
-    {
-      id: 1,
-      stepNumber: "01",
-      title: t("steps.1.title"),
-      image: "/images/step-1.png",
-    },
-    {
-      id: 2,
-      stepNumber: "02",
-      title: t("steps.2.title"),
-      image: "/images/step-2.png",
-    },
-    {
-      id: 3,
-      stepNumber: "03",
-      title: t("steps.3.title"),
-      image: "/images/step-3.png",
-    },
-    {
-      id: 4,
-      stepNumber: "04",
-      title: t("steps.4.title"),
-      image: "/images/step-4.png",
-    },
-  ];
+  const steps = (data.items ?? []).map((item, index) => ({
+    id: index,
+    stepNumber: item.number || String(index + 1).padStart(2, "0"),
+    title: pickText(item.title, locale),
+    image: item.image,
+  }));
+
+  if (steps.length === 0) return null;
 
   return (
     <HomeSection
-      title={t("title")}
-      description={t("description")}
+      title={pickText(data.title, locale)}
+      description={pickText(data.description, locale)}
       className="py-16 bg-gray-50">
       <Swiper
         spaceBetween={20}
@@ -61,9 +37,7 @@ export const HowToBookSection = () => {
         className="home-blogs-swiper">
         {steps.map((step) => (
           <SwiperSlide key={step.id}>
-            <div
-              key={step.id}
-              className="flex flex-col">
+            <div className="flex flex-col">
               <div className="bg-white rounded-[28px] p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-center text-center mb-6">
                 <div className="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold mb-4">
                   {step.stepNumber}
@@ -73,11 +47,13 @@ export const HowToBookSection = () => {
                 </h3>
                 <div className="relative w-full max-w-[200px] h-[350px] md:h-[400px] mx-auto">
                   <div className="relative w-full h-full rounded-[28px] overflow-hidden shadow-lg">
-                    <Image
+                    <CmsImage
                       src={step.image}
                       alt={step.title}
                       fill
                       className="object-contain"
+                      showPlaceholderLabel={false}
+                      placeholderIconClassName="text-4xl"
                     />
                   </div>
                 </div>

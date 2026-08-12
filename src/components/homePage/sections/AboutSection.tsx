@@ -1,33 +1,25 @@
 "use client";
-import { Row, Col, Button } from "antd";
+import { Button } from "antd";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { useTranslations } from "next-intl";
-import Image from "next/image";
+import { useLocale } from "next-intl";
 import { useLocalizedLink } from "@/hooks/useLocalizedLink";
+import { SplitContentBlockData } from "@/app/[locale]/_types/SiteBlocks";
+import { pickText, toParagraphs } from "@/utils/localizedText";
+import { CmsImage } from "@/components/common/CmsImage";
 
-export default function AboutSection() {
-  const t = useTranslations("homePage.about");
+export default function AboutSection({ data }: { data: SplitContentBlockData }) {
+  const locale = useLocale();
   const getLink = useLocalizedLink();
 
-  const slides = [
-    {
-      id: 1,
-      src: "/images/login.webp",
-      alt: t("slides.1.alt"),
-    },
-    {
-      id: 2,
-      src: "/images/contact-us.webp",
-      alt: t("slides.2.alt"),
-    },
-    {
-      id: 3,
-      src: "/images/home-hero.webp",
-      alt: t("slides.3.alt"),
-    },
-  ];
+  const title = pickText(data.title, locale);
+  const paragraphs = toParagraphs(pickText(data.body, locale));
+  const ctaLabel = pickText(data.cta_label, locale);
+
+  // Blank entries are kept rather than filtered: each one is a gallery slot the
+  // CMS still owes an image, and the placeholder says so.
+  const slides = data.media ?? [];
 
   return (
     <section className="py-10 md:py-20 bg-[#FBFBFD]">
@@ -37,24 +29,26 @@ export default function AboutSection() {
           <div className="md:max-w-[430px] py-[35px] flex justify-center items-center">
             <div className="gap-5 h-full flex flex-col flex-1">
               <h2 className="text-[40px] leading-[52px] font-black text-primary">
-                {t("title")}
+                {title}
               </h2>
 
-              <p className="text-gray-500 text-base leading-8">
-                {t("description1")}
-              </p>
+              {paragraphs.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className="text-gray-500 text-base leading-8">
+                  {paragraph}
+                </p>
+              ))}
 
-              <p className="text-gray-500 text-base leading-8">
-                {t("description2")}
-              </p>
-
-              <Button
-                type="primary"
-                size="large"
-                href={getLink("/contact-us")}
-                className="min-w-40 mt-auto">
-                {t("contactButton")}
-              </Button>
+              {ctaLabel && data.cta_url && (
+                <Button
+                  type="primary"
+                  size="large"
+                  href={getLink(data.cta_url)}
+                  className="min-w-40 mt-auto">
+                  {ctaLabel}
+                </Button>
+              )}
             </div>
           </div>
 
@@ -69,7 +63,7 @@ export default function AboutSection() {
                   nextEl: ".swiper-prev",
                 }}
                 dir="ltr"
-                loop
+                loop={slides.length > 1}
                 className="rounded-2xl gap-2"
                 breakpoints={{
                   0: {
@@ -84,14 +78,17 @@ export default function AboutSection() {
                     //   slidesOffsetAfter: 15,
                   },
                 }}>
-                {slides.map((slide) => (
-                  <SwiperSlide key={slide.id}>
-                    <Image
-                      src={slide.src}
-                      alt={slide.alt}
+                {slides.map((src, index) => (
+                  <SwiperSlide key={`${src}-${index}`}>
+                    <CmsImage
+                      src={src}
+                      alt={`${title} ${index + 1}`}
                       className="overflow-hidden aspect-square shrink-0 max-h-[462px] object-cover rounded-2xl"
                       height={462}
                       width={462}
+                      placeholderClassName="aspect-square max-h-[462px] rounded-2xl"
+                      placeholderIconClassName="text-4xl"
+                      showPlaceholderLabel={false}
                     />
                   </SwiperSlide>
                 ))}

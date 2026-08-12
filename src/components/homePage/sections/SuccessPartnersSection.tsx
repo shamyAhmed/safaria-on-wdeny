@@ -1,34 +1,38 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid, Navigation } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
+import { LogoGridBlockData } from "@/app/[locale]/_types/SiteBlocks";
+import { pickText } from "@/utils/localizedText";
+import { CmsImage } from "@/components/common/CmsImage";
 import "swiper/css";
 import "swiper/css/grid";
 
-const partners = Array.from({ length: 20 }, (_, index) => ({
-  id: index + 1,
-  image: `/images/partners/partner-${(index % 10) + 1}.png`,
-}));
-
-export const SuccessPartnersSection = () => {
+export const SuccessPartnersSection = ({ data }: { data: LogoGridBlockData }) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const locale = useLocale();
-  const t = useTranslations("homePage.successPartners");
+
+  const partners = (data.items ?? []).map((item, index) => ({
+    id: `${item.alt}-${index}`,
+    alt: item.alt || `partner-${index + 1}`,
+    image: item.image,
+  }));
+
+  if (partners.length === 0) return null;
 
   return (
     <section className="bg-[#F4F4F6] py-12 md:py-16 lg:py-20">
       <div className="container">
         <div className="mb-8 lg:mb-12">
           <h2 className="mb-2 text-3xl font-extrabold text-primary md:text-4xl">
-            {t("title")}
+            {pickText(data.title, locale)}
           </h2>
           <p className="text-sm text-black/80 md:text-base">
-            {t("description")}
+            {pickText(data.description, locale)}
           </p>
         </div>
 
@@ -67,12 +71,13 @@ export const SuccessPartnersSection = () => {
           {partners.map((partner) => (
             <SwiperSlide key={partner.id}>
               <div className="mx-auto flex h-[130px] w-full max-w-[170px] items-center justify-center bg-white p-5 md:h-[140px] md:max-w-[190px] lg:h-[160px] lg:max-w-none lg:border lg:border-[#F2F2F2]">
-                <Image
+                <CmsImage
                   src={partner.image}
-                  alt={`partner-${partner.id}`}
+                  alt={partner.alt}
                   width={180}
                   height={90}
                   className="h-auto max-h-[72px] w-auto max-w-[140px] object-contain md:max-h-[80px] md:max-w-[150px]"
+                  placeholderClassName="!bg-transparent"
                 />
               </div>
             </SwiperSlide>

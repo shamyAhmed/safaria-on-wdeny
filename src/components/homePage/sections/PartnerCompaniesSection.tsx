@@ -8,32 +8,29 @@ import type { Swiper as SwiperType } from "swiper";
 import { useLocale, useTranslations } from "next-intl";
 import { CompanyCard } from "@/components/companies/cards/CompanyCard";
 import { HomeSection } from "../HomeSection";
+import { PartnersBlockData } from "@/app/[locale]/_types/SiteBlocks";
+import { pickText } from "@/utils/localizedText";
 import "swiper/css";
 
-interface CompanyCardData {
-  id: number;
-  name: string;
-  logo: string;
-  cover: string;
-}
-
-export const PartnerCompaniesSection = () => {
+export const PartnerCompaniesSection = ({ data }: { data: PartnersBlockData }) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const locale = useLocale();
+  const isArabic = locale === "ar";
   const t = useTranslations("homePage.partnerCompanies");
 
-  const companies: CompanyCardData[] = [
-    { id: 1, name: t("companies.1"), logo: "/photos/nowrasbus-logo.png", cover: "/photos/blue-bus.png" },
-    { id: 2, name: t("companies.2"), logo: "/photos/nowrasbus-logo.png", cover: "/photos/blue-bus.png" },
-    { id: 3, name: t("companies.3"), logo: "/photos/nowrasbus-logo.png", cover: "/photos/blue-bus.png" },
-    { id: 4, name: t("companies.4"), logo: "/photos/nowrasbus-logo.png", cover: "/photos/blue-bus.png" },
-    { id: 5, name: t("companies.5"), logo: "/photos/nowrasbus-logo.png", cover: "/photos/blue-bus.png" },
-  ];
+  const companies = (data.partners ?? []).map((partner) => ({
+    id: partner.id,
+    name: (isArabic ? partner.title_ar : partner.title_en) || partner.title,
+    logo: partner.logo,
+    images: partner.images ?? [],
+  }));
+
+  if (companies.length === 0) return null;
 
   return (
     <HomeSection
-      title={t("title")}
-      description={t("description")}
+      title={pickText(data.title, locale)}
+      description={pickText(data.description, locale)}
       className="py-16 bg-[#FBFBFD]"
       headerClassName="text-center md:text-start"
     >
@@ -44,7 +41,7 @@ export const PartnerCompaniesSection = () => {
           slidesPerView={1.1}
           onSwiper={(swiper) => { swiperRef.current = swiper; }}
           loop={true}
-          dir={locale === "ar" ? "rtl" : "ltr"}
+          dir={isArabic ? "rtl" : "ltr"}
           breakpoints={{
             640:  { slidesPerView: 2.5, spaceBetween: 16 },
             768:  { slidesPerView: 2.5, spaceBetween: 14 },
@@ -58,9 +55,9 @@ export const PartnerCompaniesSection = () => {
                 companyId={company.id}
                 companyName={company.name}
                 companyLogo={company.logo}
-                images={[company.cover, company.cover, company.cover]}
-                detailsLabel={t("details")}
-                isArabic={locale === "ar"}
+                images={company.images}
+                showDetailsLink={false}
+                isArabic={isArabic}
                 imageHeightClass="h-[190px]"
               />
             </SwiperSlide>
@@ -73,14 +70,14 @@ export const PartnerCompaniesSection = () => {
             className="w-12 h-12 rounded-full bg-white text-gray-700 flex items-center justify-center hover:bg-gray-50 transition-all duration-300 shadow-md border-2 border-gray-200"
             aria-label={t("navigation.previous")}
           >
-            {locale === "ar" ? <FiChevronRight className="text-xl" /> : <FiChevronLeft className="text-xl" />}
+            {isArabic ? <FiChevronRight className="text-xl" /> : <FiChevronLeft className="text-xl" />}
           </button>
           <button
             onClick={() => swiperRef.current?.slideNext()}
             className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center hover:bg-[#005A9C] transition-all duration-300 shadow-md"
             aria-label={t("navigation.next")}
           >
-            {locale === "ar" ? <FiChevronLeft className="text-xl" /> : <FiChevronRight className="text-xl" />}
+            {isArabic ? <FiChevronLeft className="text-xl" /> : <FiChevronRight className="text-xl" />}
           </button>
         </div>
       </div>

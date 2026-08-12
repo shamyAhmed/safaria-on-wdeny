@@ -4,23 +4,17 @@ import { Button } from "antd";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import Image from "next/image";
 import type { Swiper as SwiperType } from "swiper";
 import { useLocale, useTranslations } from "next-intl";
 import { useLocalizedLink } from "@/hooks/useLocalizedLink";
 import { HomeSection } from "../HomeSection";
+import { FeatureShowcaseBlockData } from "@/app/[locale]/_types/SiteBlocks";
+import { pickText } from "@/utils/localizedText";
+import { CmsImage } from "@/components/common/CmsImage";
+import { isScrollTarget, scrollToTop } from "@/utils/cmsLink";
 import "swiper/css";
 
-interface WhyWodiniSlide {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  buttonText: string;
-  buttonLink: string;
-}
-
-export const WhyWodiniSection = () => {
+export const WhyWodiniSection = ({ data }: { data: FeatureShowcaseBlockData }) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLargeScreen, setIsLargeScreen] = useState(false);
@@ -40,40 +34,24 @@ export const WhyWodiniSection = () => {
     return () => mediaQuery.removeEventListener("change", listener);
   }, []);
 
-  const slides: WhyWodiniSlide[] = [
-    {
-      id: 1,
-      title: t("slides.1.title"),
-      description: t("slides.1.description"),
-      image: "/photos/why-wadiny.webp",
-      buttonText: t("slides.1.buttonText"),
-      buttonLink: "#scroll-top",
-    },
-    {
-      id: 2,
-      title: t("slides.2.title"),
-      description: t("slides.2.description"),
-      image: "/photos/why-wadiny.webp",
-      buttonText: t("slides.2.buttonText"),
-      buttonLink: "/contact-us",
-    },
-    {
-      id: 4,
-      title: t("slides.1.title"),
-      description: t("slides.1.description"),
-      image: "/photos/why-wadiny.webp",
-      buttonText: t("slides.1.buttonText"),
-      buttonLink: "#scroll-top",
-    },
-  ];
+  const slides = (data.items ?? []).map((item, index) => ({
+    id: index,
+    title: pickText(item.title, locale),
+    description: pickText(item.description, locale),
+    image: item.image,
+    buttonText: pickText(item.cta_label, locale),
+    buttonLink: item.cta_url ?? "",
+  }));
 
-  const indicatorSlots = 4;
+  const indicatorSlots = slides.length;
   const direction = isLargeScreen ? "vertical" : "horizontal";
+
+  if (indicatorSlots === 0) return null;
 
   return (
     <HomeSection
-      title={t("title")}
-      description={t("description")}
+      title={pickText(data.title, locale)}
+      description={pickText(data.description, locale)}
       className="py-20 bg-white"
       descriptionClassName="max-w-4xl"
     >
@@ -111,7 +89,7 @@ export const WhyWodiniSection = () => {
               setActiveIndex(swiper.realIndex % indicatorSlots);
             }}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
-            loop={true}
+            loop={slides.length > 1}
             className="why-wodini-swiper h-[500px] md:h-[380px] lg:h-[420px]"
           >
             {slides.map((slide, index) => (
@@ -125,33 +103,37 @@ export const WhyWodiniSection = () => {
                       <p className="text-gray-700 line-clamp-4 text-sm md:text-base lg:text-lg leading-relaxed mb-7">
                         {slide.description}
                       </p>
-                      {slide.buttonLink === "#scroll-top" ? (
-                        <Button
-                          type="primary"
-                          size="large"
-                          className="!h-12 !px-9 !rounded-xl"
-                          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                        >
-                          {slide.buttonText}
-                        </Button>
-                      ) : (
-                        <Button
-                          type="primary"
-                          size="large"
-                          href={getLink(slide.buttonLink)}
-                          className="!h-12 !px-9 !rounded-xl"
-                        >
-                          {slide.buttonText}
-                        </Button>
-                      )}
+                      {slide.buttonText &&
+                        (isScrollTarget(slide.buttonLink) ? (
+                          <Button
+                            type="primary"
+                            size="large"
+                            className="!h-12 !px-9 !rounded-xl"
+                            onClick={scrollToTop}
+                          >
+                            {slide.buttonText}
+                          </Button>
+                        ) : (
+                          <Button
+                            type="primary"
+                            size="large"
+                            href={getLink(slide.buttonLink)}
+                            className="!h-12 !px-9 !rounded-xl"
+                          >
+                            {slide.buttonText}
+                          </Button>
+                        ))}
                     </div>
                     <div className="md:col-span-5">
                       <div className="relative h-[220px] md:h-[300px] lg:h-[340px] w-full">
-                        <Image
+                        <CmsImage
                           src={slide.image}
                           alt={slide.title}
                           fill
                           className="object-cover rounded-[28px] md:rounded-[32px]"
+                          placeholderClassName="rounded-[28px] md:rounded-[32px]"
+                          placeholderIconClassName="text-4xl"
+                          showPlaceholderLabel={false}
                           priority={index === 0}
                         />
                       </div>
