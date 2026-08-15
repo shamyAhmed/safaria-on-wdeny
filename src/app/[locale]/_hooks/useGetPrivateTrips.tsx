@@ -3,6 +3,7 @@ import axiosInstance from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/appStore";
+import usePollForNewResults from "@/hooks/usePollForNewResults";
 import { ApiResponse } from "../_types/Api";
 import { PrivateTrip } from "../_types/PrivateTrip";
 
@@ -28,6 +29,12 @@ const useGetPrivateTrips = (filters: PrivateTripsFilters) => {
     filters.date != null &&
     (!filters.rounded || filters.return_date != null);
 
+  const refetchInterval = usePollForNewResults({
+    selectItems: (trips: PrivateTrip[]) => trips,
+    getId: (trip) => trip.id,
+    resetKey: JSON.stringify([filters, currency]),
+  });
+
   return useQuery({
     queryKey: [apiRoutes.privateSearch, filters, currency],
     queryFn: async () => {
@@ -49,6 +56,7 @@ const useGetPrivateTrips = (filters: PrivateTripsFilters) => {
       return response.data.data;
     },
     enabled,
+    refetchInterval,
     staleTime: 1000 * 60 * 5,
     refetchOnMount: false,
     refetchOnWindowFocus: false,

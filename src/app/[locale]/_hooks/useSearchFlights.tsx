@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/appStore";
+import usePollForNewResults from "@/hooks/usePollForNewResults";
 import { ApiResponse } from "../_types/Api";
 import { SearchFlightPayload } from "../_types/SearchFlight";
 import { FlightOffer } from "../_types/FlightOffer";
@@ -11,8 +12,15 @@ import { FlightOffer } from "../_types/FlightOffer";
 const useSearchFlights = (payload: SearchFlightPayload | null) => {
     const currency = useSelector((state: RootState) => state.currency.selected?.code ?? "");
 
+    const refetchInterval = usePollForNewResults({
+        selectItems: (offers: FlightOffer[]) => offers,
+        getId: (offer) => offer.offerId,
+        resetKey: JSON.stringify([payload, currency]),
+    });
+
     return useQuery({
         enabled: !!payload,
+        refetchInterval,
         queryKey: [apiRoutes.searchFlight, payload, currency],
         queryFn: async () => {
             try {

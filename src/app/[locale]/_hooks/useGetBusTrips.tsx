@@ -1,6 +1,7 @@
 import apiRoutes from "@/lib/apiRoutes";
 import axiosInstance from "@/lib/axios";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
+import usePollForNewResults from "@/hooks/usePollForNewResults";
 import { PaginatedApiResponse } from "../_types/Api";
 import { BusTrip } from "../_types/BusTrip";
 
@@ -12,6 +13,19 @@ export type BusTripsFilters = {
 };
 
 const useGetBusTrips = (filters: BusTripsFilters) => {
+  const refetchInterval = usePollForNewResults({
+    selectItems: (data: InfiniteData<PaginatedApiResponse<BusTrip[]>>) =>
+      data.pages.flatMap((page) => page.data),
+    getId: (trip) => trip.id,
+    resetKey: JSON.stringify(filters),
+    // A full page means the rest is already sitting on the server and belongs
+    // to pagination; only a short page says the results are still filling up.
+    shouldPoll: (data) => {
+      const lastPage = data.pages.at(-1);
+      return !lastPage || lastPage.data.length < lastPage.pagination.perPage;
+    },
+  });
+
   return useInfiniteQuery({
     queryKey: [apiRoutes.busTrips, filters],
     queryFn: async ({ pageParam = 1 }) => {
@@ -34,6 +48,7 @@ const useGetBusTrips = (filters: BusTripsFilters) => {
     },
     enabled: !!(filters.city_from && filters.city_to && filters.date),
     refetchOnMount: "always",
+    refetchInterval,
   });
 };
 
